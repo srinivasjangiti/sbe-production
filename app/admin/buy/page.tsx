@@ -77,7 +77,7 @@ export default function AdminBuyPage() {
           <div className="flex flex-col items-center justify-center py-16 text-slate-400">
             <Building2 className="h-10 w-10 mb-3 opacity-30" />
             <p className="font-semibold">No for-sale listings found</p>
-            <p className="text-sm mt-1">Click "Add For Sale Listing" to create one.</p>
+            <p className="text-sm mt-1">Click &ldquo;Add For Sale Listing&rdquo; to create one.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">

@@ -1,0 +1,1866 @@
+[
+  {
+    "category": "commercial",
+    "location": "Ambernath",
+    "projectName": "Empire Centrum",
+    "imagesFound": 12,
+    "imagesIntegrated": 12,
+    "primaryImage": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.51-pm-2.jpg",
+    "primaryImageDetails": {
+      "sourceName": "WhatsApp Image 2026-10-25 at 5.49.51 PM (2).jpeg",
+      "targetFilename": "whatsapp-image-2026-10-25-at-5.49.51-pm-2.jpg",
+      "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.51-pm-2.jpg",
+      "width": 1600,
+      "height": 1200,
+      "ratio": 1.3333333333333333,
+      "isLandscape": true,
+      "sizeKB": 80
+    },
+    "gallery": [
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.51-pm-2.jpg",
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.51-pm-1.jpg",
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.51-pm-3.jpg",
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.51-pm.jpg",
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.52-pm-1.jpg",
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.52-pm-2.jpg",
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.52-pm.jpg",
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.53-pm-1.jpg",
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.53-pm-2.jpg",
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.53-pm.jpg",
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.54-pm-1.jpg",
+      "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.54-pm.jpg"
+    ],
+    "allImages": [
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.51 PM (1).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.51-pm-1.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.51-pm-1.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 100
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.51 PM (2).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.51-pm-2.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.51-pm-2.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 80
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.51 PM (3).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.51-pm-3.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.51-pm-3.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 173
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.51 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.51-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.51-pm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 72
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.52 PM (1).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.52-pm-1.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.52-pm-1.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 72
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.52 PM (2).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.52-pm-2.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.52-pm-2.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 118
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.52 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.52-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.52-pm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 118
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.53 PM (1).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.53-pm-1.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.53-pm-1.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 288
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.53 PM (2).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.53-pm-2.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.53-pm-2.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 278
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.53 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.53-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.53-pm.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 201
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.54 PM (1).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.54-pm-1.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.54-pm-1.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 240
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.54 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.54-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-centrum/whatsapp-image-2026-10-25-at-5.49.54-pm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 229
+      }
+    ],
+    "status": "Integrated"
+  },
+  {
+    "category": "residential",
+    "location": "Ambernath",
+    "projectName": "Empire homes",
+    "imagesFound": 27,
+    "imagesIntegrated": 27,
+    "primaryImage": "/images/properties/ambernath/empire-homes/cbfjy.jpg",
+    "primaryImageDetails": {
+      "sourceName": "cbfjy.jpeg",
+      "targetFilename": "cbfjy.jpg",
+      "relativeUrl": "/images/properties/ambernath/empire-homes/cbfjy.jpg",
+      "width": 1600,
+      "height": 1200,
+      "ratio": 1.3333333333333333,
+      "isLandscape": true,
+      "sizeKB": 87
+    },
+    "gallery": [
+      "/images/properties/ambernath/empire-homes/cbfjy.jpg",
+      "/images/properties/ambernath/empire-homes/bcggc-bkvchkfy.jpg",
+      "/images/properties/ambernath/empire-homes/cbgjt.jpg",
+      "/images/properties/ambernath/empire-homes/cfbgnj.jpg",
+      "/images/properties/ambernath/empire-homes/cgdht.jpg",
+      "/images/properties/ambernath/empire-homes/fgrt6u.jpg",
+      "/images/properties/ambernath/empire-homes/fszdsvr.jpg",
+      "/images/properties/ambernath/empire-homes/fyjfgc.jpg",
+      "/images/properties/ambernath/empire-homes/gbuo.jpg",
+      "/images/properties/ambernath/empire-homes/ghky-bg.jpg",
+      "/images/properties/ambernath/empire-homes/ghkyt7itn.jpg",
+      "/images/properties/ambernath/empire-homes/guj-lyp.jpg",
+      "/images/properties/ambernath/empire-homes/hgygjmlp.jpg",
+      "/images/properties/ambernath/empire-homes/jb-jmluyo88ujml.jpg",
+      "/images/properties/ambernath/empire-homes/srfbg.jpg",
+      "/images/properties/ambernath/empire-homes/vhgfkyit.jpg",
+      "/images/properties/ambernath/empire-homes/vhk.jpg",
+      "/images/properties/ambernath/empire-homes/vhkj.jpg",
+      "/images/properties/ambernath/empire-homes/vhmykf.jpg",
+      "/images/properties/ambernath/empire-homes/vhykgb.jpg",
+      "/images/properties/ambernath/empire-homes/vhykmhn-v.jpg",
+      "/images/properties/ambernath/empire-homes/whatsapp-image-2026-10-25-at-5.54.15-pm.jpg",
+      "/images/properties/ambernath/empire-homes/whatsapp-image-2026-10-25-at-5.54.18-pm.jpg",
+      "/images/properties/ambernath/empire-homes/whatsapp-image-2026-10-25-at-5.54.21-pm.jpg",
+      "/images/properties/ambernath/empire-homes/whatsapp-image-2026-10-25-at-5.54.26-pm.jpg",
+      "/images/properties/ambernath/empire-homes/whatsapp-image-2026-10-25-at-5.54.28-pm.jpg",
+      "/images/properties/ambernath/empire-homes/yjhyjf.jpg"
+    ],
+    "allImages": [
+      {
+        "sourceName": "bcggc bkvchkfy.jpeg",
+        "targetFilename": "bcggc-bkvchkfy.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/bcggc-bkvchkfy.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 101
+      },
+      {
+        "sourceName": "cbfjy.jpeg",
+        "targetFilename": "cbfjy.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/cbfjy.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 87
+      },
+      {
+        "sourceName": "cbgjt.jpeg",
+        "targetFilename": "cbgjt.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/cbgjt.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 234
+      },
+      {
+        "sourceName": "cfbgnj.jpeg",
+        "targetFilename": "cfbgnj.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/cfbgnj.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 119
+      },
+      {
+        "sourceName": "cgdht.jpeg",
+        "targetFilename": "cgdht.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/cgdht.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 81
+      },
+      {
+        "sourceName": "fgrt6u.jpeg",
+        "targetFilename": "fgrt6u.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/fgrt6u.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 83
+      },
+      {
+        "sourceName": "fszdsvr.jpeg",
+        "targetFilename": "fszdsvr.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/fszdsvr.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 61
+      },
+      {
+        "sourceName": "fyjfgc.jpeg",
+        "targetFilename": "fyjfgc.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/fyjfgc.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 158
+      },
+      {
+        "sourceName": "gbuo.jpeg",
+        "targetFilename": "gbuo.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/gbuo.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 100
+      },
+      {
+        "sourceName": "ghky bg.jpeg",
+        "targetFilename": "ghky-bg.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/ghky-bg.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 86
+      },
+      {
+        "sourceName": "ghkyt7itn.jpeg",
+        "targetFilename": "ghkyt7itn.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/ghkyt7itn.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 176
+      },
+      {
+        "sourceName": "guj,lyp.jpeg",
+        "targetFilename": "guj-lyp.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/guj-lyp.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 320
+      },
+      {
+        "sourceName": "hgygjmlp.jpeg",
+        "targetFilename": "hgygjmlp.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/hgygjmlp.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 378
+      },
+      {
+        "sourceName": "jb,jmluyo88ujml.jpeg",
+        "targetFilename": "jb-jmluyo88ujml.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/jb-jmluyo88ujml.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 157
+      },
+      {
+        "sourceName": "srfbg.jpeg",
+        "targetFilename": "srfbg.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/srfbg.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 141
+      },
+      {
+        "sourceName": "vhgfkyit.jpeg",
+        "targetFilename": "vhgfkyit.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/vhgfkyit.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 302
+      },
+      {
+        "sourceName": "vhk, .jpeg",
+        "targetFilename": "vhk.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/vhk.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 97
+      },
+      {
+        "sourceName": "vhkj.jpeg",
+        "targetFilename": "vhkj.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/vhkj.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 177
+      },
+      {
+        "sourceName": "vhmykf.jpeg",
+        "targetFilename": "vhmykf.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/vhmykf.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 150
+      },
+      {
+        "sourceName": "vhykgb.jpeg",
+        "targetFilename": "vhykgb.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/vhykgb.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 136
+      },
+      {
+        "sourceName": "vhykmhn v.jpeg",
+        "targetFilename": "vhykmhn-v.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/vhykmhn-v.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 192
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.54.15 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.54.15-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/whatsapp-image-2026-10-25-at-5.54.15-pm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 82
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.54.18 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.54.18-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/whatsapp-image-2026-10-25-at-5.54.18-pm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 69
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.54.21 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.54.21-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/whatsapp-image-2026-10-25-at-5.54.21-pm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 177
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.54.26 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.54.26-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/whatsapp-image-2026-10-25-at-5.54.26-pm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 244
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.54.28 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.54.28-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/whatsapp-image-2026-10-25-at-5.54.28-pm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 134
+      },
+      {
+        "sourceName": "yjhyjf.jpeg",
+        "targetFilename": "yjhyjf.jpg",
+        "relativeUrl": "/images/properties/ambernath/empire-homes/yjhyjf.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 122
+      }
+    ],
+    "status": "Integrated"
+  },
+  {
+    "category": "residential",
+    "location": "Ambernath",
+    "projectName": "GBK Ambernath",
+    "imagesFound": 24,
+    "imagesIntegrated": 24,
+    "primaryImage": "/images/properties/ambernath/gbk-ambernath/8yhmjnl.jpg",
+    "primaryImageDetails": {
+      "sourceName": "8yhmjnl.jpeg",
+      "targetFilename": "8yhmjnl.jpg",
+      "relativeUrl": "/images/properties/ambernath/gbk-ambernath/8yhmjnl.jpg",
+      "width": 1600,
+      "height": 1200,
+      "ratio": 1.3333333333333333,
+      "isLandscape": true,
+      "sizeKB": 98
+    },
+    "gallery": [
+      "/images/properties/ambernath/gbk-ambernath/8yhmjnl.jpg",
+      "/images/properties/ambernath/gbk-ambernath/b.jpg",
+      "/images/properties/ambernath/gbk-ambernath/gumjjulhh.jpg",
+      "/images/properties/ambernath/gbk-ambernath/hgulj.jpg",
+      "/images/properties/ambernath/gbk-ambernath/hmny8.jpg",
+      "/images/properties/ambernath/gbk-ambernath/huhv.jpg",
+      "/images/properties/ambernath/gbk-ambernath/iu8jkm.jpg",
+      "/images/properties/ambernath/gbk-ambernath/jb-lguo.jpg",
+      "/images/properties/ambernath/gbk-ambernath/jhuy.jpg",
+      "/images/properties/ambernath/gbk-ambernath/kiukjb.jpg",
+      "/images/properties/ambernath/gbk-ambernath/mhjiuy.jpg",
+      "/images/properties/ambernath/gbk-ambernath/mhyih.jpg",
+      "/images/properties/ambernath/gbk-ambernath/miku8y.jpg",
+      "/images/properties/ambernath/gbk-ambernath/mjhyu.jpg",
+      "/images/properties/ambernath/gbk-ambernath/my8hm.jpg",
+      "/images/properties/ambernath/gbk-ambernath/njhuyjhy.jpg",
+      "/images/properties/ambernath/gbk-ambernath/t7iukj.jpg",
+      "/images/properties/ambernath/gbk-ambernath/t7ygjhmuk.jpg",
+      "/images/properties/ambernath/gbk-ambernath/u8ljhmnk.jpg",
+      "/images/properties/ambernath/gbk-ambernath/uhjvmn.jpg",
+      "/images/properties/ambernath/gbk-ambernath/uhyjml.jpg",
+      "/images/properties/ambernath/gbk-ambernath/uyjhm.jpg",
+      "/images/properties/ambernath/gbk-ambernath/whatsapp-image-2026-10-25-at-10.14.58-pm.jpg",
+      "/images/properties/ambernath/gbk-ambernath/whatsapp-image-2026-10-25-at-10.14.59-pm.jpg"
+    ],
+    "allImages": [
+      {
+        "sourceName": "8yhmjnl.jpeg",
+        "targetFilename": "8yhmjnl.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/8yhmjnl.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 98
+      },
+      {
+        "sourceName": "b .jpeg",
+        "targetFilename": "b.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/b.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 130
+      },
+      {
+        "sourceName": "gumjjulhh.jpeg",
+        "targetFilename": "gumjjulhh.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/gumjjulhh.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 182
+      },
+      {
+        "sourceName": "hgulj.jpeg",
+        "targetFilename": "hgulj.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/hgulj.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 111
+      },
+      {
+        "sourceName": "hmny8.jpeg",
+        "targetFilename": "hmny8.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/hmny8.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 75
+      },
+      {
+        "sourceName": "huhv .jpeg",
+        "targetFilename": "huhv.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/huhv.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 78
+      },
+      {
+        "sourceName": "iu8jkm.jpeg",
+        "targetFilename": "iu8jkm.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/iu8jkm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 206
+      },
+      {
+        "sourceName": "jb lguo.jpeg",
+        "targetFilename": "jb-lguo.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/jb-lguo.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 78
+      },
+      {
+        "sourceName": "jhuy.jpeg",
+        "targetFilename": "jhuy.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/jhuy.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 85
+      },
+      {
+        "sourceName": "kiukjb.jpeg",
+        "targetFilename": "kiukjb.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/kiukjb.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 111
+      },
+      {
+        "sourceName": "mhjiuy.jpeg",
+        "targetFilename": "mhjiuy.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/mhjiuy.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 132
+      },
+      {
+        "sourceName": "mhyih.jpeg",
+        "targetFilename": "mhyih.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/mhyih.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 163
+      },
+      {
+        "sourceName": "miku8y.jpeg",
+        "targetFilename": "miku8y.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/miku8y.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 444
+      },
+      {
+        "sourceName": "mjhyu.jpeg",
+        "targetFilename": "mjhyu.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/mjhyu.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 167
+      },
+      {
+        "sourceName": "my8hm.jpeg",
+        "targetFilename": "my8hm.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/my8hm.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 64
+      },
+      {
+        "sourceName": "njhuyjhy.jpeg",
+        "targetFilename": "njhuyjhy.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/njhuyjhy.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 273
+      },
+      {
+        "sourceName": "t7iukj.jpeg",
+        "targetFilename": "t7iukj.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/t7iukj.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 137
+      },
+      {
+        "sourceName": "t7ygjhmuk.jpeg",
+        "targetFilename": "t7ygjhmuk.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/t7ygjhmuk.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 151
+      },
+      {
+        "sourceName": "u8ljhmnk.jpeg",
+        "targetFilename": "u8ljhmnk.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/u8ljhmnk.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 46
+      },
+      {
+        "sourceName": "uhjvmn.jpeg",
+        "targetFilename": "uhjvmn.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/uhjvmn.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 168
+      },
+      {
+        "sourceName": "uhyjml.jpeg",
+        "targetFilename": "uhyjml.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/uhyjml.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 153
+      },
+      {
+        "sourceName": "uyjhm .jpeg",
+        "targetFilename": "uyjhm.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/uyjhm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 182
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 10.14.58 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-10.14.58-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/whatsapp-image-2026-10-25-at-10.14.58-pm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 186
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 10.14.59 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-10.14.59-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/gbk-ambernath/whatsapp-image-2026-10-25-at-10.14.59-pm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 145
+      }
+    ],
+    "status": "Integrated"
+  },
+  {
+    "category": "residential",
+    "location": "Ambernath",
+    "projectName": "GPS",
+    "imagesFound": 2,
+    "imagesIntegrated": 2,
+    "primaryImage": "/images/properties/ambernath/gps/whatsapp-image-2026-10-27-at-11.48.44-pm.jpg",
+    "primaryImageDetails": {
+      "sourceName": "WhatsApp Image 2026-10-27 at 11.48.44 PM.jpeg",
+      "targetFilename": "whatsapp-image-2026-10-27-at-11.48.44-pm.jpg",
+      "relativeUrl": "/images/properties/ambernath/gps/whatsapp-image-2026-10-27-at-11.48.44-pm.jpg",
+      "width": 1040,
+      "height": 1600,
+      "ratio": 0.65,
+      "isLandscape": false,
+      "sizeKB": 257
+    },
+    "gallery": [
+      "/images/properties/ambernath/gps/whatsapp-image-2026-10-27-at-11.48.44-pm.jpg",
+      "/images/properties/ambernath/gps/whatsapp-image-2026-10-27-at-11.48.45-pm.jpg"
+    ],
+    "allImages": [
+      {
+        "sourceName": "WhatsApp Image 2026-10-27 at 11.48.44 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-27-at-11.48.44-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/gps/whatsapp-image-2026-10-27-at-11.48.44-pm.jpg",
+        "width": 1040,
+        "height": 1600,
+        "ratio": 0.65,
+        "isLandscape": false,
+        "sizeKB": 257
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-27 at 11.48.45 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-27-at-11.48.45-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/gps/whatsapp-image-2026-10-27-at-11.48.45-pm.jpg",
+        "width": 1000,
+        "height": 1500,
+        "ratio": 0.6666666666666666,
+        "isLandscape": false,
+        "sizeKB": 225
+      }
+    ],
+    "status": "Integrated"
+  },
+  {
+    "category": "residential",
+    "location": "Ambernath",
+    "projectName": "Kohinoor Castles",
+    "imagesFound": 0,
+    "imagesIntegrated": 0,
+    "primaryImage": null,
+    "gallery": [],
+    "status": "Empty (0 images found in source folder)"
+  },
+  {
+    "category": "residential",
+    "location": "Ambernath",
+    "projectName": "Rosewood",
+    "imagesFound": 0,
+    "imagesIntegrated": 0,
+    "primaryImage": null,
+    "gallery": [],
+    "status": "Empty (0 images found in source folder)"
+  },
+  {
+    "category": "residential",
+    "location": "Ambernath",
+    "projectName": "Sarvodaya Nagar",
+    "imagesFound": 10,
+    "imagesIntegrated": 10,
+    "primaryImage": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.23-pm-1.jpg",
+    "primaryImageDetails": {
+      "sourceName": "WhatsApp Image 2026-10-29 at 12.31.23 PM (1).jpeg",
+      "targetFilename": "whatsapp-image-2026-10-29-at-12.31.23-pm-1.jpg",
+      "relativeUrl": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.23-pm-1.jpg",
+      "width": 960,
+      "height": 1280,
+      "ratio": 0.75,
+      "isLandscape": false,
+      "sizeKB": 173
+    },
+    "gallery": [
+      "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.23-pm-1.jpg",
+      "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.23-pm-2.jpg",
+      "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.23-pm-3.jpg",
+      "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.23-pm.jpg",
+      "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.24-pm-1.jpg",
+      "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.24-pm-2.jpg",
+      "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.24-pm-3.jpg",
+      "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.24-pm.jpg",
+      "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.25-pm-1.jpg",
+      "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.25-pm.jpg"
+    ],
+    "allImages": [
+      {
+        "sourceName": "WhatsApp Image 2026-10-29 at 12.31.23 PM (1).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-29-at-12.31.23-pm-1.jpg",
+        "relativeUrl": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.23-pm-1.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 173
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-29 at 12.31.23 PM (2).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-29-at-12.31.23-pm-2.jpg",
+        "relativeUrl": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.23-pm-2.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 183
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-29 at 12.31.23 PM (3).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-29-at-12.31.23-pm-3.jpg",
+        "relativeUrl": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.23-pm-3.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 169
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-29 at 12.31.23 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-29-at-12.31.23-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.23-pm.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 197
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-29 at 12.31.24 PM (1).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-29-at-12.31.24-pm-1.jpg",
+        "relativeUrl": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.24-pm-1.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 156
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-29 at 12.31.24 PM (2).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-29-at-12.31.24-pm-2.jpg",
+        "relativeUrl": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.24-pm-2.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 197
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-29 at 12.31.24 PM (3).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-29-at-12.31.24-pm-3.jpg",
+        "relativeUrl": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.24-pm-3.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 151
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-29 at 12.31.24 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-29-at-12.31.24-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.24-pm.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 196
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-29 at 12.31.25 PM (1).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-29-at-12.31.25-pm-1.jpg",
+        "relativeUrl": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.25-pm-1.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 133
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-29 at 12.31.25 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-29-at-12.31.25-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/sarvodaya-nagar/whatsapp-image-2026-10-29-at-12.31.25-pm.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 218
+      }
+    ],
+    "status": "Integrated"
+  },
+  {
+    "category": "residential",
+    "location": "Ambernath",
+    "projectName": "Shreeji Skyview",
+    "imagesFound": 8,
+    "imagesIntegrated": 8,
+    "primaryImage": "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.42-pm-1.jpg",
+    "primaryImageDetails": {
+      "sourceName": "WhatsApp Image 2026-10-27 at 6.22.42 PM (1).jpeg",
+      "targetFilename": "whatsapp-image-2026-10-27-at-6.22.42-pm-1.jpg",
+      "relativeUrl": "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.42-pm-1.jpg",
+      "width": 1200,
+      "height": 1600,
+      "ratio": 0.75,
+      "isLandscape": false,
+      "sizeKB": 231
+    },
+    "gallery": [
+      "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.42-pm-1.jpg",
+      "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.42-pm.jpg",
+      "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.43-pm-1.jpg",
+      "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.43-pm-2.jpg",
+      "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.43-pm.jpg",
+      "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.44-pm-1.jpg",
+      "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.44-pm-2.jpg",
+      "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.44-pm.jpg"
+    ],
+    "allImages": [
+      {
+        "sourceName": "WhatsApp Image 2026-10-27 at 6.22.42 PM (1).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-27-at-6.22.42-pm-1.jpg",
+        "relativeUrl": "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.42-pm-1.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 231
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-27 at 6.22.42 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-27-at-6.22.42-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.42-pm.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 212
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-27 at 6.22.43 PM (1).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-27-at-6.22.43-pm-1.jpg",
+        "relativeUrl": "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.43-pm-1.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 190
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-27 at 6.22.43 PM (2).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-27-at-6.22.43-pm-2.jpg",
+        "relativeUrl": "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.43-pm-2.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 211
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-27 at 6.22.43 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-27-at-6.22.43-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.43-pm.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 211
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-27 at 6.22.44 PM (1).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-27-at-6.22.44-pm-1.jpg",
+        "relativeUrl": "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.44-pm-1.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 165
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-27 at 6.22.44 PM (2).jpeg",
+        "targetFilename": "whatsapp-image-2026-10-27-at-6.22.44-pm-2.jpg",
+        "relativeUrl": "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.44-pm-2.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 231
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-27 at 6.22.44 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-27-at-6.22.44-pm.jpg",
+        "relativeUrl": "/images/properties/ambernath/shreeji-skyview/whatsapp-image-2026-10-27-at-6.22.44-pm.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 202
+      }
+    ],
+    "status": "Integrated"
+  },
+  {
+    "category": "residential",
+    "location": "Ambernath",
+    "projectName": "Tharwani Ariana",
+    "imagesFound": 29,
+    "imagesIntegrated": 29,
+    "primaryImage": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.19-am.jpg",
+    "primaryImageDetails": {
+      "sourceName": "WhatsApp Image 2026-10-30 at 12.48.19 AM.jpeg",
+      "targetFilename": "whatsapp-image-2026-10-30-at-12.48.19-am.jpg",
+      "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.19-am.jpg",
+      "width": 1600,
+      "height": 901,
+      "ratio": 1.7758046614872365,
+      "isLandscape": true,
+      "sizeKB": 394
+    },
+    "gallery": [
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.19-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.40-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.41-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.43-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.45-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.47-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.49-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.52-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.54-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.57-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.59-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.07-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.16-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.23-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.25-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.27-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.29-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.32-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.37-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.39-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.41-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.45-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.49-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.52-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.55-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.58-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.50.00-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.50.03-am.jpg",
+      "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.50.05-am.jpg"
+    ],
+    "allImages": [
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.48.19 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.48.19-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.19-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 394
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.48.40 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.48.40-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.40-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 382
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.48.41 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.48.41-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.41-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 100
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.48.43 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.48.43-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.43-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 196
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.48.45 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.48.45-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.45-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 231
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.48.47 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.48.47-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.47-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 110
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.48.49 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.48.49-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.49-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 130
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.48.52 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.48.52-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.52-am.jpg",
+        "width": 901,
+        "height": 1600,
+        "ratio": 0.563125,
+        "isLandscape": false,
+        "sizeKB": 75
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.48.54 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.48.54-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.54-am.jpg",
+        "width": 901,
+        "height": 1600,
+        "ratio": 0.563125,
+        "isLandscape": false,
+        "sizeKB": 102
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.48.57 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.48.57-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.57-am.jpg",
+        "width": 901,
+        "height": 1600,
+        "ratio": 0.563125,
+        "isLandscape": false,
+        "sizeKB": 64
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.48.59 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.48.59-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.48.59-am.jpg",
+        "width": 901,
+        "height": 1600,
+        "ratio": 0.563125,
+        "isLandscape": false,
+        "sizeKB": 139
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.07 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.07-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.07-am.jpg",
+        "width": 901,
+        "height": 1600,
+        "ratio": 0.563125,
+        "isLandscape": false,
+        "sizeKB": 60
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.16 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.16-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.16-am.jpg",
+        "width": 901,
+        "height": 1600,
+        "ratio": 0.563125,
+        "isLandscape": false,
+        "sizeKB": 128
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.23 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.23-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.23-am.jpg",
+        "width": 901,
+        "height": 1600,
+        "ratio": 0.563125,
+        "isLandscape": false,
+        "sizeKB": 189
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.25 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.25-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.25-am.jpg",
+        "width": 901,
+        "height": 1600,
+        "ratio": 0.563125,
+        "isLandscape": false,
+        "sizeKB": 113
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.27 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.27-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.27-am.jpg",
+        "width": 901,
+        "height": 1600,
+        "ratio": 0.563125,
+        "isLandscape": false,
+        "sizeKB": 109
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.29 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.29-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.29-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 79
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.32 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.32-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.32-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 257
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.37 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.37-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.37-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 145
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.39 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.39-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.39-am.jpg",
+        "width": 901,
+        "height": 1600,
+        "ratio": 0.563125,
+        "isLandscape": false,
+        "sizeKB": 84
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.41 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.41-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.41-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 85
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.45 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.45-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.45-am.jpg",
+        "width": 901,
+        "height": 1600,
+        "ratio": 0.563125,
+        "isLandscape": false,
+        "sizeKB": 104
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.49 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.49-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.49-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 127
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.52 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.52-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.52-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 164
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.55 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.55-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.55-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 163
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.49.58 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.49.58-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.49.58-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 216
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.50.00 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.50.00-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.50.00-am.jpg",
+        "width": 1600,
+        "height": 900,
+        "ratio": 1.7777777777777777,
+        "isLandscape": true,
+        "sizeKB": 386
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.50.03 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.50.03-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.50.03-am.jpg",
+        "width": 1600,
+        "height": 901,
+        "ratio": 1.7758046614872365,
+        "isLandscape": true,
+        "sizeKB": 348
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-30 at 12.50.05 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-30-at-12.50.05-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tharwani-ariana/whatsapp-image-2026-10-30-at-12.50.05-am.jpg",
+        "width": 1600,
+        "height": 900,
+        "ratio": 1.7777777777777777,
+        "isLandscape": true,
+        "sizeKB": 413
+      }
+    ],
+    "status": "Integrated"
+  },
+  {
+    "category": "residential",
+    "location": "Ambernath",
+    "projectName": "Tharwani Meghana Montana",
+    "imagesFound": 0,
+    "imagesIntegrated": 0,
+    "primaryImage": null,
+    "gallery": [],
+    "status": "Empty (0 images found in source folder)"
+  },
+  {
+    "category": "residential",
+    "location": "Ambernath",
+    "projectName": "Tulsi Sanidhya",
+    "imagesFound": 17,
+    "imagesIntegrated": 17,
+    "primaryImage": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.35-am.jpg",
+    "primaryImageDetails": {
+      "sourceName": "WhatsApp Image 2026-10-26 at 8.50.35 AM.jpeg",
+      "targetFilename": "whatsapp-image-2026-10-26-at-8.50.35-am.jpg",
+      "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.35-am.jpg",
+      "width": 1600,
+      "height": 1200,
+      "ratio": 1.3333333333333333,
+      "isLandscape": true,
+      "sizeKB": 93
+    },
+    "gallery": [
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.35-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.36-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.37-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.38-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.40-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.43-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.45-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.48-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.51-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.53-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.54-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.55-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.51.00-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.51.05-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.51.09-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.51.13-am.jpg",
+      "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.51.15-am.jpg"
+    ],
+    "allImages": [
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.35 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.35-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.35-am.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 93
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.36 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.36-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.36-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 315
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.37 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.37-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.37-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 336
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.38 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.38-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.38-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 308
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.40 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.40-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.40-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 225
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.43 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.43-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.43-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 107
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.45 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.45-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.45-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 113
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.48 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.48-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.48-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 126
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.51 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.51-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.51-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 132
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.53 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.53-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.53-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 95
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.54 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.54-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.54-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 176
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.50.55 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.50.55-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.50.55-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 67
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.51.00 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.51.00-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.51.00-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 196
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.51.05 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.51.05-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.51.05-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 95
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.51.09 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.51.09-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.51.09-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 113
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.51.13 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.51.13-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.51.13-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 119
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-26 at 8.51.15 AM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-26-at-8.51.15-am.jpg",
+        "relativeUrl": "/images/properties/ambernath/tulsi-sanidhya/whatsapp-image-2026-10-26-at-8.51.15-am.jpg",
+        "width": 1200,
+        "height": 1600,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 123
+      }
+    ],
+    "status": "Integrated"
+  },
+  {
+    "category": "residential",
+    "location": "Ambernath",
+    "projectName": "Tulsi Sharnam",
+    "imagesFound": 0,
+    "imagesIntegrated": 0,
+    "primaryImage": null,
+    "gallery": [],
+    "status": "Empty (0 images found in source folder)"
+  },
+  {
+    "category": "residential",
+    "location": "Badlapur",
+    "projectName": "Godrej Vihaa",
+    "imagesFound": 0,
+    "imagesIntegrated": 0,
+    "primaryImage": null,
+    "gallery": [],
+    "status": "Empty (0 images found in source folder)"
+  },
+  {
+    "category": "residential",
+    "location": "Dombivli",
+    "projectName": "Lodha Regency",
+    "imagesFound": 9,
+    "imagesIntegrated": 9,
+    "primaryImage": "/images/properties/dombivli/lodha-regency/whatsapp-image-2026-10-25-at-5.49.51-pm.jpg",
+    "primaryImageDetails": {
+      "sourceName": "WhatsApp Image 2026-10-25 at 5.49.51 PM.jpeg",
+      "targetFilename": "whatsapp-image-2026-10-25-at-5.49.51-pm.jpg",
+      "relativeUrl": "/images/properties/dombivli/lodha-regency/whatsapp-image-2026-10-25-at-5.49.51-pm.jpg",
+      "width": 1600,
+      "height": 1200,
+      "ratio": 1.3333333333333333,
+      "isLandscape": true,
+      "sizeKB": 72
+    },
+    "gallery": [
+      "/images/properties/dombivli/lodha-regency/whatsapp-image-2026-10-25-at-5.49.51-pm.jpg",
+      "/images/properties/dombivli/lodha-regency/b-j.jpg",
+      "/images/properties/dombivli/lodha-regency/ffuj.jpg",
+      "/images/properties/dombivli/lodha-regency/gjui.jpg",
+      "/images/properties/dombivli/lodha-regency/hy.jpg",
+      "/images/properties/dombivli/lodha-regency/nj.jpg",
+      "/images/properties/dombivli/lodha-regency/ug.jpg",
+      "/images/properties/dombivli/lodha-regency/whatsapp-image-2026-10-25-at-5.52.14-pm.jpg",
+      "/images/properties/dombivli/lodha-regency/yf.jpg"
+    ],
+    "allImages": [
+      {
+        "sourceName": "b j.jpeg",
+        "targetFilename": "b-j.jpg",
+        "relativeUrl": "/images/properties/dombivli/lodha-regency/b-j.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 58
+      },
+      {
+        "sourceName": "ffuj.jpeg",
+        "targetFilename": "ffuj.jpg",
+        "relativeUrl": "/images/properties/dombivli/lodha-regency/ffuj.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 128
+      },
+      {
+        "sourceName": "gjui.jpeg",
+        "targetFilename": "gjui.jpg",
+        "relativeUrl": "/images/properties/dombivli/lodha-regency/gjui.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 101
+      },
+      {
+        "sourceName": "hy.jpeg",
+        "targetFilename": "hy.jpg",
+        "relativeUrl": "/images/properties/dombivli/lodha-regency/hy.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 91
+      },
+      {
+        "sourceName": "nj.jpeg",
+        "targetFilename": "nj.jpg",
+        "relativeUrl": "/images/properties/dombivli/lodha-regency/nj.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 114
+      },
+      {
+        "sourceName": "ug.jpeg",
+        "targetFilename": "ug.jpg",
+        "relativeUrl": "/images/properties/dombivli/lodha-regency/ug.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 111
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.49.51 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.49.51-pm.jpg",
+        "relativeUrl": "/images/properties/dombivli/lodha-regency/whatsapp-image-2026-10-25-at-5.49.51-pm.jpg",
+        "width": 1600,
+        "height": 1200,
+        "ratio": 1.3333333333333333,
+        "isLandscape": true,
+        "sizeKB": 72
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-25 at 5.52.14 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-25-at-5.52.14-pm.jpg",
+        "relativeUrl": "/images/properties/dombivli/lodha-regency/whatsapp-image-2026-10-25-at-5.52.14-pm.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 98
+      },
+      {
+        "sourceName": "yf'.jpeg",
+        "targetFilename": "yf.jpg",
+        "relativeUrl": "/images/properties/dombivli/lodha-regency/yf.jpg",
+        "width": 960,
+        "height": 1280,
+        "ratio": 0.75,
+        "isLandscape": false,
+        "sizeKB": 67
+      }
+    ],
+    "status": "Integrated"
+  },
+  {
+    "category": "residential",
+    "location": "Dombivli",
+    "projectName": "Runwal Garden city",
+    "imagesFound": 6,
+    "imagesIntegrated": 6,
+    "primaryImage": "/images/properties/dombivli/runwal-garden-city/whatsapp-image-2026-10-29-at-5.55.04-pm.jpg",
+    "primaryImageDetails": {
+      "sourceName": "WhatsApp Image 2026-10-29 at 5.55.04 PM.jpeg",
+      "targetFilename": "whatsapp-image-2026-10-29-at-5.55.04-pm.jpg",
+      "relativeUrl": "/images/properties/dombivli/runwal-garden-city/whatsapp-image-2026-10-29-at-5.55.04-pm.jpg",
+      "width": 1259,
+      "height": 1127,
+      "ratio": 1.1171251109139309,
+      "isLandscape": true,
+      "sizeKB": 290
+    },
+    "gallery": [
+      "/images/properties/dombivli/runwal-garden-city/whatsapp-image-2026-10-29-at-5.55.04-pm.jpg",
+      "/images/properties/dombivli/runwal-garden-city/dggtg.jpg",
+      "/images/properties/dombivli/runwal-garden-city/gbku.jpg",
+      "/images/properties/dombivli/runwal-garden-city/ghyi.jpg",
+      "/images/properties/dombivli/runwal-garden-city/hvyfk.jpg",
+      "/images/properties/dombivli/runwal-garden-city/yghbkn.jpg"
+    ],
+    "allImages": [
+      {
+        "sourceName": "dggtg.jpeg",
+        "targetFilename": "dggtg.jpg",
+        "relativeUrl": "/images/properties/dombivli/runwal-garden-city/dggtg.jpg",
+        "width": 1080,
+        "height": 1920,
+        "ratio": 0.5625,
+        "isLandscape": false,
+        "sizeKB": 206
+      },
+      {
+        "sourceName": "gbku.jpeg",
+        "targetFilename": "gbku.jpg",
+        "relativeUrl": "/images/properties/dombivli/runwal-garden-city/gbku.jpg",
+        "width": 1139,
+        "height": 1920,
+        "ratio": 0.5932291666666667,
+        "isLandscape": false,
+        "sizeKB": 259
+      },
+      {
+        "sourceName": "ghyi.jpeg",
+        "targetFilename": "ghyi.jpg",
+        "relativeUrl": "/images/properties/dombivli/runwal-garden-city/ghyi.jpg",
+        "width": 1144,
+        "height": 1920,
+        "ratio": 0.5958333333333333,
+        "isLandscape": false,
+        "sizeKB": 277
+      },
+      {
+        "sourceName": "hvyfk.jpeg",
+        "targetFilename": "hvyfk.jpg",
+        "relativeUrl": "/images/properties/dombivli/runwal-garden-city/hvyfk.jpg",
+        "width": 1080,
+        "height": 1920,
+        "ratio": 0.5625,
+        "isLandscape": false,
+        "sizeKB": 235
+      },
+      {
+        "sourceName": "WhatsApp Image 2026-10-29 at 5.55.04 PM.jpeg",
+        "targetFilename": "whatsapp-image-2026-10-29-at-5.55.04-pm.jpg",
+        "relativeUrl": "/images/properties/dombivli/runwal-garden-city/whatsapp-image-2026-10-29-at-5.55.04-pm.jpg",
+        "width": 1259,
+        "height": 1127,
+        "ratio": 1.1171251109139309,
+        "isLandscape": true,
+        "sizeKB": 290
+      },
+      {
+        "sourceName": "yghbkn.jpeg",
+        "targetFilename": "yghbkn.jpg",
+        "relativeUrl": "/images/properties/dombivli/runwal-garden-city/yghbkn.jpg",
+        "width": 1144,
+        "height": 1920,
+        "ratio": 0.5958333333333333,
+        "isLandscape": false,
+        "sizeKB": 231
+      }
+    ],
+    "status": "Integrated"
+  }
+]

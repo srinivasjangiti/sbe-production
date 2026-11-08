@@ -26,7 +26,17 @@ function save<T>(key: string, data: T): void {
 
 // ─── Properties ───────────────────────────────────────────────────────────
 export function getBuyProperties(): PropertyData[] {
-  return load<PropertyData[]>(BUY_KEY, buyProperties)
+  const stored = load<PropertyData[]>(BUY_KEY, buyProperties)
+  if (typeof window !== "undefined" && Array.isArray(stored)) {
+    const storedIds = new Set(stored.map((p) => p.id))
+    const missing = buyProperties.filter((p) => !storedIds.has(p.id))
+    if (missing.length > 0) {
+      const merged = [...stored, ...missing]
+      save(BUY_KEY, merged)
+      return merged
+    }
+  }
+  return stored
 }
 export function getRentProperties(): PropertyData[] {
   return load<PropertyData[]>(RENT_KEY, rentalProperties)

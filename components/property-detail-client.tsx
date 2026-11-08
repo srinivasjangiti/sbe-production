@@ -5,15 +5,16 @@ import Image from "next/image"
 import Link from "next/link"
 import {
   Heart, Share2, ChevronLeft, ChevronRight, MapPin,
-  BedDouble, Bath, Maximize, Calendar, Home, Thermometer,
-  Car, Building2, Clock, Star, Phone, Mail, Check
+  BedDouble, Bath, Maximize, Calendar, Home, Check,
+  Grid, X, Phone, Mail, Shield, Building2, CheckCircle2,
+  Clock, ArrowRight, MessageCircle
 } from "lucide-react"
 import { PropertyCard } from "@/components/property-card"
 import { Button } from "@/components/ui/button"
 import { formatAddress } from "@/lib/data"
 import { getPropertyById, getSimilarProperties, saveInquiry, nextInquiryId } from "@/lib/admin-store"
 import { PropertyData } from "@/lib/data"
-import { motion, AnimatePresence } from "motion/react"
+import { AnimatePresence, motion } from "motion/react"
 
 export function PropertyDetailClient({
   initialProperty,
@@ -28,477 +29,524 @@ export function PropertyDetailClient({
 }) {
   const [property, setProperty] = useState<PropertyData | undefined>(initialProperty)
   const [similar, setSimilar] = useState<PropertyData[]>(initialSimilar)
-  const [currentImage, setCurrentImage] = useState(0)
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
   const [saved, setSaved] = useState(false)
+  const [copied, setCopied] = useState(false)
   const [contactName, setContactName] = useState("")
   const [contactPhone, setContactPhone] = useState("")
+  const [selectedDayIdx, setSelectedDayIdx] = useState(0)
 
   useEffect(() => {
-    // Only re-fetch if admin modified anything in localStorage
     const prop = getPropertyById(id)
     if (prop) setProperty(prop)
     const sim = getSimilarProperties(id, type)
     if (sim.length) setSimilar(sim)
   }, [id, type])
 
-  if (!property) {
-    return (
-      <>
-        <div className="flex flex-col items-center justify-center py-32">
-          <h1 className="text-2xl font-bold text-foreground mb-2">Property Not Found</h1>
-          <p className="text-muted-foreground mb-6">The property you are looking for does not exist.</p>
-          <Link href={`/${type}`}>
-            <Button>Browse Homes</Button>
-          </Link>
-        </div>
-      </>
-    )
-  }
-
-  const handleContact = () => {
-    if (contactName.trim() || contactPhone.trim()) {
-      saveInquiry({
-        id: nextInquiryId(),
-        name: contactName || "Anonymous",
-        phone: contactPhone,
-        email: "",
-        interest: `Property Enquiry – ${property.address}, ${property.city}`,
-        message: `Interested in property #${property.id}`,
-        status: "new",
-        date: new Date().toISOString(),
-      })
-    }
-    const msg = encodeURIComponent(`Hi, I am interested in ${property.address}, ${property.city}.\nName: ${contactName}\nPhone: ${contactPhone}\nPlease share more details.`)
-    window.open(`https://wa.me/917767805544?text=${msg}`, "_blank")
-  }
-
-  // Dynamic tour dates
+  // Visit day options
   const today = new Date()
   const fmt = (d: Date) => d.toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" })
   const tourDays = [today, new Date(today.getTime() + 86400000), new Date(today.getTime() + 172800000)]
 
-  const images = property.images || [property.image]
+  // Lightbox keyboard shortcuts
+  useEffect(() => {
+    if (lightboxIndex === null) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!property) return
+      const images = property.images || [property.image]
+      if (e.key === "Escape") setLightboxIndex(null)
+      if (e.key === "ArrowRight") setLightboxIndex((prev) => ((prev ?? 0) + 1) % images.length)
+      if (e.key === "ArrowLeft") setLightboxIndex((prev) => ((prev ?? 0) - 1 + images.length) % images.length)
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [lightboxIndex, property])
 
-  const nextImage = () => setCurrentImage((prev) => (prev + 1) % images.length)
-  const prevImage = () => setCurrentImage((prev) => (prev - 1 + images.length) % images.length)
+  if (!property) {
+    return (
+      <div className="flex flex-col items-center justify-center py-32">
+        <h1 className="text-xl font-bold text-foreground mb-2">Property Not Found</h1>
+        <p className="text-sm text-muted-foreground mb-6">The listing you requested could not be located.</p>
+        <Link href={`/${type}`}>
+          <Button>View All Properties</Button>
+        </Link>
+      </div>
+    )
+  }
+
+  const images = property.images && property.images.length > 0
+    ? property.images
+    : [property.image]
+
+  const handleShare = async () => {
+    if (typeof navigator !== "undefined" && navigator.share) {
+      try {
+        await navigator.share({
+          title: property.address,
+          text: `${property.address} in ${property.city} - Shree Balaji Enterprises`,
+          url: window.location.href,
+        })
+        return
+      } catch {}
+    }
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
+
+  const handleWhatsAppInquiry = () => {
+    if (contactName.trim() || contactPhone.trim()) {
+      saveInquiry({
+        id: nextInquiryId(),
+        name: contactName || "Website Visitor",
+        phone: contactPhone,
+        email: "",
+        interest: `${property.address}, ${property.city}`,
+        message: `Preferred inspection day: ${fmt(tourDays[selectedDayIdx])}`,
+        status: "new",
+        date: new Date().toISOString(),
+      })
+    }
+
+    const dayText = fmt(tourDays[selectedDayIdx])
+    const msg = encodeURIComponent(
+      `Hello Anju ji,\nI am interested in ${property.address}, ${property.city} (${property.price}).\n` +
+      `Name: ${contactName || "Interested Buyer"}\n` +
+      `Phone: ${contactPhone || "Not provided"}\n` +
+      `Preferred site visit day: ${dayText}\n` +
+      `Please share the floor plan and property details.`
+    )
+    window.open(`https://wa.me/917767805544?text=${msg}`, "_blank")
+  }
 
   return (
     <>
-      <main className="mx-auto max-w-[1440px] px-4 w-full">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 py-4 text-sm text-muted-foreground" aria-label="Breadcrumb">
-          <Link href="/" className="hover:text-primary transition-colors">Home</Link>
-          <span>/</span>
-          <Link href={`/${type}`} className="hover:text-primary transition-colors capitalize">{type}</Link>
-          <span>/</span>
-          <span className="text-foreground font-medium truncate">{property.address}</span>
-        </nav>
+      <main className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8 py-6 pb-24">
+        {/* Header Section */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between text-xs text-neutral-500 mb-2">
+            <nav className="flex items-center gap-1.5 truncate">
+              <Link href="/" className="hover:text-foreground">Home</Link>
+              <span>/</span>
+              <Link href={`/${type}`} className="hover:text-foreground capitalize">{type}</Link>
+              <span>/</span>
+              <span className="text-foreground font-medium truncate">{property.city}</span>
+            </nav>
 
-        {/* Image Gallery */}
-        <div className="relative rounded-xl overflow-hidden mb-6">
-          <div className="relative aspect-[16/9] md:aspect-[2.4/1] bg-muted overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentImage}
-                initial={{ opacity: 0.7 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0.7 }}
-                transition={{ duration: 0.22, ease: "easeOut" }}
-                className="absolute inset-0"
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleShare}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-medium text-foreground transition-colors"
               >
-                <Image
-                  src={images[currentImage]}
-                  alt={`${property.beds > 0 ? `${property.beds} BHK ` : ""}${property.type || "Property"} at ${property.address}, ${property.city} - Photo ${currentImage + 1}`}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </motion.div>
-            </AnimatePresence>
-            {images.length > 1 && (
-              <>
-                <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  onClick={prevImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-card/80 hover:bg-card rounded-full transition-colors z-10"
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="h-5 w-5 text-foreground" />
-                </motion.button>
-                <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  onClick={nextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-card/80 hover:bg-card rounded-full transition-colors z-10"
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="h-5 w-5 text-foreground" />
-                </motion.button>
-              </>
-            )}
-            <div className="absolute bottom-4 right-4 bg-foreground/70 text-card px-3 py-1 rounded-full text-xs font-semibold z-10">
-              {currentImage + 1} / {images.length}
-            </div>
-            <div className="absolute top-4 right-4 flex items-center gap-2 z-10">
-              <motion.button
-                whileTap={{ scale: 0.88 }}
+                <Share2 className="h-3.5 w-3.5" />
+                <span>{copied ? "Link Copied" : "Share"}</span>
+              </button>
+              <button
+                type="button"
                 onClick={() => setSaved(!saved)}
-                aria-label={saved ? "Remove from saved" : "Save property"}
-                className="flex items-center gap-1.5 px-3 py-2 bg-card/90 hover:bg-card rounded-full text-sm font-semibold transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md hover:bg-neutral-100 dark:hover:bg-neutral-800 text-xs font-medium text-foreground transition-colors"
               >
-                <Heart className={`h-4 w-4 transition-colors ${saved ? "fill-destructive text-destructive" : "text-foreground"}`} />
-                <span className="hidden md:inline text-foreground">Save</span>
-              </motion.button>
-              <motion.button
-                whileTap={{ scale: 0.88 }}
-                aria-label="Share property"
-                className="flex items-center gap-1.5 px-3 py-2 bg-card/90 hover:bg-card rounded-full text-sm font-semibold transition-colors"
-              >
-                <Share2 className="h-4 w-4 text-foreground" />
-                <span className="hidden md:inline text-foreground">Share</span>
-              </motion.button>
+                <Heart className={`h-3.5 w-3.5 ${saved ? "fill-rose-500 text-rose-500" : ""}`} />
+                <span>{saved ? "Saved" : "Save"}</span>
+              </button>
             </div>
           </div>
 
-          {images.length > 1 && (
-            <div className="flex gap-2 mt-2">
-              {images.map((img, idx) => (
-                <button
-                  key={idx}
-                  aria-label={`View image ${idx + 1}`}
-                  onClick={() => setCurrentImage(idx)}
-                  className={`relative w-20 h-14 rounded-md overflow-hidden border-2 hover:scale-[1.03] active:scale-95 transition-all ${idx === currentImage ? "border-primary shadow-sm" : "border-transparent opacity-80 hover:opacity-100 hover:border-border"}`}
+          <h1 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-50 tracking-tight">
+            {property.address}
+          </h1>
+
+          <div className="flex items-center gap-2 mt-1.5 text-xs sm:text-sm text-neutral-600 dark:text-neutral-400">
+            <span className="font-semibold text-neutral-900 dark:text-neutral-100">★ 5.0</span>
+            <span>·</span>
+            <span>{property.city}, Maharashtra</span>
+            <span>·</span>
+            <span className="text-emerald-700 dark:text-emerald-400 font-medium">RERA A51700023633</span>
+          </div>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* AIRBNB 5-PHOTO GRID                                                       */}
+        {/* ========================================================================= */}
+        <div className="mb-10">
+          {images.length >= 5 ? (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-2 rounded-2xl overflow-hidden h-[360px] md:h-[460px] relative">
+              {/* Photo 1 (Big Left) */}
+              <div
+                onClick={() => setLightboxIndex(0)}
+                className="md:col-span-2 relative h-full overflow-hidden cursor-pointer bg-neutral-100 dark:bg-neutral-800"
+              >
+                <Image
+                  src={images[0]}
+                  alt={`${property.address} - Photo 1`}
+                  fill
+                  className="object-cover hover:brightness-95 transition-all"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+
+              {/* Photos 2 & 3 */}
+              <div className="hidden md:flex flex-col gap-2 h-full">
+                <div
+                  onClick={() => setLightboxIndex(1)}
+                  className="relative flex-1 overflow-hidden cursor-pointer bg-neutral-100 dark:bg-neutral-800"
                 >
-                  <Image src={img} alt={`Thumbnail ${idx + 1}`} fill className="object-cover" sizes="80px" />
+                  <Image
+                    src={images[1]}
+                    alt={`${property.address} - Photo 2`}
+                    fill
+                    className="object-cover hover:brightness-95 transition-all"
+                    sizes="25vw"
+                  />
+                </div>
+                <div
+                  onClick={() => setLightboxIndex(2)}
+                  className="relative flex-1 overflow-hidden cursor-pointer bg-neutral-100 dark:bg-neutral-800"
+                >
+                  <Image
+                    src={images[2]}
+                    alt={`${property.address} - Photo 3`}
+                    fill
+                    className="object-cover hover:brightness-95 transition-all"
+                    sizes="25vw"
+                  />
+                </div>
+              </div>
+
+              {/* Photos 4 & 5 */}
+              <div className="hidden md:flex flex-col gap-2 h-full">
+                <div
+                  onClick={() => setLightboxIndex(3)}
+                  className="relative flex-1 overflow-hidden cursor-pointer bg-neutral-100 dark:bg-neutral-800"
+                >
+                  <Image
+                    src={images[3]}
+                    alt={`${property.address} - Photo 4`}
+                    fill
+                    className="object-cover hover:brightness-95 transition-all"
+                    sizes="25vw"
+                  />
+                </div>
+                <div
+                  onClick={() => setLightboxIndex(4)}
+                  className="relative flex-1 overflow-hidden cursor-pointer bg-neutral-100 dark:bg-neutral-800"
+                >
+                  <Image
+                    src={images[4]}
+                    alt={`${property.address} - Photo 5`}
+                    fill
+                    className="object-cover hover:brightness-95 transition-all"
+                    sizes="25vw"
+                  />
+                </div>
+              </div>
+
+              {/* Show All Photos Button */}
+              <button
+                type="button"
+                onClick={() => setLightboxIndex(0)}
+                className="absolute bottom-4 right-4 flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white/95 text-neutral-900 text-xs font-semibold shadow-md border border-neutral-200 hover:bg-white active:scale-95 transition-all"
+              >
+                <Grid className="h-4 w-4" />
+                <span>Show all {images.length} photos</span>
+              </button>
+            </div>
+          ) : (
+            <div className="relative rounded-2xl overflow-hidden h-[340px] md:h-[440px] bg-neutral-100 dark:bg-neutral-800">
+              <Image
+                src={images[0]}
+                alt={property.address}
+                fill
+                className="object-cover cursor-pointer"
+                onClick={() => setLightboxIndex(0)}
+                priority
+              />
+              {images.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => setLightboxIndex(0)}
+                  className="absolute bottom-4 right-4 flex items-center gap-2 px-3.5 py-2 rounded-lg bg-white/95 text-neutral-900 text-xs font-semibold shadow-md border border-neutral-200 hover:bg-white"
+                >
+                  <Grid className="h-4 w-4" />
+                  <span>Show all {images.length} photos</span>
                 </button>
-              ))}
+              )}
             </div>
           )}
         </div>
 
-        {/* Main content grid */}
-        <div className="flex flex-col lg:flex-row gap-8 pb-12">
-          {/* Left column */}
-          <div className="flex-1 min-w-0">
-            {/* Price & key stats */}
-            <div className="mb-6">
-              <div className="flex items-start justify-between gap-4 flex-wrap">
-                <div>
-                  <h1 className="text-2xl md:text-3xl font-extrabold text-foreground tracking-tight">
-                    {property.beds > 0 ? `${property.beds} BHK ` : ""}{property.type ? property.type.charAt(0).toUpperCase() + property.type.slice(1) : "Property"} in {property.address}, {property.city}
-                  </h1>
-                  <div className="flex items-baseline gap-3 mt-1.5 flex-wrap">
-                    <p className="text-3xl md:text-4xl font-bold text-primary">{property.price}</p>
-                    {property.zestimate && (
-                      <p className="text-sm text-muted-foreground">
-                        Valuation: <span className="font-semibold text-foreground">{property.zestimate}</span>
-                      </p>
-                    )}
-                  </div>
-                </div>
-                {property.tag && (
-                  <span className={`px-3 py-1.5 text-xs font-bold rounded-full ${
-                    property.tagColor === "primary" ? "bg-primary text-primary-foreground"
-                    : property.tagColor === "destructive" ? "bg-destructive text-destructive-foreground"
-                    : "bg-muted text-foreground"
-                  }`}>
-                    {property.tag}
-                  </span>
-                )}
+        {/* ========================================================================= */}
+        {/* TWO-COLUMN DETAILS & CONTACT LAYOUT                                       */}
+        {/* ========================================================================= */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Main Info Column (Left 65%) */}
+          <div className="lg:col-span-7 xl:col-span-8 space-y-8">
+            {/* Real Estate Consultant Header */}
+            <div className="flex items-center justify-between py-4 border-b border-border">
+              <div>
+                <h2 className="text-base font-semibold text-foreground">
+                  Listing managed by {property.listingAgent?.name || "Anju Jangiti"}
+                </h2>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  Shree Balaji Enterprises · Licensed RERA Real Estate Consultant (Est. 2016)
+                </p>
               </div>
-
-              <div className="flex items-center gap-6 mt-4 text-foreground">
-                {property.beds > 0 && (
-                  <span className="flex items-center gap-1.5">
-                    <BedDouble className="h-5 w-5 text-muted-foreground" />
-                    <span className="text-lg font-bold">{property.beds}</span>
-                    <span className="text-sm text-muted-foreground">beds</span>
-                  </span>
-                )}
-                {property.baths > 0 && (
-                  <span className="flex items-center gap-1.5">
-                    <Bath className="h-5 w-5 text-muted-foreground" />
-                    <span className="text-lg font-bold">{property.baths}</span>
-                    <span className="text-sm text-muted-foreground">baths</span>
-                  </span>
-                )}
-                {property.sqft && property.sqft !== "0" && (
-                  <span className="flex items-center gap-1.5">
-                    <Maximize className="h-5 w-5 text-muted-foreground" />
-                    <span className="text-lg font-bold">{property.sqft}</span>
-                    <span className="text-sm text-muted-foreground">sqft</span>
-                  </span>
-                )}
+              <div className="relative h-12 w-12 rounded-full overflow-hidden border border-border shrink-0">
+                <Image
+                  src={property.listingAgent?.image || "/images/logo.png"}
+                  alt={property.listingAgent?.name || "Anju Jangiti"}
+                  fill
+                  className="object-cover"
+                />
               </div>
-
-              <p className="flex items-center gap-1.5 mt-3 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4 shrink-0" />
-                {formatAddress(property)}
-              </p>
             </div>
 
-            {/* Estimated payment */}
-            {property.monthlyPayment && (
-              <div className="p-4 bg-muted/50 rounded-lg mb-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Est. payment</p>
-                    <p className="text-xl font-bold text-foreground">{property.monthlyPayment}<span className="text-sm font-normal text-muted-foreground">/mo</span></p>
-                  </div>
-                  <Link href="/home-loans" className="text-sm font-semibold text-primary hover:underline">Get pre-approved</Link>
-                </div>
-                {property.hoaFee && property.hoaFee !== "None" && (
-                  <p className="text-xs text-muted-foreground mt-2">HOA fee: {property.hoaFee}</p>
-                )}
+            {/* Quick Specs Overview */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 py-2 border-b border-border text-sm">
+              <div>
+                <p className="text-xs text-muted-foreground">Type</p>
+                <p className="font-semibold text-foreground capitalize mt-0.5">
+                  {property.type || "Apartment"}
+                </p>
               </div>
-            )}
+              {property.beds > 0 && (
+                <div>
+                  <p className="text-xs text-muted-foreground">Bedrooms</p>
+                  <p className="font-semibold text-foreground mt-0.5">
+                    {property.beds} BHK
+                  </p>
+                </div>
+              )}
+              {property.baths > 0 && (
+                <div>
+                  <p className="text-xs text-muted-foreground">Bathrooms</p>
+                  <p className="font-semibold text-foreground mt-0.5">
+                    {property.baths} Bath{property.baths > 1 ? "s" : ""}
+                  </p>
+                </div>
+              )}
+              <div>
+                <p className="text-xs text-muted-foreground">Carpet Area</p>
+                <p className="font-semibold text-foreground mt-0.5">
+                  {property.sqft !== "On Request" ? `${property.sqft} sqft` : "On Request"}
+                </p>
+              </div>
+            </div>
 
-            {/* Description */}
-            <div className="mb-8">
-              <h2 className="text-lg font-bold text-foreground mb-3">About This Home</h2>
-              <p className="text-sm text-foreground leading-relaxed">{property.description}</p>
+            {/* About the Listing */}
+            <div>
+              <h3 className="text-lg font-bold text-foreground mb-2">About this property</h3>
+              <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed">
+                {property.description}
+              </p>
               {property.daysOnMarket !== undefined && (
-                <p className="text-xs text-muted-foreground mt-3 flex items-center gap-1">
-                  <Clock className="h-3.5 w-3.5" />
-                  {property.daysOnMarket === 0 ? "Just listed today" : `Listed ${property.daysOnMarket} days ago`}
+                <p className="text-xs text-muted-foreground mt-2">
+                  Listed {property.daysOnMarket === 0 ? "today" : `${property.daysOnMarket} days ago`}
                 </p>
               )}
             </div>
 
-            {/* Key facts */}
-            <div className="mb-8">
-              <h2 className="text-lg font-bold text-foreground mb-4">Key Facts</h2>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {property.type && (
-                  <div className="flex items-center gap-3 p-3 bg-muted/30 rounded-lg">
-                    <Home className="h-5 w-5 text-primary shrink-0" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Type</p>
-                      <p className="text-sm font-semibold text-foreground capitalize">{property.type}</p>
+            {/* Amenities / What this place offers */}
+            {property.features && property.features.length > 0 && (
+              <div className="pt-4 border-t border-border">
+                <h3 className="text-lg font-bold text-foreground mb-3">Amenities & Features</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {property.features.map((feature) => (
+                    <div key={feature} className="flex items-center gap-2.5 text-sm text-neutral-800 dark:text-neutral-200">
+                      <Check className="h-4 w-4 text-emerald-600 shrink-0" />
+                      <span>{feature}</span>
                     </div>
-                  </div>
-                )}
-                {property.yearBuilt && (
-                  <div className="flex items-center gap-3 p-3 bg-muted/30 rounded-lg">
-                    <Calendar className="h-5 w-5 text-primary shrink-0" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Year Built</p>
-                      <p className="text-sm font-semibold text-foreground">{property.yearBuilt}</p>
-                    </div>
-                  </div>
-                )}
-                {property.lotSize && (
-                  <div className="flex items-center gap-3 p-3 bg-muted/30 rounded-lg">
-                    <Maximize className="h-5 w-5 text-primary shrink-0" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Lot Size</p>
-                      <p className="text-sm font-semibold text-foreground">{property.lotSize}</p>
-                    </div>
-                  </div>
-                )}
-                {property.garage && (
-                  <div className="flex items-center gap-3 p-3 bg-muted/30 rounded-lg">
-                    <Car className="h-5 w-5 text-primary shrink-0" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Garage</p>
-                      <p className="text-sm font-semibold text-foreground">{property.garage}-car</p>
-                    </div>
-                  </div>
-                )}
-                {property.stories && (
-                  <div className="flex items-center gap-3 p-3 bg-muted/30 rounded-lg">
-                    <Building2 className="h-5 w-5 text-primary shrink-0" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Stories</p>
-                      <p className="text-sm font-semibold text-foreground">{property.stories}</p>
-                    </div>
-                  </div>
-                )}
-                {property.heating && (
-                  <div className="flex items-center gap-3 p-3 bg-muted/30 rounded-lg">
-                    <Thermometer className="h-5 w-5 text-primary shrink-0" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">Heating / Cooling</p>
-                      <p className="text-sm font-semibold text-foreground">{property.heating} / {property.cooling}</p>
-                    </div>
-                  </div>
-                )}
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Location & Neighborhood */}
+            <div className="pt-4 border-t border-border">
+              <h3 className="text-lg font-bold text-foreground mb-1">Locality</h3>
+              <p className="text-xs text-neutral-500 mb-4">
+                {property.address}, {property.city}, Maharashtra
+              </p>
+              <div className="p-4 rounded-xl border border-border bg-neutral-50 dark:bg-neutral-900/50 text-xs text-muted-foreground space-y-1">
+                <p className="font-medium text-foreground">Nearby Transit & Essentials:</p>
+                <p>• Connected to local railway station and highway corridors</p>
+                <p>• Schools, markets, and medical centers within 10–15 minutes</p>
               </div>
             </div>
-
-            {/* Features */}
-            {property.features && property.features.length > 0 && (
-              <div className="mb-8">
-                <h2 className="text-lg font-bold text-foreground mb-4">Features</h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                  {property.features.map((feature) => (
-                     <div key={feature} className="flex items-center gap-2 py-2">
-                       <Check className="h-4 w-4 text-primary shrink-0" />
-                       <span className="text-sm text-foreground">{feature}</span>
-                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Monthly cost breakdown */}
-            {property.monthlyPayment && (
-              <div className="mb-8">
-                <h2 className="text-lg font-bold text-foreground mb-4">Monthly Cost Breakdown</h2>
-                <div className="border border-border rounded-lg overflow-hidden">
-                  <div className="flex items-center justify-between px-4 py-3 bg-muted/30">
-                    <span className="text-sm font-semibold text-foreground">Principal & Interest</span>
-                    <span className="text-sm font-bold text-foreground">{property.monthlyPayment}</span>
-                  </div>
-                  <div className="flex items-center justify-between px-4 py-3 border-t border-border">
-                    <span className="text-sm text-foreground">Property Tax</span>
-                    <span className="text-sm text-foreground">₹{Math.round((property.priceNum || 0) * 0.001 / 12).toLocaleString('en-IN')}/mo</span>
-                  </div>
-                  <div className="flex items-center justify-between px-4 py-3 border-t border-border">
-                    <span className="text-sm text-foreground">Home Insurance</span>
-                    <span className="text-sm text-foreground">Included</span>
-                  </div>
-                  {property.hoaFee && property.hoaFee !== "None" && (
-                    <div className="flex items-center justify-between px-4 py-3 border-t border-border">
-                      <span className="text-sm text-foreground">HOA Fees</span>
-                      <span className="text-sm text-foreground">{property.hoaFee}</span>
-                    </div>
-                  )}
-                </div>
-                <Link href="/home-loans" className="inline-block mt-3 text-sm font-semibold text-primary hover:underline">
-                  See home loan details
-                </Link>
-              </div>
-            )}
           </div>
 
-          {/* Right column - Agent contact card */}
-          <div className="w-full lg:w-[380px] shrink-0">
-            <div className="sticky top-[80px] flex flex-col gap-4">
-              {/* Contact agent card */}
-              {property.listingAgent && (
-                <div className="border border-border rounded-xl p-5 bg-card">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="relative h-14 w-14 rounded-full overflow-hidden shrink-0">
-                      <Image src={property.listingAgent.image} alt={property.listingAgent.name} fill className="object-cover" sizes="56px" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="text-sm font-bold text-foreground">{property.listingAgent.name}</p>
-                      <p className="text-xs text-muted-foreground">{property.listingAgent.company}</p>
-                      {property.listingAgent.rating && property.listingAgent.reviewCount ? (
-                        <div className="flex items-center gap-1 mt-0.5">
-                          <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                          <span className="text-xs font-semibold text-foreground">{property.listingAgent.rating}</span>
-                          <span className="text-xs text-muted-foreground">({property.listingAgent.reviewCount} reviews)</span>
-                        </div>
-                      ) : (
-                        <div className="flex items-center gap-1 mt-0.5">
-                          <span className="text-xs font-semibold text-primary">RERA Registered Agent</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
+          {/* Sticky Inspection & Inquiry Card (Right 35%) */}
+          <div className="lg:col-span-5 xl:col-span-4 sticky top-20">
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-md space-y-5">
+              {/* Price Line */}
+              <div className="flex items-baseline justify-between">
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase font-medium">Price</p>
+                  <p className="text-2xl font-bold text-foreground">{property.price}</p>
+                </div>
+                <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded-md">
+                  No Brokerage on New Projects
+                </span>
+              </div>
 
-                  <div className="mb-4">
-                    <input
-                      type="text"
-                      value={contactName}
-                      onChange={(e) => setContactName(e.target.value)}
-                      placeholder="Your full name"
-                      className="w-full px-3 py-2.5 text-sm border border-border rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary mb-2"
-                    />
-                    <input
-                      type="tel"
-                      value={contactPhone}
-                      onChange={(e) => setContactPhone(e.target.value)}
-                      placeholder="Your mobile number"
-                      className="w-full px-3 py-2.5 text-sm border border-border rounded-md bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary mb-3"
-                    />
-                    <Button className="w-full mb-2" onClick={handleContact}>
-                      <svg viewBox="0 0 24 24" className="h-4 w-4 mr-2 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                      Send Enquiry via WhatsApp
-                    </Button>
-                  </div>
+              {/* Inquiry Inputs */}
+              <div className="space-y-3 pt-2 border-t border-border">
+                <div>
+                  <label className="block text-xs font-medium text-foreground mb-1">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    value={contactName}
+                    onChange={(e) => setContactName(e.target.value)}
+                    placeholder="Full name"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-neutral-900 dark:focus:border-neutral-100"
+                  />
+                </div>
 
-                  <div className="flex items-center gap-3 mt-3 pt-3 border-t border-border">
-                    <a href={`tel:${property.listingAgent.phone}`} className="flex items-center gap-1.5 text-xs text-primary hover:underline">
-                      <Phone className="h-3.5 w-3.5" />{property.listingAgent.phone}
-                    </a>
-                    <a href={`mailto:${property.listingAgent.email}`} className="flex items-center gap-1.5 text-xs text-primary hover:underline">
-                      <Mail className="h-3.5 w-3.5" />Email
-                    </a>
+                <div>
+                  <label className="block text-xs font-medium text-foreground mb-1">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    value={contactPhone}
+                    onChange={(e) => setContactPhone(e.target.value)}
+                    placeholder="10-digit mobile number"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-neutral-900 dark:focus:border-neutral-100"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-medium text-foreground mb-1">
+                    Select a Site Visit Day
+                  </label>
+                  <div className="grid grid-cols-3 gap-1.5">
+                    {tourDays.map((d, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => setSelectedDayIdx(i)}
+                        className={`py-1.5 px-1 text-center rounded-md text-xs font-medium border transition-colors ${
+                          selectedDayIdx === i
+                            ? "bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900 border-neutral-900 dark:border-neutral-100 font-semibold"
+                            : "bg-background text-neutral-700 dark:text-neutral-300 border-border hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                        }`}
+                      >
+                        {fmt(d)}
+                      </button>
+                    ))}
                   </div>
                 </div>
-              )}
+              </div>
 
-              <div className="border border-border rounded-xl p-5 bg-card">
-                <h3 className="text-base font-bold text-foreground mb-3">Request a Site Visit</h3>
-                <div className="grid grid-cols-3 gap-2 mb-4">
-                  {tourDays.map((day, idx) => (
-                     <button
-                       key={idx}
-                       className={`px-2 py-2.5 text-xs font-semibold rounded-md border transition-colors text-center ${
-                         idx === 0
-                           ? "border-primary bg-primary/5 text-primary"
-                           : "border-border text-foreground hover:border-primary"
-                       }`}
-                     >
-                       {fmt(day)}
-                     </button>
-                  ))}
-                </div>
-                <a
-                  href={`https://wa.me/917767805544?text=${encodeURIComponent(`Hi, I would like to schedule a site visit for ${property.address}, ${property.city}. Please let me know the available time slots.`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+              {/* Action Buttons */}
+              <div className="space-y-2 pt-2">
+                <button
+                  type="button"
+                  onClick={handleWhatsAppInquiry}
+                  className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-xs transition-colors"
                 >
-                  <Button className="w-full">
-                    <svg viewBox="0 0 24 24" className="h-4 w-4 mr-2 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    Book Site Visit via WhatsApp
-                  </Button>
+                  <MessageCircle className="h-4 w-4" />
+                  <span>Enquire via WhatsApp</span>
+                </button>
+
+                <a
+                  href="tel:7767805544"
+                  className="w-full py-2.5 px-4 rounded-xl border border-border hover:bg-neutral-50 dark:hover:bg-neutral-900 text-foreground text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
+                >
+                  <Phone className="h-3.5 w-3.5 text-neutral-500" />
+                  <span>Call Agent: +91 77678 05544</span>
                 </a>
               </div>
 
-              {/* EMI estimate */}
-              <div className="border border-border rounded-xl p-5 bg-card">
-                <h3 className="text-base font-bold text-foreground mb-1">Home Loan Estimate</h3>
-                <p className="text-xs text-muted-foreground mb-4">Indicative EMI based on current rates</p>
-                <div className="flex items-baseline gap-1 mb-4">
-                  <span className="text-lg font-bold text-primary">₹</span>
-                  <span className="text-2xl font-bold text-foreground">{property.monthlyPayment || "Contact Us"}</span>
-                  {property.monthlyPayment && <span className="text-sm text-muted-foreground">/mo</span>}
-                </div>
-                <Link href="/home-loans">
-                  <Button variant="outline" className="w-full">Calculate EMI</Button>
-                </Link>
+              {/* Genuine Trust Facts */}
+              <div className="text-[11px] text-muted-foreground space-y-1 pt-2 border-t border-border">
+                <p>• Verified MahaRERA Agency: A51700023633</p>
+                <p>• Free site visit and doorstep consultation</p>
+                <p>• Direct builder inventory pricing</p>
               </div>
             </div>
           </div>
         </div>
 
-        <section className="pb-12 border-t border-border pt-8">
-          <h2 className="text-xl font-bold text-foreground mb-6">Similar Homes You May Like</h2>
-          {similar.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-               {similar.map((p) => (
-                 <PropertyCard key={p.id} property={p} />
-               ))}
+        {/* Similar Listings Section */}
+        {similar.length > 0 && (
+          <section className="mt-20 pt-10 border-t border-border">
+            <h2 className="text-xl font-bold text-foreground mb-6">
+              Other properties in {property.city}
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {similar.map((p) => (
+                <PropertyCard key={p.id} property={p} />
+              ))}
             </div>
-          ) : (
-            <div className="bg-primary/5 border border-primary/20 rounded-xl p-8 text-center">
-              <p className="text-base font-bold text-foreground mb-2">More Properties Coming Soon</p>
-              <p className="text-sm text-muted-foreground mb-5 max-w-md mx-auto">
-                We regularly add new listings. Contact us via WhatsApp to get notified when new properties matching your requirements are available.
-              </p>
-              <a href={`https://wa.me/917767805544?text=${encodeURIComponent(`Hi, please notify me when new properties similar to ${property.address}, ${property.city} are available.`)}`} target="_blank" rel="noopener noreferrer">
-                <Button>
-                  <svg viewBox="0 0 24 24" className="h-4 w-4 mr-2 fill-current" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                  Get Notified via WhatsApp
-                </Button>
-              </a>
-            </div>
-          )}
-        </section>
+          </section>
+        )}
       </main>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/95 flex flex-col"
+          >
+            <div className="flex items-center justify-between px-6 py-4 text-white border-b border-white/10">
+              <span className="text-xs font-medium">
+                Photo {lightboxIndex + 1} of {images.length}
+              </span>
+              <button
+                type="button"
+                onClick={() => setLightboxIndex(null)}
+                className="p-1.5 rounded-full hover:bg-white/10 text-white"
+                aria-label="Close"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="flex-1 relative flex items-center justify-center p-4">
+              <div className="relative w-full max-w-4xl h-[70vh]">
+                <Image
+                  src={images[lightboxIndex]}
+                  alt={`${property.address} - Photo ${lightboxIndex + 1}`}
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+
+              {images.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => setLightboxIndex((prev) => ((prev ?? 0) - 1 + images.length) % images.length)}
+                    className="absolute left-4 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white"
+                    aria-label="Previous"
+                  >
+                    <ChevronLeft className="h-6 w-6" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLightboxIndex((prev) => ((prev ?? 0) + 1) % images.length)}
+                    className="absolute right-4 p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white"
+                    aria-label="Next"
+                  >
+                    <ChevronRight className="h-6 w-6" />
+                  </button>
+                </>
+              )}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

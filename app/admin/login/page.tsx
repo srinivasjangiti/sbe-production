@@ -2,33 +2,42 @@
 
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Eye, EyeOff, Lock, ShieldCheck } from "lucide-react"
+import { Eye, EyeOff, Lock, User, ShieldCheck } from "lucide-react"
 import { BrandLogo } from "@/components/brand-logo"
 import { login, isAuthenticated } from "@/lib/admin-auth"
 
 export default function AdminLoginPage() {
   const router = useRouter()
+  const [username, setUsername] = useState("admin")
   const [password, setPassword] = useState("")
   const [show, setShow] = useState(false)
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (isAuthenticated()) router.replace("/admin")
+    let active = true
+    isAuthenticated().then((authed) => {
+      if (active && authed) {
+        router.replace("/admin")
+      }
+    })
+    return () => {
+      active = false
+    }
   }, [router])
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     setError("")
-    setTimeout(() => {
-      if (login(password)) {
-        router.replace("/admin")
-      } else {
-        setError("Incorrect password. Please try again.")
-        setLoading(false)
-      }
-    }, 400)
+
+    const result = await login(password, username)
+    if (result.ok) {
+      router.replace("/admin")
+    } else {
+      setError(result.error || "Invalid credentials. Please try again.")
+      setLoading(false)
+    }
   }
 
   return (
@@ -53,6 +62,24 @@ export default function AdminLoginPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1.5">
+                Username
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter admin username"
+                  required
+                  autoComplete="username"
+                  className="w-full pl-10 pr-3 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 mb-1.5">
                 Admin Password
               </label>
               <div className="relative">
@@ -63,12 +90,14 @@ export default function AdminLoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter admin password"
                   required
+                  autoComplete="current-password"
                   className="w-full pl-10 pr-10 py-2.5 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
                 />
                 <button
                   type="button"
                   onClick={() => setShow(!show)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                  aria-label={show ? "Hide password" : "Show password"}
                 >
                   {show ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 </button>
@@ -76,7 +105,7 @@ export default function AdminLoginPage() {
             </div>
 
             {error && (
-              <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+              <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg px-3 py-2 leading-snug">
                 {error}
               </p>
             )}
