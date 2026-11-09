@@ -1,4 +1,3 @@
-import Image from "next/image"
 import Link from "next/link"
 import {
   MapPin,
@@ -273,70 +272,14 @@ export default function LocationsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
-      {/* ── HERO ──────────────────────────────────────────── */}
-      <section className="relative overflow-hidden min-h-[520px] xl:min-h-[620px] 2xl:min-h-[700px] flex items-end">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/mumbai-night.jpg"
-            alt="Mumbai Metropolitan Region cityscape"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground via-foreground/70 to-foreground/20" />
-        </div>
-
-        <div className="relative z-10 mx-auto max-w-[1440px] px-4 pt-32 pb-16 w-full">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 bg-primary text-primary-foreground text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-5">
-                <MapPin className="h-3.5 w-3.5" />
-                Mumbai Metropolitan Region
-              </div>
-              <h1 className="text-4xl md:text-[60px] font-black text-white leading-[1.0] tracking-tight mb-4">
-                Areas We<br />
-                <span className="text-primary">Proudly Serve.</span>
-              </h1>
-              <p className="text-base text-white/60 max-w-lg leading-relaxed">
-                15+ years of on-the-ground expertise across 13+ cities — from Ambernath to Mumbai,
-                Karjat to Navi Mumbai. We know every neighbourhood, every price point.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── STATS BAR ─────────────────────────────────────── */}
-      <section className="py-10 border-b border-border bg-card">
-        <div className="mx-auto max-w-[1440px] px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden">
-            {[
-              { value: "13+", label: "Cities Covered", sub: "Across Maharashtra" },
-              { value: "500+", label: "Properties Sold", sub: "Across MMR" },
-              { value: "65+", label: "Km Radius", sub: "From Ambernath" },
-              { value: "15+", label: "Years Local Know-How", sub: "Established 2016" },
-            ].map((s) => (
-              <div
-                key={s.label}
-                className="flex flex-col items-center justify-center py-8 px-4 gap-0.5 text-center bg-card"
-              >
-                <p className="text-3xl md:text-4xl font-black text-foreground">{s.value}</p>
-                <p className="text-sm font-semibold text-foreground">{s.label}</p>
-                <p className="text-xs text-muted-foreground">{s.sub}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── INTRO ─────────────────────────────────────────── */}
-      <section className="py-16 md:py-20">
+      {/* ── LOCATION DISCOVERY INTRODUCTION ───────────────── */}
+      <section className="pt-10 md:pt-14 pb-8 md:pb-10">
         <div className="mx-auto max-w-[1440px] px-4 text-center">
-          <p className="text-primary text-xs font-extrabold uppercase tracking-[0.25em] mb-4">Explore Locations</p>
-          <h2 className="text-3xl md:text-5xl font-black text-foreground leading-tight mb-4">
+          <p className="text-primary text-xs font-extrabold uppercase tracking-[0.25em] mb-3">Explore Locations</p>
+          <h1 className="text-3xl md:text-5xl font-black text-foreground leading-tight mb-3">
             Find Your City,<br />
             <span className="text-muted-foreground font-light italic">Find Your Home.</span>
-          </h2>
+          </h1>
           <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Click on any location below to browse available properties. Don&apos;t see yours?{" "}
             <Link href="/contact" className="text-primary font-semibold hover:underline">
@@ -426,6 +369,29 @@ export default function LocationsPage() {
                     </Link>
                   </div>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── STATS BAR ─────────────────────────────────────── */}
+      <section className="py-12 border-t border-b border-border bg-card">
+        <div className="mx-auto max-w-[1440px] px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden">
+            {[
+              { value: "13+", label: "Cities Covered", sub: "Across Maharashtra" },
+              { value: "500+", label: "Properties Sold", sub: "Across MMR" },
+              { value: "65+", label: "Km Radius", sub: "From Ambernath" },
+              { value: "15+", label: "Years Local Know-How", sub: "Established 2016" },
+            ].map((s) => (
+              <div
+                key={s.label}
+                className="flex flex-col items-center justify-center py-8 px-4 gap-0.5 text-center bg-card"
+              >
+                <p className="text-3xl md:text-4xl font-black text-foreground">{s.value}</p>
+                <p className="text-sm font-semibold text-foreground">{s.label}</p>
+                <p className="text-xs text-muted-foreground">{s.sub}</p>
               </div>
             ))}
           </div>
