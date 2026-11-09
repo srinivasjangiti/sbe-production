@@ -358,42 +358,37 @@ export default function LocationsPage() {
                 className="group relative flex flex-col rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 scroll-mt-24"
               >
                 {/* Image */}
-                <div className="relative h-56 overflow-hidden">
+                <div className="relative h-56 overflow-hidden bg-muted">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={loc.image}
                     alt={`${loc.name} real estate — Shree Balaji Enterprises`}
-                    className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${(loc as any).imgClass ?? ""}`}
+                    className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${(loc as any).imgClass ?? ""}`}
                   />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                   {/* Badge */}
                   <span
-                    className={`absolute top-3 left-3 inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide ${loc.badgeClass}`}
+                    className={`absolute top-3 left-3 inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide shadow-sm ${loc.badgeClass}`}
                   >
                     {loc.badge}
                   </span>
-
-                  {/* Location name overlaid on image */}
-                  <div className="absolute bottom-3 left-4 right-4">
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <h3 className="text-xl font-black text-white leading-tight">{loc.name}</h3>
-                        <div className="flex items-center gap-1 mt-0.5">
-                          <MapPin className="h-3 w-3 text-white/60 shrink-0" />
-                          <span className="text-xs text-white/60 font-medium">{loc.region}</span>
-                        </div>
-                      </div>
-                      <span className="shrink-0 text-[11px] font-semibold text-white/50 mt-1 whitespace-nowrap">
-                        {loc.distance}
-                      </span>
-                    </div>
-                  </div>
                 </div>
 
                 {/* Card body */}
                 <div className="flex flex-col flex-1 p-5">
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <div>
+                      <h3 className="text-xl font-black text-foreground leading-tight">{loc.name}</h3>
+                      <div className="flex items-center gap-1 mt-0.5">
+                        <MapPin className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                        <span className="text-xs text-muted-foreground font-medium">{loc.region}</span>
+                      </div>
+                    </div>
+                    <span className="shrink-0 text-[11px] font-semibold text-muted-foreground bg-muted px-2.5 py-1 rounded-full mt-0.5 whitespace-nowrap">
+                      {loc.distance}
+                    </span>
+                  </div>
+
                   <p className="text-xs font-extrabold uppercase tracking-widest text-primary mb-1">
                     {loc.tagline}
                   </p>
