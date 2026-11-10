@@ -4,6 +4,7 @@ import {
   verifyPassword,
   createSessionToken,
   getSessionSecret,
+  isProductionSessionSecretConfigured,
   checkRateLimit,
   recordFailedAttempt,
   clearFailedAttempts,
@@ -62,8 +63,9 @@ export async function POST(req: NextRequest) {
   const expectedUsername = (process.env.ADMIN_USERNAME || "admin").trim()
   const expectedPasswordHash = process.env.ADMIN_PASSWORD_HASH?.trim()
 
-  if (!expectedPasswordHash) {
-    // Failsafe: Server credentials have not been configured
+  // In production, both the password hash AND a valid 32+ char SESSION_SECRET must be configured.
+  // Fails closed with 500 if unconfigured, preventing any login operations.
+  if (!expectedPasswordHash || (process.env.NODE_ENV === "production" && !isProductionSessionSecretConfigured())) {
     return NextResponse.json(
       {
         ok: false,
@@ -91,11 +93,23 @@ export async function POST(req: NextRequest) {
   // 6. Successful Authentication: Reset rate limiter and issue signed session cookie
   await clearFailedAttempts(ip)
 
-  const sessionToken = await createSessionToken(
-    expectedUsername,
-    getSessionSecret(),
-    28800 // 8 hours
-  )
+  let sessionToken: string
+  try {
+    sessionToken = await createSessionToken(
+      expectedUsername,
+      getSessionSecret(),
+      28800 // 8 hours
+    )
+  } catch (err) {
+    console.error("Session token creation failed:", err)
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "Server authentication credentials not configured. Please contact the administrator.",
+      },
+      { status: 500 }
+    )
+  }
 
   const response = NextResponse.json(
     { ok: true, user: { username: expectedUsername } },

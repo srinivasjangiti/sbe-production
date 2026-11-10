@@ -53,28 +53,30 @@ export function isValidOrigin(origin: string | null, host: string | null): boole
   }
 }
 
-let ephemeralSecret: string | null = null
+export const MIN_SESSION_SECRET_LENGTH = 32
+
+// Helper to check if production session secret is properly provisioned
+export function isProductionSessionSecretConfigured(): boolean {
+  const secret = process.env.SESSION_SECRET?.trim()
+  return Boolean(secret && secret.length >= MIN_SESSION_SECRET_LENGTH)
+}
 
 // Session secret resolver
 export function getSessionSecret(): string {
-  const secret = process.env.SESSION_SECRET
-  if (secret && secret.length >= 32) {
+  const secret = process.env.SESSION_SECRET?.trim()
+  if (secret && secret.length >= MIN_SESSION_SECRET_LENGTH) {
     return secret
   }
+
   if (process.env.NODE_ENV === "production") {
-    // In production, NEVER fall back to a static hardcoded key
-    if (!ephemeralSecret) {
-      const bytes = crypto.getRandomValues(new Uint8Array(32))
-      ephemeralSecret = Array.from(bytes)
-        .map((b) => b.toString(16).padStart(2, "0"))
-        .join("")
-      console.error(
-        "CRITICAL SECURITY ALERT: SESSION_SECRET is not configured or too short (<32 chars) in production! Using an ephemeral random secret. Add a 64-character SESSION_SECRET to Vercel."
-      )
-    }
-    return ephemeralSecret
+    // In production, NEVER fall back to an ephemeral secret or static secret.
+    // Must fail closed immediately if SESSION_SECRET is missing or shorter than 32 characters.
+    throw new Error(
+      "CRITICAL: SESSION_SECRET is missing or shorter than 32 characters in production. Authentication operations fail closed."
+    )
   }
-  // Safe development-only fallback
+
+  // Safe development-only fallback — strictly prohibited in production runtime
   return "dev-only-session-secret-change-in-env-vars-minimum-32-chars-long"
 }
 
@@ -95,6 +97,12 @@ export async function createSessionToken(
   secret: string,
   expiresInSeconds = 28800 // 8 hours default
 ): Promise<string> {
+  if (!secret || secret.length < MIN_SESSION_SECRET_LENGTH) {
+    throw new Error(
+      `Invalid session secret provided to createSessionToken. Secret must be at least ${MIN_SESSION_SECRET_LENGTH} characters.`
+    )
+  }
+
   const header = toBase64Url(ENCODER.encode(JSON.stringify({ alg: "HS256", typ: "JWT" })))
   const now = Math.floor(Date.now() / 1000)
   const randomBytes = crypto.getRandomValues(new Uint8Array(16))
@@ -123,7 +131,7 @@ export async function verifySessionToken(
   token: string,
   secret: string
 ): Promise<{ valid: boolean; username?: string; expired?: boolean }> {
-  if (!token || typeof token !== "string") {
+  if (!token || typeof token !== "string" || !secret || secret.length < MIN_SESSION_SECRET_LENGTH) {
     return { valid: false }
   }
 

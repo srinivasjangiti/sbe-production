@@ -30,7 +30,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "Unauthorized. Admin session required." }, { status: 401 })
   }
 
-  const session = await verifySessionToken(token, getSessionSecret())
+  let session: { valid: boolean; username?: string } = { valid: false }
+  try {
+    session = await verifySessionToken(token, getSessionSecret())
+  } catch {
+    return NextResponse.json({ ok: false, error: "Unauthorized. Authentication service unavailable." }, { status: 401 })
+  }
   if (!session.valid) {
     return NextResponse.json({ ok: false, error: "Unauthorized. Invalid or expired admin session." }, { status: 401 })
   }

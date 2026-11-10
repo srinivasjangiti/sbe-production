@@ -2,8 +2,12 @@ import fs from "node:fs"
 import path from "node:path"
 import sharp from "sharp"
 
-const SOURCE_ROOT = "C:\\Shree Balaji Enterprises\\Properties"
-const DEST_ROOT = path.resolve("public/images/properties")
+const SOURCE_ROOT = process.env.SOURCE_ROOT
+  ? path.resolve(process.env.SOURCE_ROOT)
+  : path.resolve(process.cwd(), "properties-source")
+const DEST_ROOT = process.env.DEST_ROOT
+  ? path.resolve(process.env.DEST_ROOT)
+  : path.resolve("public/images/properties")
 
 // Sanitize filename into web-safe format while preserving source stem
 export function sanitizeFilename(filename, usedNames = new Set()) {
@@ -43,6 +47,13 @@ export function slugify(str) {
 export function discoverProjects() {
   const categories = ["Commercial", "Residential"]
   const projects = []
+
+  if (!fs.existsSync(SOURCE_ROOT)) {
+    console.warn(`\n⚠️  [WARN] Image source directory not found: "${SOURCE_ROOT}"`)
+    console.warn(`   To process new project photos, specify the directory via SOURCE_ROOT:`)
+    console.warn(`   SOURCE_ROOT="/path/to/raw/photos" node scripts/process-property-images.mjs\n`)
+    return []
+  }
 
   for (const cat of categories) {
     const catDir = path.join(SOURCE_ROOT, cat)
@@ -95,6 +106,10 @@ export function discoverProjects() {
 
 async function processAllImages() {
   const projects = discoverProjects()
+  if (projects.length === 0) {
+    console.log(`No property folders found to process. Exiting cleanly.`)
+    return
+  }
   console.log(`Discovered ${projects.length} project folders.\n`)
 
   const manifest = []

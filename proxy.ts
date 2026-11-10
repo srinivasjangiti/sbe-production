@@ -8,10 +8,14 @@ export async function proxy(request: NextRequest) {
   if (pathname === "/admin/login") {
     const token = request.cookies.get("sbe_admin_session")?.value
     if (token) {
-      const verified = await verifySessionToken(token, getSessionSecret())
-      if (verified.valid) {
-        // User is already logged in, redirect to admin dashboard
-        return NextResponse.redirect(new URL("/admin", request.url))
+      try {
+        const verified = await verifySessionToken(token, getSessionSecret())
+        if (verified.valid) {
+          // User is already logged in, redirect to admin dashboard
+          return NextResponse.redirect(new URL("/admin", request.url))
+        }
+      } catch {
+        // If session secret is unconfigured/invalid, treat as unauthenticated
       }
     }
     return NextResponse.next()
@@ -25,11 +29,19 @@ export async function proxy(request: NextRequest) {
       return NextResponse.redirect(loginUrl)
     }
 
-    const verified = await verifySessionToken(token, getSessionSecret())
-    if (!verified.valid) {
+    try {
+      const verified = await verifySessionToken(token, getSessionSecret())
+      if (!verified.valid) {
+        const loginUrl = new URL("/admin/login", request.url)
+        const response = NextResponse.redirect(loginUrl)
+        // Clear invalid/expired cookie
+        response.cookies.delete("sbe_admin_session")
+        return response
+      }
+    } catch {
+      // Fail closed: If session secret is invalid or throws, redirect to login & clear cookie
       const loginUrl = new URL("/admin/login", request.url)
       const response = NextResponse.redirect(loginUrl)
-      // Clear invalid/expired cookie
       response.cookies.delete("sbe_admin_session")
       return response
     }

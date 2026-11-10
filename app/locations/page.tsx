@@ -294,83 +294,115 @@ export default function LocationsPage() {
       <section className="pb-24 md:pb-32">
         <div className="mx-auto max-w-[1440px] px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {locations.map((loc) => (
-              <div
-                key={loc.id}
-                id={loc.id}
-                className="group relative flex flex-col rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 scroll-mt-24"
-              >
-                {/* Image */}
-                <div className="relative h-56 overflow-hidden bg-muted">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={loc.image}
-                    alt={`${loc.name} real estate — Shree Balaji Enterprises`}
-                    className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${(loc as any).imgClass ?? ""}`}
-                  />
-
-                  {/* Badge */}
-                  <span
-                    className={`absolute top-3 left-3 inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide shadow-sm ${loc.badgeClass}`}
+            {locations.map((loc) => {
+              const Icon = loc.icon
+              const isHQ = loc.badge === "HQ"
+              return (
+                <div
+                  key={loc.id}
+                  id={loc.id}
+                  className="group relative flex flex-col rounded-2xl overflow-hidden border border-border/80 bg-card shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.09)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 scroll-mt-24"
+                >
+                  {/* Image Container */}
+                  <Link
+                    href={`/buy?q=${encodeURIComponent(loc.searchQuery)}`}
+                    className="block relative h-56 sm:h-60 overflow-hidden bg-muted"
                   >
-                    {loc.badge}
-                  </span>
-                </div>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={loc.image}
+                      alt={`${loc.name} real estate — Shree Balaji Enterprises`}
+                      className={`w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${(loc as any).imgClass ?? ""}`}
+                    />
 
-                {/* Card body */}
-                <div className="flex flex-col flex-1 p-5">
-                  <div className="flex items-start justify-between gap-2 mb-2">
-                    <div>
-                      <h3 className="text-xl font-black text-foreground leading-tight">{loc.name}</h3>
-                      <div className="flex items-center gap-1 mt-0.5">
-                        <MapPin className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
-                        <span className="text-xs text-muted-foreground font-medium">{loc.region}</span>
-                      </div>
-                    </div>
-                    <span className="shrink-0 text-[11px] font-semibold text-muted-foreground bg-muted px-2.5 py-1 rounded-full mt-0.5 whitespace-nowrap">
-                      {loc.distance}
-                    </span>
-                  </div>
-
-                  <p className="text-xs font-extrabold uppercase tracking-widest text-primary mb-1">
-                    {loc.tagline}
-                  </p>
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 mb-4">
-                    {loc.description}
-                  </p>
-
-                  {/* Property type pills */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {loc.highlights.map((h) => (
+                    {/* Badge */}
+                    <div className="absolute top-3 left-3 z-10 pointer-events-none">
                       <span
-                        key={h}
-                        className="inline-flex items-center px-2.5 py-1 bg-muted rounded-full text-[11px] font-semibold text-muted-foreground"
+                        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold tracking-wide shadow-sm ${
+                          isHQ
+                            ? "bg-primary text-primary-foreground ring-1 ring-white/30"
+                            : "backdrop-blur-md bg-white/95 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 border border-black/5 dark:border-white/10"
+                        }`}
                       >
-                        {h}
+                        {loc.badge}
                       </span>
-                    ))}
-                  </div>
+                    </div>
 
-                  {/* CTA row */}
-                  <div className="flex items-center gap-2 mt-auto pt-3 border-t border-border">
+                    {/* Floating Distance Chip */}
+                    <div className="absolute top-3 right-3 z-10 pointer-events-none">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-medium backdrop-blur-md bg-black/60 text-white shadow-sm">
+                        {loc.distance.includes("km") ? (
+                          <Train className="h-3 w-3 opacity-80" />
+                        ) : (
+                          <MapPin className="h-3 w-3 opacity-80" />
+                        )}
+                        {loc.distance}
+                      </span>
+                    </div>
+                  </Link>
+
+                  {/* Card Body */}
+                  <div className="flex flex-col flex-1 p-5">
+                    {/* Eyebrow Tagline with Icon */}
+                    <div className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-primary mb-1">
+                      <Icon className="h-3.5 w-3.5 shrink-0" />
+                      <span>{loc.tagline}</span>
+                    </div>
+
+                    {/* City Title */}
                     <Link
                       href={`/buy?q=${encodeURIComponent(loc.searchQuery)}`}
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 bg-primary text-primary-foreground rounded-lg text-xs font-bold hover:bg-primary/90 transition-colors"
+                      className="block group-hover:text-primary transition-colors"
                     >
-                      Buy
-                      <ArrowRight className="h-3.5 w-3.5" />
+                      <h3 className="text-2xl font-black text-foreground tracking-tight group-hover:text-primary transition-colors">
+                        {loc.name}
+                      </h3>
                     </Link>
-                    <Link
-                      href={`/rent?q=${encodeURIComponent(loc.searchQuery)}`}
-                      className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-1.5 border border-primary text-primary rounded-lg text-xs font-bold hover:bg-primary/10 transition-colors"
-                    >
-                      Rent
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
+
+                    {/* Region / District */}
+                    <div className="flex items-center gap-1.5 text-xs text-muted-foreground font-medium mt-1 mb-3">
+                      <MapPin className="h-3.5 w-3.5 text-muted-foreground/80 shrink-0" />
+                      <span>{loc.region}</span>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-[13.5px] text-muted-foreground leading-relaxed line-clamp-3 mb-4">
+                      {loc.description}
+                    </p>
+
+                    {/* Property Highlights */}
+                    <div className="flex flex-wrap gap-1.5 mb-5">
+                      {loc.highlights.map((h) => (
+                        <span
+                          key={h}
+                          className="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-medium bg-muted/60 text-foreground/85 border border-border/50 hover:bg-muted transition-colors"
+                        >
+                          {h}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* CTA row */}
+                    <div className="flex items-center gap-2.5 mt-auto pt-3.5 border-t border-border/70">
+                      <Link
+                        href={`/buy?q=${encodeURIComponent(loc.searchQuery)}`}
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 h-9 px-3 bg-primary text-primary-foreground rounded-lg text-xs font-bold shadow-xs hover:bg-primary/90 transition-all group/btn"
+                      >
+                        <span>Buy</span>
+                        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/btn:translate-x-0.5" />
+                      </Link>
+                      <Link
+                        href={`/rent?q=${encodeURIComponent(loc.searchQuery)}`}
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 h-9 px-3 border border-primary/20 bg-background hover:bg-primary/5 hover:border-primary/40 text-foreground rounded-lg text-xs font-bold transition-all group/btn"
+                      >
+                        <span>Rent</span>
+                        <ArrowRight className="h-3.5 w-3.5 text-muted-foreground transition-transform group-hover/btn:translate-x-0.5" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
