@@ -136,7 +136,7 @@ export function BuyListingCard({
   // ── Full Card for Grid View ──────────────────────────
   return (
     <article
-      className="group relative flex flex-col rounded-2xl overflow-hidden border border-border/80 bg-card shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 h-full"
+      className="group relative flex flex-col rounded-xl overflow-hidden border border-border/70 bg-card shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 h-full"
       onMouseEnter={() => {
         setIsHovered(true)
         onHover?.(property.id)
@@ -154,14 +154,14 @@ export function BuyListingCard({
             alt={`${property.address}, ${property.city}`}
             fill
             className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
           />
         </Link>
 
         {/* Meaningful tag badge */}
         {tag && (
-          <div className="absolute top-3 left-3 z-10 pointer-events-none">
-            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide backdrop-blur-md bg-white/95 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 border border-black/5 dark:border-white/10 shadow-xs">
+          <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-semibold tracking-wide backdrop-blur-md bg-white/95 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 border border-black/5 dark:border-white/10 shadow-xs">
               {tag}
             </span>
           </div>
@@ -172,10 +172,10 @@ export function BuyListingCard({
           type="button"
           onClick={toggleSave}
           aria-label={saved ? "Remove from wishlist" : "Add to wishlist"}
-          className="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/30 hover:bg-black/55 text-white transition-all active:scale-90 shadow-xs"
+          className="absolute top-2.5 right-2.5 z-10 p-1.5 rounded-full bg-black/35 hover:bg-black/60 text-white transition-all active:scale-90 shadow-xs"
         >
           <Heart
-            className={`h-4 w-4 transition-colors ${
+            className={`h-3.5 w-3.5 transition-colors ${
               saved ? "fill-rose-500 text-rose-500" : "text-white"
             }`}
           />
@@ -183,9 +183,9 @@ export function BuyListingCard({
 
         {/* Photo count indicator */}
         {images.length > 1 && (
-          <div className="absolute bottom-3 left-3 z-10 pointer-events-none">
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium backdrop-blur-md bg-black/60 text-white shadow-xs">
-              <Camera className="h-3 w-3" />
+          <div className="absolute bottom-2.5 left-2.5 z-10 pointer-events-none">
+            <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[9px] font-medium backdrop-blur-md bg-black/60 text-white shadow-xs">
+              <Camera className="h-2.5 w-2.5" />
               {imgIndex + 1}/{images.length}
             </span>
           </div>
@@ -198,68 +198,68 @@ export function BuyListingCard({
               type="button"
               onClick={prev}
               aria-label="Previous photo"
-              className="hidden sm:flex absolute left-2.5 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-white/95 text-neutral-800 hover:bg-white hover:scale-105 shadow-md transition-all"
+              className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-white/95 text-neutral-800 hover:bg-white hover:scale-105 shadow-md transition-all"
             >
-              <ChevronLeft className="h-4 w-4" />
+              <ChevronLeft className="h-3.5 w-3.5" />
             </button>
             <button
               type="button"
               onClick={next}
               aria-label="Next photo"
-              className="hidden sm:flex absolute right-2.5 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-white/95 text-neutral-800 hover:bg-white hover:scale-105 shadow-md transition-all"
+              className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-white/95 text-neutral-800 hover:bg-white hover:scale-105 shadow-md transition-all"
             >
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-3.5 w-3.5" />
             </button>
           </>
         )}
       </div>
 
       {/* ─ Card Body ──────────────────────────────────── */}
-      <div className="flex flex-col flex-1 p-6">
+      <div className="flex flex-col flex-1 p-3.5 sm:p-4">
         {/* Price */}
-        <p className="text-2xl font-bold tracking-tight text-foreground">
+        <p className="text-lg sm:text-xl font-bold tracking-tight text-foreground">
           {displayPrice}
         </p>
 
-        {/* Clean Typographic Specs Line — airy, readable, no cramped boxes */}
-        <p className="text-[13px] font-medium text-muted-foreground mt-1.5 tracking-normal">
+        {/* Clean Typographic Specs Line */}
+        <p className="text-xs font-medium text-muted-foreground mt-0.5 tracking-normal">
           {specs.length > 0
             ? specs.join("  ·  ")
             : `${formattedType}  ·  ${property.locality || property.city}`}
         </p>
 
         {/* Property Address / Project Name */}
-        <Link href={href} className="block mt-4 group/title">
-          <h3 className="text-lg font-semibold text-foreground tracking-tight leading-snug group-hover/title:text-primary transition-colors line-clamp-1">
+        <Link href={href} className="block mt-2 group/title">
+          <h3 className="text-sm sm:text-[15px] font-semibold text-foreground tracking-tight leading-snug group-hover/title:text-primary transition-colors line-clamp-1">
             {property.address}
           </h3>
         </Link>
 
         {/* Locality & City */}
-        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1.5">
-          <MapPin className="h-3.5 w-3.5 text-muted-foreground/75 shrink-0" />
+        <div className="flex items-center gap-1 text-[11px] text-muted-foreground mt-1">
+          <MapPin className="h-3 w-3 text-muted-foreground/75 shrink-0" />
           <span className="truncate">
             {property.locality ? `${property.locality}, ` : ""}{property.city}
           </span>
         </div>
 
         {/* Refined Footer Action */}
-        <div className="flex items-center justify-between pt-4 mt-6 border-t border-border/60">
+        <div className="flex items-center justify-between pt-3 mt-3 border-t border-border/60">
           <Link
             href={href}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-foreground hover:text-primary transition-colors"
+            className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-foreground hover:text-primary transition-colors"
           >
             <span>View Property</span>
-            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
           </Link>
 
           <button
             type="button"
             onClick={openWhatsApp}
             title="Chat on WhatsApp"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 transition-colors py-1 px-2.5 rounded-md"
+            className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 transition-colors py-1 px-2 rounded-md"
           >
-            <WhatsAppIcon className="h-3.5 w-3.5 fill-[#25D366] shrink-0" />
+            <WhatsAppIcon className="h-3 w-3 fill-[#25D366] shrink-0" />
             <span>WhatsApp</span>
           </button>
         </div>

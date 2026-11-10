@@ -279,7 +279,7 @@ export default function TermsPage() {
                 <p className="text-muted-foreground">
                   Chambers:{" "}
                   <a
-                    href="https://share.google/wXb6cKV7lpMgo9P4c"
+                    href="https://share.google/tY8FNxnQ15wDXyRom"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:underline text-foreground"

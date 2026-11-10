@@ -139,14 +139,14 @@ export function PropertyCard({ property }: { property: PropertyData }) {
       </div>
 
       {/* Listing Content Body */}
-      <div className="flex flex-col flex-1 p-6">
+      <div className="flex flex-col flex-1 p-3.5 sm:p-4">
         {/* Marketplace Price */}
-        <p className="text-2xl font-bold text-foreground tracking-tight">
+        <p className="text-lg sm:text-xl font-bold text-foreground tracking-tight">
           {property.price === "Contact for Price" ? "Price on Request" : property.price}
         </p>
 
         {/* Clean Typographic Specs Line */}
-        <p className="text-[13px] font-medium text-muted-foreground mt-1.5 tracking-normal">
+        <p className="text-xs font-medium text-muted-foreground mt-0.5 tracking-normal">
           {specs.length > 0 ? (
             specs.join("  ·  ")
           ) : (
@@ -155,37 +155,37 @@ export function PropertyCard({ property }: { property: PropertyData }) {
         </p>
 
         {/* Property Title / Address */}
-        <Link href={detailHref} className="block mt-4 group/title">
-          <h3 className="text-lg font-semibold text-foreground tracking-tight leading-snug group-hover/title:text-primary transition-colors line-clamp-1">
+        <Link href={detailHref} className="block mt-2 group/title">
+          <h3 className="text-sm sm:text-[15px] font-semibold text-foreground tracking-tight leading-snug group-hover/title:text-primary transition-colors line-clamp-1">
             {property.address}
           </h3>
         </Link>
 
         {/* Locality */}
-        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1.5">
-          <MapPin className="h-3.5 w-3.5 text-muted-foreground/75 shrink-0" />
+        <div className="flex items-center gap-1 text-[11px] text-muted-foreground mt-1">
+          <MapPin className="h-3 w-3 text-muted-foreground/75 shrink-0" />
           <span className="truncate">
             {property.locality ? `${property.locality}, ` : ""}{property.city}
           </span>
         </div>
 
         {/* Footer Actions */}
-        <div className="flex items-center justify-between pt-4 mt-6 border-t border-border/60">
+        <div className="flex items-center justify-between pt-3 mt-3 border-t border-border/60">
           <Link
             href={detailHref}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-foreground hover:text-primary transition-colors"
+            className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-foreground hover:text-primary transition-colors"
           >
             <span>View Property</span>
-            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+            <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
           </Link>
 
           <button
             type="button"
             onClick={handleWhatsApp}
             title="Chat on WhatsApp"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 transition-colors py-1 px-2.5 rounded-md"
+            className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 transition-colors py-1 px-2 rounded-md"
           >
-            <WhatsAppIcon className="h-3.5 w-3.5 fill-[#25D366] shrink-0" />
+            <WhatsAppIcon className="h-3 w-3 fill-[#25D366] shrink-0" />
             <span>WhatsApp</span>
           </button>
         </div>

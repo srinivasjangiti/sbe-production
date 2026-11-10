@@ -325,12 +325,12 @@ function RentPageContent() {
   return (
     <div className="min-h-screen bg-background">
       {/* ── Editorial Header (Restrained, Typographic Elegance) ─── */}
-      <header className="pt-8 sm:pt-10 pb-6">
+      <header className="pt-2.5 sm:pt-3.5 pb-4 sm:pb-5">
         <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4 sm:gap-6">
             {/* Title & Introduction */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary mb-1 sm:mb-1.5">
                 Rental Marketplace
               </p>
               <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-normal text-foreground tracking-tight leading-tight">
@@ -429,7 +429,7 @@ function RentPageContent() {
         {/* ── View Mode: List or Map ─────────────────────────── */}
         {viewMode === "list" ? (
           filtered.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
               {filtered.map((property) => (
                 <RentListingCard
                   key={property.id}

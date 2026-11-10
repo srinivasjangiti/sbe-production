@@ -52,7 +52,7 @@ export default function Home() {
     telephone: ["+917767805544", "+919168588575"],
     email: "shreebalajienterprisesamb@gmail.com",
     priceRange: "₹₹ - ₹₹₹₹",
-    hasMap: "https://share.google/wXb6cKV7lpMgo9P4c",
+    hasMap: "https://share.google/tY8FNxnQ15wDXyRom",
     address: {
       "@type": "PostalAddress",
       streetAddress:
@@ -101,7 +101,7 @@ export default function Home() {
     },
     sameAs: [
       "https://www.facebook.com/profile.php?id=100091469033284",
-      "https://share.google/wXb6cKV7lpMgo9P4c",
+      "https://share.google/tY8FNxnQ15wDXyRom",
     ],
   }
 

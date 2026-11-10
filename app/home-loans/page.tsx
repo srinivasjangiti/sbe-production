@@ -1191,7 +1191,7 @@ export default function HomeLoansPage() {
             {/* Direct Office & Telephone Details */}
             <div className="pt-8 mt-8 border-t border-border/70 flex flex-col items-center justify-center gap-3 text-xs sm:text-sm text-muted-foreground text-center">
               <a
-                href="https://share.google/wXb6cKV7lpMgo9P4c"
+                href="https://share.google/tY8FNxnQ15wDXyRom"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex flex-wrap items-center justify-center gap-2 max-w-full hover:text-primary transition-colors group"
