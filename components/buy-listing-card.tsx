@@ -1,9 +1,17 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Heart, ChevronLeft, ChevronRight, MessageCircle, Camera } from "lucide-react"
+import {
+  Heart,
+  ChevronLeft,
+  ChevronRight,
+  MessageCircle,
+  Camera,
+  MapPin,
+  ArrowRight,
+} from "lucide-react"
 import type { PropertyData } from "@/lib/data"
 
 interface BuyListingCardProps {
@@ -24,7 +32,17 @@ export function BuyListingCard({
   const [isHovered, setIsHovered] = useState(false)
 
   const href = `/buy/${property.id}`
-  const images = property.images?.length ? property.images : [property.image]
+
+  // Ensure raw document/spreadsheet screenshots are never displayed on property discovery cards
+  const images = useMemo(() => {
+    const raw = property.images?.length ? property.images : [property.image]
+    const filtered = raw.filter(
+      (img) =>
+        !img.toLowerCase().includes("whatsapp-image-2026-10-29-at-5.55.04-pm") &&
+        !img.toLowerCase().includes("dggtg.jpg")
+    )
+    return filtered.length > 0 ? filtered : [property.image]
+  }, [property.images, property.image])
 
   const prev = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -45,7 +63,7 @@ export function BuyListingCard({
     e.preventDefault()
     e.stopPropagation()
     const msg = encodeURIComponent(
-      `Hello Anju ji, I am interested in ${property.address}, ${property.city} (${property.price}). Please share more details.`
+      `Hello Anju ji, I am interested in ${property.address}, ${property.city} (${displayPrice}). Please share more details and floor plans.`
     )
     window.open(`https://wa.me/917767805544?text=${msg}`, "_blank")
   }
@@ -69,7 +87,7 @@ export function BuyListingCard({
   // Format type with first letter capitalized (e.g. "house" -> "House")
   const formattedType = property.type
     ? property.type.charAt(0).toUpperCase() + property.type.slice(1)
-    : null
+    : "Apartment"
 
   // Specs: show only what actually exists — never fabricate
   const specs: string[] = []
@@ -84,26 +102,26 @@ export function BuyListingCard({
     return (
       <Link
         href={href}
-        className={`flex gap-3 px-4 py-3.5 transition-colors ${
+        className={`flex gap-3 px-4 py-3.5 transition-colors border-b border-border/60 ${
           highlighted ? "bg-primary/5" : "hover:bg-muted/40"
         }`}
         onMouseEnter={() => onHover?.(property.id)}
         onMouseLeave={() => onHover?.(null)}
       >
-        <div className="relative w-20 h-[56px] rounded overflow-hidden bg-muted shrink-0">
+        <div className="relative w-24 h-18 rounded-md overflow-hidden bg-muted shrink-0">
           <Image
             src={images[0]}
             alt={property.address}
             fill
             className="object-cover"
-            sizes="80px"
+            sizes="96px"
           />
         </div>
         <div className="min-w-0 flex-1 flex flex-col justify-center gap-0.5">
-          <p className="text-sm font-semibold text-foreground truncate">
+          <p className="text-[15px] font-semibold text-foreground tracking-tight truncate">
             {displayPrice}
           </p>
-          <p className="text-[13px] text-foreground truncate">
+          <p className="text-[13px] font-medium text-foreground truncate">
             {property.address}
           </p>
           <p className="text-xs text-muted-foreground truncate">
@@ -115,10 +133,10 @@ export function BuyListingCard({
     )
   }
 
-  // ── Full card for grid ───────────────────────────────
+  // ── Full Card for Grid View ──────────────────────────
   return (
     <article
-      className="group"
+      className="group relative flex flex-col rounded-2xl overflow-hidden border border-border/80 bg-card shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 h-full"
       onMouseEnter={() => {
         setIsHovered(true)
         onHover?.(property.id)
@@ -129,30 +147,32 @@ export function BuyListingCard({
       }}
     >
       {/* ─ Photograph ─────────────────────────────────── */}
-      <div className="relative aspect-[16/10] overflow-hidden rounded-lg bg-muted">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted select-none">
         <Link href={href} className="block w-full h-full">
           <Image
             src={images[imgIndex]}
             alt={`${property.address}, ${property.city}`}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </Link>
 
-        {/* Meaningful tag only */}
+        {/* Meaningful tag badge */}
         {tag && (
-          <span className="absolute top-3 left-3 z-10 px-2 py-0.5 text-[11px] font-medium tracking-wide bg-white/90 text-neutral-800 rounded backdrop-blur-sm">
-            {tag}
-          </span>
+          <div className="absolute top-3 left-3 z-10 pointer-events-none">
+            <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide backdrop-blur-md bg-white/95 dark:bg-neutral-900/90 text-neutral-900 dark:text-neutral-100 border border-black/5 dark:border-white/10 shadow-xs">
+              {tag}
+            </span>
+          </div>
         )}
 
-        {/* Save */}
+        {/* Wishlist Heart */}
         <button
           type="button"
           onClick={toggleSave}
-          aria-label={saved ? "Remove from saved" : "Save property"}
-          className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-black/25 hover:bg-black/45 text-white transition-colors"
+          aria-label={saved ? "Remove from wishlist" : "Add to wishlist"}
+          className="absolute top-3 right-3 z-10 p-2 rounded-full bg-black/30 hover:bg-black/55 text-white transition-all active:scale-90 shadow-xs"
         >
           <Heart
             className={`h-4 w-4 transition-colors ${
@@ -161,22 +181,24 @@ export function BuyListingCard({
           />
         </button>
 
-        {/* Photo count */}
+        {/* Photo count indicator */}
         {images.length > 1 && (
-          <span className="absolute bottom-3 left-3 z-10 inline-flex items-center gap-1 px-1.5 py-0.5 text-[11px] text-white bg-black/40 rounded backdrop-blur-sm">
-            <Camera className="h-3 w-3" />
-            {imgIndex + 1}/{images.length}
-          </span>
+          <div className="absolute bottom-3 left-3 z-10 pointer-events-none">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium backdrop-blur-md bg-black/60 text-white shadow-xs">
+              <Camera className="h-3 w-3" />
+              {imgIndex + 1}/{images.length}
+            </span>
+          </div>
         )}
 
-        {/* Gallery arrows — visible on hover */}
+        {/* Gallery Carousel Arrows on hover */}
         {images.length > 1 && isHovered && (
           <>
             <button
               type="button"
               onClick={prev}
               aria-label="Previous photo"
-              className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-10 p-1 rounded-full bg-white/90 text-neutral-900 hover:bg-white shadow-sm transition-all"
+              className="hidden sm:flex absolute left-2.5 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-white/95 text-neutral-800 hover:bg-white hover:scale-105 shadow-md transition-all"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -184,7 +206,7 @@ export function BuyListingCard({
               type="button"
               onClick={next}
               aria-label="Next photo"
-              className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-10 p-1 rounded-full bg-white/90 text-neutral-900 hover:bg-white shadow-sm transition-all"
+              className="hidden sm:flex absolute right-2.5 top-1/2 -translate-y-1/2 z-10 p-1.5 rounded-full bg-white/95 text-neutral-800 hover:bg-white hover:scale-105 shadow-md transition-all"
             >
               <ChevronRight className="h-4 w-4" />
             </button>
@@ -192,48 +214,52 @@ export function BuyListingCard({
         )}
       </div>
 
-      {/* ─ Content — no container, just information ──── */}
-      <div className="pt-3">
-        <p className="text-[17px] font-semibold tracking-tight text-foreground leading-tight">
+      {/* ─ Card Body ──────────────────────────────────── */}
+      <div className="flex flex-col flex-1 p-6">
+        {/* Price */}
+        <p className="text-2xl font-bold tracking-tight text-foreground">
           {displayPrice}
         </p>
 
-        <Link href={href}>
-          <h3 className="text-[15px] font-medium text-foreground mt-0.5 group-hover:text-primary transition-colors leading-snug">
+        {/* Clean Typographic Specs Line — airy, readable, no cramped boxes */}
+        <p className="text-[13px] font-medium text-muted-foreground mt-1.5 tracking-normal">
+          {specs.length > 0
+            ? specs.join("  ·  ")
+            : `${formattedType}  ·  ${property.locality || property.city}`}
+        </p>
+
+        {/* Property Address / Project Name */}
+        <Link href={href} className="block mt-4 group/title">
+          <h3 className="text-lg font-semibold text-foreground tracking-tight leading-snug group-hover/title:text-primary transition-colors line-clamp-1">
             {property.address}
           </h3>
         </Link>
 
-        <p className="text-[13px] text-muted-foreground mt-0.5">
-          {property.city}, Maharashtra
-          {formattedType && property.beds === 0 ? ` · ${formattedType}` : ""}
-        </p>
+        {/* Locality & City */}
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1.5">
+          <MapPin className="h-3.5 w-3.5 text-muted-foreground/75 shrink-0" />
+          <span className="truncate">
+            {property.locality ? `${property.locality}, ` : ""}{property.city}
+          </span>
+        </div>
 
-        {/* Show real specs, or first few features, or nothing */}
-        {specs.length > 0 ? (
-          <p className="text-[13px] text-muted-foreground mt-1">
-            {specs.join(" · ")}
-          </p>
-        ) : property.features?.length ? (
-          <p className="text-[13px] text-muted-foreground mt-1">
-            {property.features.slice(0, 3).join(" · ")}
-          </p>
-        ) : null}
-
-        {/* Actions — text links, not heavy buttons */}
-        <div className="flex items-center gap-4 mt-3">
+        {/* Refined Footer Action */}
+        <div className="flex items-center justify-between pt-4 mt-6 border-t border-border/60">
           <Link
             href={href}
-            className="text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-foreground hover:text-primary transition-colors"
           >
-            View Details →
+            <span>View Property</span>
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
+
           <button
             type="button"
             onClick={openWhatsApp}
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-emerald-600 transition-colors"
+            title="Chat on WhatsApp"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors py-1 px-2 rounded-md hover:bg-emerald-500/10"
           >
-            <MessageCircle className="h-3.5 w-3.5" />
+            <MessageCircle className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
             <span>WhatsApp</span>
           </button>
         </div>
@@ -241,4 +267,3 @@ export function BuyListingCard({
     </article>
   )
 }
-

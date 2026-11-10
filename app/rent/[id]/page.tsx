@@ -2,10 +2,13 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { RentalDetailClient } from "@/components/rental-detail-client"
 import { rentalProperties, formatAddress } from "@/lib/data"
+import { CURATED_RENT_PROPERTIES } from "@/lib/rent-data"
+
+const allRentals = [...CURATED_RENT_PROPERTIES, ...rentalProperties]
 
 // Ensures static routes can be pre-rendered for rentals
 export async function generateStaticParams() {
-  return rentalProperties.map((property) => ({
+  return allRentals.map((property) => ({
     id: property.id.toString(),
   }))
 }
@@ -17,7 +20,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id: rawId } = await params
   const id = Number(rawId)
-  const property = rentalProperties.find((p) => p.id === id)
+  const property = allRentals.find((p) => p.id === id)
 
   if (!property) {
     return {
@@ -74,13 +77,13 @@ export default async function RentalDetailPage({
 }) {
   const { id: rawId } = await params
   const id = Number(rawId)
-  const property = rentalProperties.find((p) => p.id === id)
+  const property = allRentals.find((p) => p.id === id)
 
   if (!property) {
     notFound()
   }
 
-  const similar = rentalProperties.filter((p) => p.id !== id).slice(0, 4)
+  const similar = allRentals.filter((p) => p.id !== id).slice(0, 4)
 
   const listingSchema = {
     "@context": "https://schema.org",

@@ -70,8 +70,7 @@ export function Footer() {
             <h3 className="text-sm font-bold mb-4">Contact</h3>
             <div className="flex flex-col divide-y divide-card/10">
               {[
-                { href: "tel:7767805544", icon: Phone, label: "7767805544" },
-                { href: "tel:9168588575", icon: Phone, label: "9168588575" },
+                { href: "tel:7767805544", icon: Phone, label: "+91 7767805544" },
                 { href: "mailto:shreebalajienterprisesamb@gmail.com", icon: Mail, label: "Email Us" },
                 { href: "https://wa.me/917767805544", icon: WhatsAppIcon, label: "WhatsApp", external: true },
                 { href: "https://maps.app.goo.gl/xESVmiEK2GtM3XBDA", icon: MapPin, label: "Get Directions", external: true },

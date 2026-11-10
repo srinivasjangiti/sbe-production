@@ -45,7 +45,7 @@ function ContactForm() {
 
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(
-      "Shop No. 6, Vallabh Building, Avdhoot Residency, Opp. Shiv Mandir Road, Ambernath-West, District Thane, Maharashtra – 421505"
+      "Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West), Maharashtra 421505"
     )
     setCopiedAddress(true)
     setTimeout(() => setCopiedAddress(false), 2500)
@@ -123,9 +123,6 @@ function ContactForm() {
                   <a href="tel:+917767805544" className="font-semibold text-foreground hover:text-primary transition-colors block">
                     +91 7767805544
                   </a>
-                  <a href="tel:+919168588575" className="font-semibold text-foreground hover:text-primary transition-colors block mt-0.5">
-                    +91 9168588575
-                  </a>
                 </div>
               </div>
 
@@ -151,7 +148,7 @@ function ContactForm() {
                 </div>
                 <div>
                   <p className="text-foreground leading-relaxed">
-                    Shop No. 6, Vallabh Building, Avdhoot Residency, Opp. Shiv Mandir Road, Ambernath-West, District Thane, Maharashtra &ndash; 421505
+                    Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West), Maharashtra &ndash; 421505
                   </p>
                   
                   {/* Copy Address & Directions Actions */}

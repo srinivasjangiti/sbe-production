@@ -28,13 +28,30 @@ function save<T>(key: string, data: T): void {
 export function getBuyProperties(): PropertyData[] {
   const stored = load<PropertyData[]>(BUY_KEY, buyProperties)
   if (typeof window !== "undefined" && Array.isArray(stored)) {
+    let changed = false
     const storedIds = new Set(stored.map((p) => p.id))
     const missing = buyProperties.filter((p) => !storedIds.has(p.id))
-    if (missing.length > 0) {
-      const merged = [...stored, ...missing]
+    let merged = missing.length > 0 ? [...stored, ...missing] : stored
+    if (missing.length > 0) changed = true
+
+    // Synchronize base property images if stale spreadsheet flyer is present in client localStorage
+    merged = merged.map((p) => {
+      if (
+        p.id === 13 &&
+        (p.image?.includes("whatsapp-image-2026-10-29-at-5.55.04-pm") ||
+          p.images?.some((img) => img.includes("whatsapp-image-2026-10-29-at-5.55.04-pm")))
+      ) {
+        changed = true
+        const fresh = buyProperties.find((b) => b.id === 13)
+        return fresh ? { ...p, image: fresh.image, images: fresh.images } : p
+      }
+      return p
+    })
+
+    if (changed) {
       save(BUY_KEY, merged)
-      return merged
     }
+    return merged
   }
   return stored
 }
@@ -175,7 +192,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
   siteName: "Shree Balaji Enterprises",
   phone: "7767805544",
   email: "anjujangiti@gmail.com",
-  address: "Ambernath, Maharashtra",
+  address: "Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West) 421505",
   whatsapp: "917767805544",
   reraNo: "A51700023633",
   tagline: "Your Trusted Real Estate Partner",

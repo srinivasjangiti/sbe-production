@@ -121,7 +121,7 @@ export default function PrivacyPolicyPage() {
               </h2>
               <div className="text-sm leading-relaxed text-foreground/80 space-y-3 font-normal">
                 <p>
-                  Shree Balaji Enterprises (&ldquo;the Firm&rdquo;) is an established real estate advisory firm operating pursuant to the provisions of the Real Estate (Regulation and Development) Act, 2016 (RERA), under Maharashtra Real Estate Regulatory Authority <strong>Certificate No. A51700023633</strong>, having its principal brokerage chambers at Shop No. 6, Avdhoot Residency, Ambernath-West, Maharashtra 421505.
+                  Shree Balaji Enterprises (&ldquo;the Firm&rdquo;) is an established real estate advisory firm operating pursuant to the provisions of the Real Estate (Regulation and Development) Act, 2016 (RERA), under Maharashtra Real Estate Regulatory Authority <strong>Certificate No. A51700023633</strong>, having its principal brokerage chambers at Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West), Maharashtra 421505.
                 </p>
                 <p>
                   This Privacy Notice governs all client engagements, portal interactions (via <code>shreebalajienterprises.live</code>), transaction consultations, site viewings, and regulatory submissions conducted under our agency authority across the Mumbai Metropolitan Region (MMR).
@@ -314,7 +314,7 @@ export default function PrivacyPolicyPage() {
               <div className="p-6 border border-border/80 rounded-lg bg-muted/20 space-y-2 text-xs leading-relaxed">
                 <p className="font-semibold text-sm text-foreground">Principal Compliance Office &bull; Shree Balaji Enterprises</p>
                 <p className="text-muted-foreground">MahaRERA Broker Registration Certificate: <strong>A51700023633</strong></p>
-                <p className="text-muted-foreground">Chambers: Shop No. 6, Vallabh Bldg, Avdhoot Residency, Ambernath-West, Maharashtra 421505</p>
+                <p className="text-muted-foreground">Chambers: Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West), Maharashtra 421505</p>
                 <div className="pt-2 flex flex-wrap gap-x-6 gap-y-1 text-foreground">
                   <span>Telephone: <a href="tel:7767805544" className="hover:underline font-mono">+91 7767805544</a></span>
                   <span>Email: <a href="mailto:shreebalajienterprisesamb@gmail.com" className="hover:underline font-mono">shreebalajienterprisesamb@gmail.com</a></span>

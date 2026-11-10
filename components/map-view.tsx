@@ -12,6 +12,7 @@ interface MapViewProps {
   selectedId?: number | null
   onHoverProperty?: (id: number | null) => void
   onSelectProperty?: (id: number) => void
+  baseUrl?: string
 }
 
 // Convert WGS84 lat/lng to Web Mercator pixel coordinates at zoom level z
@@ -48,6 +49,7 @@ export function MapView({
   selectedId,
   onHoverProperty,
   onSelectProperty,
+  baseUrl = "/buy",
 }: MapViewProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [dimensions, setDimensions] = useState<{ width: number; height: number }>({ width: 800, height: 600 })
@@ -342,7 +344,11 @@ export function MapView({
                 {activePopupProperty.type || "Residential"}
               </span>
               <Link
-                href={`/buy/${activePopupProperty.id}`}
+                href={
+                  activePopupProperty.isRental
+                    ? `/rent/${activePopupProperty.id}`
+                    : `${baseUrl}/${activePopupProperty.id}`
+                }
                 className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
               >
                 <span>View Details</span>

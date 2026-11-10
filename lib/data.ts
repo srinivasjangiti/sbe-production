@@ -565,14 +565,12 @@ export const buyProperties: PropertyData[] = [
   },
   {
     id: 13,
-    image: "/images/properties/dombivli/runwal-garden-city/whatsapp-image-2026-10-29-at-5.55.04-pm.jpg",
+    image: "/images/properties/dombivli/runwal-garden-city/exterior.jpg",
     images: [
-          "/images/properties/dombivli/runwal-garden-city/whatsapp-image-2026-10-29-at-5.55.04-pm.jpg",
-          "/images/properties/dombivli/runwal-garden-city/dggtg.jpg",
-          "/images/properties/dombivli/runwal-garden-city/gbku.jpg",
-          "/images/properties/dombivli/runwal-garden-city/ghyi.jpg",
-          "/images/properties/dombivli/runwal-garden-city/hvyfk.jpg",
-          "/images/properties/dombivli/runwal-garden-city/yghbkn.jpg"
+      "/images/properties/dombivli/runwal-garden-city/exterior.jpg",
+      "/images/properties/dombivli/runwal-garden-city/gbku-cropped.jpg",
+      "/images/properties/dombivli/runwal-garden-city/ghyi-cropped.jpg",
+      "/images/properties/dombivli/runwal-garden-city/hvyfk-cropped.jpg",
     ],
     price: "Contact for Price",
     beds: 0,

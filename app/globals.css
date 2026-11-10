@@ -163,18 +163,10 @@
 
 /* ==========================================================================
    Universal Modern Minimalist Scrollbar (Page & All Containers)
-   Sleek 6px floating rounded thumb, transparent track, no 90s arrow buttons
+   Sleek 6px floating rounded thumb, transparent track, NO 19th-century arrow buttons
    ========================================================================== */
 
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(140, 140, 140, 0.4) transparent;
-}
-
-.dark * {
-  scrollbar-color: rgba(200, 200, 200, 0.35) transparent;
-}
-
+/* WebKit & Chromium (Chrome, Edge, Brave, Opera, Safari) */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -214,7 +206,18 @@
   height: 0 !important;
 }
 
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(140, 140, 140, 0.4) transparent;
+/* Firefox fallback only — applied ONLY when ::-webkit-scrollbar is not supported.
+   This avoids Chromium disabling custom webkit-scrollbar on Windows. */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(140, 140, 140, 0.4) transparent;
+  }
+  .dark * {
+    scrollbar-color: rgba(200, 200, 200, 0.35) transparent;
+  }
+}
+
+.modern-scrollbar {
+  overflow-y: auto;
 }

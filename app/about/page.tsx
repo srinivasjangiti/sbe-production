@@ -190,7 +190,7 @@ export default function AboutPage() {
                   <div className="flex items-start gap-2.5">
                     <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                     <span className="text-foreground/90">
-                      <strong>Office:</strong> Shop No. 6, Vallabh Building, Avdhoot Residency, Opp. Shiv Mandir Road, Ambernath-West 421505
+                      <strong>Office:</strong> Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West) 421505
                     </span>
                   </div>
                   <div className="flex items-center gap-2.5">

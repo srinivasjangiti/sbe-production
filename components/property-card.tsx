@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Heart, ChevronLeft, ChevronRight, MessageCircle, MapPin, ArrowRight, Bed, Bath, Maximize2, Camera, Building2, CheckCircle2 } from "lucide-react"
+import { Heart, ChevronLeft, ChevronRight, MessageCircle, MapPin, ArrowRight, Camera } from "lucide-react"
 import type { PropertyData } from "@/lib/data"
 
 export function PropertyCard({ property }: { property: PropertyData }) {
@@ -57,9 +57,15 @@ export function PropertyCard({ property }: { property: PropertyData }) {
   // Format property type label
   const typeLabel = property.type || (property.isRental ? "Rental" : "Apartment")
 
+  // Specs: show only what actually exists — never fabricate
+  const specs: string[] = []
+  if (property.beds > 0) specs.push(`${property.beds} BHK`)
+  if (property.baths > 0) specs.push(`${property.baths} ${property.baths === 1 ? "Bath" : "Baths"}`)
+  if (property.sqft && property.sqft !== "On Request") specs.push(`${property.sqft} sqft`)
+
   return (
     <article
-      className="group relative flex flex-col rounded-xl overflow-hidden border border-border/80 bg-card shadow-xs hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 h-full"
+      className="group relative flex flex-col rounded-2xl overflow-hidden border border-border/70 bg-card shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_36px_rgba(0,0,0,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 h-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -132,96 +138,54 @@ export function PropertyCard({ property }: { property: PropertyData }) {
       </div>
 
       {/* Listing Content Body */}
-      <div className="flex flex-col flex-1 p-4">
-        {/* Marketplace Price Line */}
-        <div className="flex items-baseline justify-between gap-2 mb-1.5">
-          <span className="text-xl font-bold text-foreground tracking-tight">
-            {property.price}
-          </span>
-          <span className="text-[11px] font-medium text-muted-foreground bg-muted/70 px-2 py-0.5 rounded">
-            {typeLabel}
-          </span>
-        </div>
+      <div className="flex flex-col flex-1 p-6">
+        {/* Marketplace Price */}
+        <p className="text-2xl font-bold text-foreground tracking-tight">
+          {property.price === "Contact for Price" ? "Price on Request" : property.price}
+        </p>
+
+        {/* Clean Typographic Specs Line */}
+        <p className="text-[13px] font-medium text-muted-foreground mt-1.5 tracking-normal">
+          {specs.length > 0 ? (
+            specs.join("  ·  ")
+          ) : (
+            `${typeLabel}  ·  ${property.locality || property.city}`
+          )}
+        </p>
 
         {/* Property Title / Address */}
-        <Link href={detailHref} className="block group-hover:text-primary transition-colors">
-          <h3 className="text-base font-semibold text-foreground leading-snug line-clamp-1 group-hover:text-primary transition-colors">
+        <Link href={detailHref} className="block mt-4 group/title">
+          <h3 className="text-lg font-semibold text-foreground tracking-tight leading-snug group-hover/title:text-primary transition-colors line-clamp-1">
             {property.address}
           </h3>
         </Link>
 
-        {/* Locality with Map Pin */}
-        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1 mb-3">
-          <MapPin className="h-3.5 w-3.5 text-muted-foreground/80 shrink-0" />
-          <span className="truncate">{property.city}, Maharashtra</span>
-        </div>
-
-        {/* Real Estate Specifications Strip - Non-fabricated & relevant */}
-        <div className="grid grid-cols-3 gap-2 py-2 px-3 rounded-lg bg-muted/40 border border-border/60 text-xs mb-3.5 mt-auto">
-          {property.beds > 0 ? (
-            <>
-              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
-                <Bed className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
-                <span className="font-semibold text-foreground text-[11px]">
-                  {property.beds} BHK
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
-                <Bath className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
-                <span className="font-semibold text-foreground text-[11px]">
-                  {property.baths > 0 ? `${property.baths} Bath` : "Bath on req."}
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
-                <Maximize2 className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
-                <span className="font-semibold text-foreground text-[11px] truncate">
-                  {property.sqft && property.sqft !== "On Request" ? `${property.sqft} sqft` : "Area on req."}
-                </span>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
-                <Building2 className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
-                <span className="font-semibold text-foreground text-[11px] truncate">
-                  {property.category === "commercial" || property.type?.toLowerCase().includes("office") || property.type?.toLowerCase().includes("shop")
-                    ? (property.type || "Commercial")
-                    : (property.features?.[0] || "Residential")}
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
-                <Maximize2 className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
-                <span className="font-semibold text-foreground text-[11px] truncate">
-                  {property.sqft && property.sqft !== "On Request" ? `${property.sqft} sqft` : "Area on req."}
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
-                <CheckCircle2 className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
-                <span className="font-semibold text-foreground text-[11px] truncate">
-                  {property.features?.[2] || property.features?.[1] || "Ready to Move"}
-                </span>
-              </div>
-            </>
-          )}
+        {/* Locality */}
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1.5">
+          <MapPin className="h-3.5 w-3.5 text-muted-foreground/75 shrink-0" />
+          <span className="truncate">
+            {property.locality ? `${property.locality}, ` : ""}{property.city}
+          </span>
         </div>
 
         {/* Footer Actions */}
-        <div className="flex items-center gap-2 pt-2.5 border-t border-border/60">
+        <div className="flex items-center justify-between pt-4 mt-6 border-t border-border/60">
           <Link
             href={detailHref}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 h-9 px-3 bg-primary text-primary-foreground rounded-lg text-xs font-semibold hover:bg-primary/90 transition-all shadow-xs"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-foreground hover:text-primary transition-colors"
           >
-            <span>View Details</span>
-            <ArrowRight className="h-3 w-3" />
+            <span>View Property</span>
+            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
           </Link>
+
           <button
             type="button"
             onClick={handleWhatsApp}
             title="Chat on WhatsApp"
-            className="inline-flex items-center justify-center gap-1.5 h-9 px-3.5 border border-emerald-600/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded-lg text-xs font-semibold transition-all"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors py-1 px-2 rounded-md hover:bg-emerald-500/10"
           >
-            <MessageCircle className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">WhatsApp</span>
+            <MessageCircle className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+            <span>WhatsApp</span>
           </button>
         </div>
       </div>

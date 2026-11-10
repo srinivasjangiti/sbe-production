@@ -775,10 +775,10 @@ export function SearchFilters({
                 style={{ maxHeight: `${maxDropdownHeight}px` }}
                 className={`absolute ${
                   dropDirection === "up" ? "bottom-full mb-1.5" : "top-full mt-1.5"
-                } right-0 bg-card border border-border rounded-xl shadow-xl z-50 w-[360px] sm:w-[380px] max-w-[calc(100vw-2rem)] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-100`}
+                } right-0 bg-card border border-border rounded-xl shadow-xl z-50 w-[420px] sm:w-[480px] max-w-[calc(100vw-2rem)] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-100`}
               >
                 {/* Sticky Header */}
-                <div className="flex items-center justify-between px-4 py-2.5 border-b border-border/80 shrink-0 bg-card">
+                <div className="flex items-center justify-between px-5 py-3 border-b border-border/80 shrink-0 bg-card">
                   <p className="text-xs font-semibold text-foreground uppercase tracking-wide">
                     Additional Filters
                   </p>
@@ -793,7 +793,7 @@ export function SearchFilters({
                 </div>
 
                 {/* Scrollable Categories — Sleek Modern Scrollbar */}
-                <div className="p-4 space-y-4 overflow-y-auto flex-1 min-h-0">
+                <div className="p-5 space-y-5 overflow-y-auto flex-1 min-h-0 modern-scrollbar">
                   {/* Possession Status */}
                   <div>
                     <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider mb-2">
@@ -906,7 +906,7 @@ export function SearchFilters({
                 </div>
 
                 {/* Sticky Footer Actions — Always within viewport */}
-                <div className="px-4 py-2.5 border-t border-border/80 bg-card shrink-0 flex items-center gap-2">
+                <div className="px-5 py-3 border-t border-border/80 bg-card shrink-0 flex items-center gap-3">
                   <button
                     type="button"
                     onClick={() => {
