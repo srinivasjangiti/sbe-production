@@ -57,7 +57,7 @@ export function ValueProposition() {
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className="flex flex-col gap-3 p-6 rounded-2xl border border-border bg-card hover:border-primary/40 hover:shadow-md hover:-translate-y-1 transition-all"
+                className="flex flex-col gap-3 p-6 rounded-2xl border border-border/80 bg-card shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_28px_rgba(0,0,0,0.08)] hover:border-primary/40 hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="flex items-center justify-center h-12 w-12 rounded-xl bg-primary/10">
                   <feature.icon className="h-6 w-6 text-primary" />

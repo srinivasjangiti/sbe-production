@@ -1,511 +1,1015 @@
 "use client"
 
-import { useState } from "react"
-import { ChevronDown, SlidersHorizontal, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect, useRef } from "react"
+import { ChevronDown, SlidersHorizontal, MapPin, X, Check, ArrowUpDown } from "lucide-react"
 
-interface FilterState {
+export interface FilterState {
+  location: string
   priceMin: string
   priceMax: string
+  priceOnRequestOnly: boolean
   bedsMin: string
   bathsMin: string
   homeType: string[]
-  furnishing: string[]
   possession: string[]
-  facing: string[]
-  sqftMin: string
-  sqftMax: string
+  furnishing: string[]
+  amenities: string[]
+  sqftRange: string
   sortBy: string
 }
 
+export const DEFAULT_FILTERS: FilterState = {
+  location: "",
+  priceMin: "",
+  priceMax: "",
+  priceOnRequestOnly: false,
+  bedsMin: "",
+  bathsMin: "",
+  homeType: [],
+  possession: [],
+  furnishing: [],
+  amenities: [],
+  sqftRange: "",
+  sortBy: "Featured",
+}
+
+interface SearchFiltersProps {
+  filters: FilterState
+  onFilterChange: (filters: FilterState) => void
+  onReset?: () => void
+}
+
 export function SearchFilters({
+  filters,
   onFilterChange,
-}: {
-  onFilterChange?: (filters: FilterState) => void
-}) {
-  const [filters, setFilters] = useState<FilterState>({
-    priceMin: "",
-    priceMax: "",
-    bedsMin: "",
-    bathsMin: "",
-    homeType: [],
-    furnishing: [],
-    possession: [],
-    facing: [],
-    sqftMin: "",
-    sqftMax: "",
-    sortBy: "Newest",
-  })
-  const [activeFilter, setActiveFilter] = useState<string | null>(null)
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+  onReset,
+}: SearchFiltersProps) {
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const navRef = useRef<HTMLElement>(null)
 
-  const toggleFilter = (name: string) => {
-    setActiveFilter(activeFilter === name ? null : name)
+  // Local state for custom price inputs (in Lakhs)
+  const [inputMinLakh, setInputMinLakh] = useState<string>("")
+  const [inputMaxLakh, setInputMaxLakh] = useState<string>("")
+  const [priceError, setPriceError] = useState<string>("")
+
+  // Dynamic viewport bounding & smart drop direction
+  const [maxDropdownHeight, setMaxDropdownHeight] = useState<number>(440)
+  const [dropDirection, setDropDirection] = useState<"down" | "up">("down")
+
+  // Calculate available space in viewport in real-time
+  useEffect(() => {
+    if (!activeDropdown || !navRef.current) return
+
+    const updateDimensions = () => {
+      if (!navRef.current) return
+      const rect = navRef.current.getBoundingClientRect()
+      // Buffer from bottom of viewport so popovers never touch edge or taskbar
+      const spaceBelow = window.innerHeight - rect.bottom - 16
+      const spaceAbove = rect.top - 16
+
+      if (spaceBelow < 260 && spaceAbove > spaceBelow) {
+        setDropDirection("up")
+        setMaxDropdownHeight(Math.max(200, Math.min(spaceAbove, 520)))
+      } else {
+        setDropDirection("down")
+        setMaxDropdownHeight(Math.max(200, Math.min(spaceBelow, 520)))
+      }
+    }
+
+    updateDimensions()
+    window.addEventListener("resize", updateDimensions)
+    window.addEventListener("scroll", updateDimensions, { passive: true })
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setActiveDropdown(null)
+        setPriceError("")
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+
+    return () => {
+      window.removeEventListener("resize", updateDimensions)
+      window.removeEventListener("scroll", updateDimensions)
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [activeDropdown])
+
+  // Sync price inputs when filters change
+  useEffect(() => {
+    if (filters.priceMin) {
+      setInputMinLakh(String(Number(filters.priceMin) / 100000))
+    } else {
+      setInputMinLakh("")
+    }
+    if (filters.priceMax) {
+      setInputMaxLakh(String(Number(filters.priceMax) / 100000))
+    } else {
+      setInputMaxLakh("")
+    }
+  }, [filters.priceMin, filters.priceMax])
+
+  // Close dropdown on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveDropdown(null)
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [])
+
+  const toggleDropdown = (name: string) => {
+    setActiveDropdown((prev) => (prev === name ? null : name))
+    setPriceError("")
   }
 
-  const updateFilter = (key: keyof FilterState, value: string | string[]) => {
+  const closeDropdown = () => {
+    setActiveDropdown(null)
+    setPriceError("")
+  }
+
+  const updateFilter = <K extends keyof FilterState>(key: K, value: FilterState[K]) => {
     const next = { ...filters, [key]: value }
-    setFilters(next)
-    onFilterChange?.(next)
+    onFilterChange(next)
   }
 
-  const toggleArrayFilter = (key: keyof FilterState, value: string) => {
-    const current = filters[key] as string[]
+  const toggleArrayFilter = (key: "homeType" | "possession" | "furnishing" | "amenities", value: string) => {
+    const current = filters[key]
     const next = current.includes(value)
       ? current.filter((v) => v !== value)
       : [...current, value]
     updateFilter(key, next)
   }
 
-  const priceRanges = [
-    { label: "Any", min: "", max: "" },
-    { label: "Under ₹30L", min: "", max: "3000000" },
-    { label: "₹30L - ₹60L", min: "3000000", max: "6000000" },
-    { label: "₹60L - ₹1Cr", min: "6000000", max: "10000000" },
-    { label: "₹1Cr - ₹2Cr", min: "10000000", max: "20000000" },
-    { label: "₹2Cr+", min: "20000000", max: "" },
+  // All key locations across MMR served by Shree Balaji Enterprises
+  const locations = [
+    { label: "All Locations", value: "", count: 13 },
+    { label: "Ambernath", value: "Ambernath", count: 10 },
+    { label: "Badlapur", value: "Badlapur", count: 1 },
+    { label: "Dombivli", value: "Dombivli", count: 2 },
+    { label: "Kalyan", value: "Kalyan" },
+    { label: "Ulhasnagar", value: "Ulhasnagar" },
+    { label: "Thane", value: "Thane" },
+    { label: "Navi Mumbai", value: "Navi Mumbai" },
+    { label: "Mumbai", value: "Mumbai" },
+    { label: "Bhiwandi", value: "Bhiwandi" },
+    { label: "Karjat", value: "Karjat" },
+    { label: "Titwala", value: "Titwala" },
+    { label: "Panvel", value: "Panvel" },
+    { label: "Vasai-Virar", value: "Vasai-Virar" },
+    { label: "Other Locations", value: "Other" },
   ]
 
-  const homeTypes = ["Apartment", "Villa / Bungalow", "Plot / Land", "Shop", "Office", "Warehouse", "Townhome", "Multi-family"]
-  const furnishingOptions = ["Furnished", "Semi-Furnished", "Unfurnished"]
-  const possessionOptions = ["Ready to Move", "Under Construction", "New Launch"]
-  const facingOptions = ["East", "West", "North", "South", "North-East", "South-West"]
-  const sqftRanges = [
-    { label: "Any", min: "", max: "" },
-    { label: "Under 500 sqft", min: "", max: "500" },
-    { label: "500 – 1000 sqft", min: "500", max: "1000" },
-    { label: "1000 – 2000 sqft", min: "1000", max: "2000" },
-    { label: "2000 sqft+", min: "2000", max: "" },
+  // Comprehensive property types
+  const propertyTypes = [
+    { label: "Apartment / Flat", value: "Apartment", count: 11 },
+    { label: "Villa / Bungalow", value: "Villa" },
+    { label: "House / Row House", value: "House", count: 1 },
+    { label: "Commercial Shop / Showroom", value: "Shop" },
+    { label: "Office Space", value: "Commercial", count: 1 },
+    { label: "Industrial Shed / Warehouse", value: "Industrial" },
+    { label: "Residential Plot / Land", value: "Plot" },
+    { label: "Penthouse", value: "Penthouse" },
   ]
-  const sortOptions = ["Newest", "Price (Low to High)", "Price (High to Low)", "Beds", "Sqft"]
 
-  const moreActiveCount = [
-    filters.homeType.length > 0,
-    filters.furnishing.length > 0,
+  // Comprehensive MMR price presets (compact 2-column format)
+  const pricePresets = [
+    { label: "All Prices", min: "", max: "", onRequest: false },
+    { label: "Under ₹30L", min: "", max: "3000000", onRequest: false },
+    { label: "₹30L – ₹50L", min: "3000000", max: "5000000", onRequest: false },
+    { label: "₹50L – ₹75L", min: "5000000", max: "7500000", onRequest: false },
+    { label: "₹75L – ₹1Cr", min: "7500000", max: "10000000", onRequest: false },
+    { label: "₹1Cr – ₹1.5Cr", min: "10000000", max: "15000000", onRequest: false },
+    { label: "₹1.5Cr – ₹2Cr", min: "15000000", max: "20000000", onRequest: false },
+    { label: "₹2 Crore+", min: "20000000", max: "", onRequest: false },
+    { label: "Price on Request", min: "", max: "", onRequest: true, span2: true },
+  ]
+
+  // Possession status
+  const possessionOptions = [
+    { label: "Ready to Move", value: "Ready to Move", count: 5 },
+    { label: "Under Construction", value: "Under Construction" },
+    { label: "New Launch", value: "New Launch", count: 2 },
+  ]
+
+  // Furnishing options
+  const furnishingOptions = [
+    { label: "Fully Furnished", value: "Furnished" },
+    { label: "Semi-Furnished", value: "Semi-Furnished" },
+    { label: "Unfurnished", value: "Unfurnished" },
+  ]
+
+  // Amenities
+  const amenityOptions = [
+    { label: "Gated Security / CCTV", value: "Security" },
+    { label: "Clubhouse & Gym", value: "Clubhouse" },
+    { label: "Swimming Pool", value: "Pool" },
+    { label: "Lift / Elevator", value: "Elevator" },
+    { label: "Power Backup", value: "Power Backup" },
+    { label: "Children Play Area", value: "Play Area" },
+    { label: "Garden / Park", value: "Garden" },
+    { label: "Vastu Compliant", value: "Vastu" },
+  ]
+
+  // Carpet area options
+  const areaOptions = [
+    { label: "Any Area", value: "" },
+    { label: "Under 500 sqft", value: "under-500" },
+    { label: "500 – 1,000 sqft", value: "500-1000" },
+    { label: "1,000 – 1,500 sqft", value: "1000-1500" },
+    { label: "1,500 – 2,000 sqft", value: "1500-2000" },
+    { label: "2,000+ sqft", value: "2000-plus" },
+    { label: "Area on Request", value: "on-request" },
+  ]
+
+  // Sort options
+  const sortOptions = [
+    { label: "Featured", value: "Featured" },
+    { label: "Newest First", value: "Newest First" },
+    { label: "Price: Low to High", value: "Price: Low to High" },
+    { label: "Price: High to Low", value: "Price: High to Low" },
+  ]
+
+  // Apply custom price input with validation
+  const handleApplyCustomPrice = (e: React.FormEvent) => {
+    e.preventDefault()
+    const minVal = inputMinLakh ? Number(inputMinLakh) : 0
+    const maxVal = inputMaxLakh ? Number(inputMaxLakh) : Infinity
+
+    if (minVal < 0 || (inputMaxLakh && maxVal < 0)) {
+      setPriceError("Price must be a positive number")
+      return
+    }
+
+    if (inputMinLakh && inputMaxLakh && minVal > maxVal) {
+      setPriceError("Min price cannot exceed Max price")
+      return
+    }
+
+    setPriceError("")
+    const minRupees = inputMinLakh ? String(minVal * 100000) : ""
+    const maxRupees = inputMaxLakh ? String(maxVal * 100000) : ""
+
+    onFilterChange({
+      ...filters,
+      priceMin: minRupees,
+      priceMax: maxRupees,
+      priceOnRequestOnly: false,
+    })
+    closeDropdown()
+  }
+
+  // Active status calculations
+  const isLocationActive = Boolean(filters.location)
+  const isPriceActive = Boolean(filters.priceMin || filters.priceMax || filters.priceOnRequestOnly)
+  const isBedsBathsActive = Boolean(filters.bedsMin || filters.bathsMin)
+  const isTypeActive = filters.homeType.length > 0
+  const moreFiltersCount = [
     filters.possession.length > 0,
-    filters.facing.length > 0,
-    filters.sqftMin || filters.sqftMax,
+    filters.furnishing.length > 0,
+    filters.amenities.length > 0,
+    Boolean(filters.sqftRange),
   ].filter(Boolean).length
 
+  // Price button label
+  const priceLabel = (() => {
+    if (filters.priceOnRequestOnly) return "Price on Request"
+    if (filters.priceMin && filters.priceMax) {
+      const minL = Number(filters.priceMin) / 100000
+      const maxL = Number(filters.priceMax) / 100000
+      return `₹${minL}L – ₹${maxL}L`
+    }
+    if (filters.priceMax) {
+      const maxL = Number(filters.priceMax) / 100000
+      return maxL >= 100 ? `Up to ₹${maxL / 100}Cr` : `Under ₹${maxL}L`
+    }
+    if (filters.priceMin) {
+      const minL = Number(filters.priceMin) / 100000
+      return minL >= 100 ? `From ₹${minL / 100}Cr` : `From ₹${minL}L`
+    }
+    return "Price"
+  })()
+
+  // Beds & Baths button label
+  const bedsBathsLabel = (() => {
+    if (filters.bedsMin && filters.bathsMin) {
+      return `${filters.bedsMin}+ Beds, ${filters.bathsMin}+ Bath`
+    }
+    if (filters.bedsMin) return `${filters.bedsMin}+ BHK`
+    if (filters.bathsMin) return `${filters.bathsMin}+ Bath`
+    return "Beds & Baths"
+  })()
+
+  // Property Type button label
+  const typeLabel = (() => {
+    if (filters.homeType.length === 1) {
+      const match = propertyTypes.find((t) => t.value === filters.homeType[0])
+      return match ? match.label.split(" / ")[0] : filters.homeType[0]
+    }
+    if (filters.homeType.length > 1) {
+      return `Type (${filters.homeType.length})`
+    }
+    return "Property Type"
+  })()
+
   return (
-    <>
-      {/* Desktop Filters */}
-      <div className="hidden md:flex items-center gap-2 py-3 px-4 bg-card border-b border-border">
-        {/* Price Filter */}
-        <div className="relative">
-          <button
-            onClick={() => toggleFilter("price")}
-            className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-full border transition-colors ${
-              filters.priceMin || filters.priceMax
-                ? "border-primary text-primary bg-primary/5"
-                : "border-border text-foreground hover:border-foreground/30"
-            }`}
-          >
-            Price
-            <ChevronDown className="h-3.5 w-3.5" />
-          </button>
-          {activeFilter === "price" && (
-            <div className="absolute top-full left-0 mt-2 bg-card border border-border rounded-lg shadow-lg p-4 z-50 min-w-[260px]">
-              <p className="text-sm font-semibold text-foreground mb-3">Price Range</p>
-              <div className="flex flex-col gap-2">
-                {priceRanges.map((range) => (
-                  <button
-                    key={range.label}
-                    onClick={() => {
-                      updateFilter("priceMin", range.min)
-                      updateFilter("priceMax", range.max)
-                      setActiveFilter(null)
-                    }}
-                    className={`text-left px-3 py-2 text-sm rounded-md transition-colors ${
-                      filters.priceMin === range.min && filters.priceMax === range.max
-                        ? "bg-primary text-primary-foreground"
-                        : "text-foreground hover:bg-muted"
-                    }`}
-                  >
-                    {range.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Beds & Baths */}
-        <div className="relative">
-          <button
-            onClick={() => toggleFilter("beds")}
-            className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-full border transition-colors ${
-              filters.bedsMin
-                ? "border-primary text-primary bg-primary/5"
-                : "border-border text-foreground hover:border-foreground/30"
-            }`}
-          >
-            {"Beds & Baths"}
-            <ChevronDown className="h-3.5 w-3.5" />
-          </button>
-          {activeFilter === "beds" && (
-            <div className="absolute top-full left-0 mt-2 bg-card border border-border rounded-lg shadow-lg p-4 z-50 min-w-[280px]">
-              <p className="text-sm font-semibold text-foreground mb-3">Bedrooms</p>
-              <div className="flex gap-2 mb-4">
-                {["Any", "1+", "2+", "3+", "4+", "5+"].map((opt) => (
-                  <button
-                    key={`bed-${opt}`}
-                    onClick={() => updateFilter("bedsMin", opt === "Any" ? "" : opt.replace("+", ""))}
-                    className={`px-3 py-1.5 text-sm rounded-md border transition-colors ${
-                      (opt === "Any" && !filters.bedsMin) || filters.bedsMin === opt.replace("+", "")
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "border-border text-foreground hover:bg-muted"
-                    }`}
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
-              <p className="text-sm font-semibold text-foreground mb-3">Bathrooms</p>
-              <div className="flex gap-2">
-                {["Any", "1+", "2+", "3+", "4+"].map((opt) => (
-                  <button
-                    key={`bath-${opt}`}
-                    onClick={() => {
-                      updateFilter("bathsMin", opt === "Any" ? "" : opt.replace("+", ""))
-                      setActiveFilter(null)
-                    }}
-                    className={`px-3 py-1.5 text-sm rounded-md border transition-colors ${
-                      (opt === "Any" && !filters.bathsMin) || filters.bathsMin === opt.replace("+", "")
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "border-border text-foreground hover:bg-muted"
-                    }`}
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Home Type */}
-        <div className="relative">
-          <button
-            onClick={() => toggleFilter("homeType")}
-            className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-full border transition-colors ${
-              filters.homeType.length > 0
-                ? "border-primary text-primary bg-primary/5"
-                : "border-border text-foreground hover:border-foreground/30"
-            }`}
-          >
-            Home Type
-            <ChevronDown className="h-3.5 w-3.5" />
-          </button>
-          {activeFilter === "homeType" && (
-            <div className="absolute top-full left-0 mt-2 bg-card border border-border rounded-lg shadow-lg p-4 z-50 min-w-[220px]">
-              <p className="text-sm font-semibold text-foreground mb-3">Home Type</p>
-              <div className="flex flex-col gap-2">
-                {homeTypes.map((type) => (
-                  <label key={type} className="flex items-center gap-2.5 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={filters.homeType.includes(type)}
-                      onChange={(e) => {
-                        const next = e.target.checked
-                          ? [...filters.homeType, type]
-                          : filters.homeType.filter((t) => t !== type)
-                        updateFilter("homeType", next)
-                      }}
-                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
-                    />
-                    <span className="text-sm text-foreground">{type}</span>
-                  </label>
-                ))}
-              </div>
-              <button
-                onClick={() => setActiveFilter(null)}
-                className="mt-3 w-full py-2 text-sm font-semibold text-primary-foreground bg-primary rounded-md hover:bg-primary/90 transition-colors"
-              >
-                Apply
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Filters button */}
-        <div className="relative">
-          <button
-            onClick={() => toggleFilter("more")}
-            className={`flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-full border transition-colors ${
-              moreActiveCount > 0
-                ? "border-primary text-primary bg-primary/5"
-                : "border-border text-foreground hover:border-foreground/30"
-            }`}
-          >
-            <SlidersHorizontal className="h-3.5 w-3.5" />
-            Filters
-            {moreActiveCount > 0 && (
-              <span className="ml-0.5 bg-primary text-primary-foreground text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                {moreActiveCount}
-              </span>
-            )}
-          </button>
-
-          {activeFilter === "more" && (
-            <div className="absolute top-full left-0 mt-2 bg-card border border-border rounded-lg shadow-xl p-5 z-50 w-[420px] max-h-[80vh] overflow-y-auto">
-
-              {/* Property Type */}
-              <p className="text-sm font-semibold text-foreground mb-2">Property Type</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {homeTypes.map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => toggleArrayFilter("homeType", type)}
-                    className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${
-                      filters.homeType.includes(type)
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "border-border text-foreground hover:bg-muted"
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
-              </div>
-
-              {/* Furnishing */}
-              <p className="text-sm font-semibold text-foreground mb-2">Furnishing</p>
-              <div className="flex gap-2 mb-4 flex-wrap">
-                {furnishingOptions.map((opt) => (
-                  <button
-                    key={opt}
-                    onClick={() => toggleArrayFilter("furnishing", opt)}
-                    className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${
-                      filters.furnishing.includes(opt)
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "border-border text-foreground hover:bg-muted"
-                    }`}
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
-
-              {/* Possession Status */}
-              <p className="text-sm font-semibold text-foreground mb-2">Possession Status</p>
-              <div className="flex gap-2 mb-4 flex-wrap">
-                {possessionOptions.map((opt) => (
-                  <button
-                    key={opt}
-                    onClick={() => toggleArrayFilter("possession", opt)}
-                    className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${
-                      filters.possession.includes(opt)
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "border-border text-foreground hover:bg-muted"
-                    }`}
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
-
-              {/* Area (sqft) */}
-              <p className="text-sm font-semibold text-foreground mb-2">Area (sqft)</p>
-              <div className="flex flex-col gap-1.5 mb-4">
-                {sqftRanges.map((range) => (
-                  <button
-                    key={range.label}
-                    onClick={() => {
-                      updateFilter("sqftMin", range.min)
-                      updateFilter("sqftMax", range.max)
-                    }}
-                    className={`text-left px-3 py-2 text-sm rounded-md transition-colors ${
-                      filters.sqftMin === range.min && filters.sqftMax === range.max
-                        ? "bg-primary text-primary-foreground"
-                        : "text-foreground hover:bg-muted"
-                    }`}
-                  >
-                    {range.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Facing */}
-              <p className="text-sm font-semibold text-foreground mb-2">Facing</p>
-              <div className="flex flex-wrap gap-2 mb-5">
-                {facingOptions.map((opt) => (
-                  <button
-                    key={opt}
-                    onClick={() => toggleArrayFilter("facing", opt)}
-                    className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${
-                      filters.facing.includes(opt)
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "border-border text-foreground hover:bg-muted"
-                    }`}
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex gap-2">
-                <button
-                  onClick={() => {
-                    updateFilter("homeType", [])
-                    updateFilter("furnishing", [])
-                    updateFilter("possession", [])
-                    updateFilter("facing", [])
-                    updateFilter("sqftMin", "")
-                    updateFilter("sqftMax", "")
-                  }}
-                  className="flex-1 py-2 text-sm font-semibold text-foreground border border-border rounded-md hover:bg-muted transition-colors"
-                >
-                  Clear All
-                </button>
-                <button
-                  onClick={() => setActiveFilter(null)}
-                  className="flex-1 py-2 text-sm font-semibold text-primary-foreground bg-primary rounded-md hover:bg-primary/90 transition-colors"
-                >
-                  Apply Filters
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className="flex-1" />
-
-        {/* Sort */}
-        <div className="relative">
-          <button
-            onClick={() => toggleFilter("sort")}
-            className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
-          >
-            Sort: {filters.sortBy}
-            <ChevronDown className="h-3.5 w-3.5" />
-          </button>
-          {activeFilter === "sort" && (
-            <div className="absolute top-full right-0 mt-2 bg-card border border-border rounded-lg shadow-lg py-2 z-50 min-w-[200px]">
-              {sortOptions.map((opt) => (
-                <button
-                  key={opt}
-                  onClick={() => {
-                    updateFilter("sortBy", opt)
-                    setActiveFilter(null)
-                  }}
-                  className={`block w-full text-left px-4 py-2.5 text-sm transition-colors ${
-                    filters.sortBy === opt
-                      ? "text-primary bg-primary/5 font-semibold"
-                      : "text-foreground hover:bg-muted"
-                  }`}
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Mobile Filters */}
-      <div className="md:hidden flex items-center gap-2 px-4 py-3 bg-card border-b border-border overflow-x-auto" style={{ scrollbarWidth: "none" }}>
-        <button
-          onClick={() => setMobileFiltersOpen(true)}
-          className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-full border border-border text-foreground shrink-0"
+    <nav
+      ref={navRef}
+      aria-label="Property discovery filters"
+      className="border-y border-border/80 bg-background/95 sticky top-[60px] z-40 relative backdrop-blur-sm"
+    >
+      <div className="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
+        <div
+          className={`flex items-center gap-2 py-2.5 ${
+            activeDropdown ? "overflow-visible" : "overflow-x-auto"
+          } md:overflow-visible [scrollbar-width:none] [&::-webkit-scrollbar]:hidden`}
         >
-          <SlidersHorizontal className="h-3.5 w-3.5" />
-          Filters
-        </button>
-        {["Price", "Beds", "Home Type", "Sort"].map((label) => (
-          <button
-            key={label}
-            className="flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-full border border-border text-foreground shrink-0"
-          >
-            {label}
-            <ChevronDown className="h-3 w-3" />
-          </button>
-        ))}
-      </div>
 
-      {/* Mobile Filter Sheet */}
-      {mobileFiltersOpen && (
-        <div className="fixed inset-0 z-50 bg-foreground/50 md:hidden">
-          <div className="absolute inset-y-0 right-0 w-full max-w-sm bg-card">
-            <div className="flex items-center justify-between p-4 border-b border-border">
-              <h3 className="text-lg font-bold text-foreground">Filters</h3>
-              <button onClick={() => setMobileFiltersOpen(false)} aria-label="Close filters">
-                <X className="h-6 w-6 text-foreground" />
-              </button>
-            </div>
-            <div className="p-4 overflow-y-auto h-[calc(100vh-130px)]">
-              <div className="mb-6">
-                <p className="text-sm font-semibold text-foreground mb-3">Price Range</p>
-                {priceRanges.map((range) => (
-                  <button
-                    key={range.label}
-                    onClick={() => {
-                      updateFilter("priceMin", range.min)
-                      updateFilter("priceMax", range.max)
-                    }}
-                    className={`block w-full text-left px-3 py-2.5 text-sm rounded-md mb-1 transition-colors ${
-                      filters.priceMin === range.min && filters.priceMax === range.max
-                        ? "bg-primary text-primary-foreground"
-                        : "text-foreground hover:bg-muted"
-                    }`}
-                  >
-                    {range.label}
-                  </button>
-                ))}
-              </div>
-              <div className="mb-6">
-                <p className="text-sm font-semibold text-foreground mb-3">Bedrooms</p>
-                <div className="flex gap-2 flex-wrap">
-                  {["Any", "1+", "2+", "3+", "4+", "5+"].map((opt) => (
+          {/* ── 1. LOCATION FILTER ────────────────────── */}
+          <div className="relative shrink-0">
+            <button
+              type="button"
+              onClick={() => toggleDropdown("location")}
+              aria-expanded={activeDropdown === "location"}
+              aria-label="Filter by location"
+              className={`h-9 px-3 inline-flex items-center gap-1.5 text-[13px] font-medium rounded-md border transition-colors whitespace-nowrap ${
+                isLocationActive
+                  ? "bg-foreground text-background border-foreground font-semibold"
+                  : "bg-background text-foreground/85 border-border/80 hover:border-foreground/40 hover:text-foreground"
+              }`}
+            >
+              <MapPin className="h-3.5 w-3.5 shrink-0 opacity-70" />
+              <span>{isLocationActive ? filters.location : "Location"}</span>
+              <ChevronDown className={`h-3 w-3 opacity-60 transition-transform ${activeDropdown === "location" ? "rotate-180" : ""}`} />
+            </button>
+
+            {activeDropdown === "location" && (
+              <div
+                style={{ maxHeight: `${Math.min(maxDropdownHeight, 360)}px` }}
+                className={`absolute ${
+                  dropDirection === "up" ? "bottom-full mb-1.5" : "top-full mt-1.5"
+                } left-0 bg-card border border-border rounded-md shadow-xl p-1.5 z-50 w-[240px] max-w-[calc(100vw-2rem)] overflow-y-auto animate-in fade-in zoom-in-95 duration-100`}
+              >
+                <div className="flex items-center justify-between px-2.5 py-1 text-[11px] font-medium text-muted-foreground uppercase tracking-wider sticky top-0 bg-card z-10 border-b border-border/50">
+                  <span>MMR Locations</span>
+                  {isLocationActive && (
                     <button
-                      key={`mob-bed-${opt}`}
-                      onClick={() => updateFilter("bedsMin", opt === "Any" ? "" : opt.replace("+", ""))}
-                      className={`px-4 py-2 text-sm rounded-md border transition-colors ${
-                        (opt === "Any" && !filters.bedsMin) || filters.bedsMin === opt.replace("+", "")
-                          ? "bg-primary text-primary-foreground border-primary"
-                          : "border-border text-foreground"
-                      }`}
+                      type="button"
+                      onClick={() => {
+                        updateFilter("location", "")
+                        closeDropdown()
+                      }}
+                      className="text-primary hover:underline lowercase font-normal"
                     >
-                      {opt}
+                      clear
                     </button>
-                  ))}
+                  )}
+                </div>
+                <div className="flex flex-col gap-0.5 mt-1">
+                  {locations.map((loc) => {
+                    const isSelected = filters.location === loc.value
+                    return (
+                      <button
+                        key={loc.label}
+                        type="button"
+                        onClick={() => {
+                          updateFilter("location", loc.value)
+                          closeDropdown()
+                        }}
+                        className={`w-full flex items-center justify-between px-2.5 py-1.5 text-[13px] rounded transition-colors text-left ${
+                          isSelected
+                            ? "bg-foreground text-background font-medium"
+                            : "text-foreground hover:bg-muted/70"
+                        }`}
+                      >
+                        <span className="flex items-center gap-1.5">
+                          {isSelected && <Check className="h-3.5 w-3.5 shrink-0" />}
+                          <span>{loc.label}</span>
+                        </span>
+                        {loc.count ? (
+                          <span className={`text-xs ${isSelected ? "text-background/80" : "text-muted-foreground"}`}>
+                            {loc.count}
+                          </span>
+                        ) : null}
+                      </button>
+                    )
+                  })}
                 </div>
               </div>
-              <div className="mb-6">
-                <p className="text-sm font-semibold text-foreground mb-3">Home Type</p>
-                {homeTypes.map((type) => (
-                  <label key={`mob-${type}`} className="flex items-center gap-2.5 py-2 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={filters.homeType.includes(type)}
-                      onChange={(e) => {
-                        const next = e.target.checked
-                          ? [...filters.homeType, type]
-                          : filters.homeType.filter((t) => t !== type)
-                        updateFilter("homeType", next)
-                      }}
-                      className="h-4 w-4 rounded border-border text-primary focus:ring-primary"
-                    />
-                    <span className="text-sm text-foreground">{type}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-            <div className="p-4 border-t border-border">
-              <Button onClick={() => setMobileFiltersOpen(false)} className="w-full">
-                Show Results
-              </Button>
-            </div>
+            )}
           </div>
-        </div>
-      )}
 
-      {/* Click-away overlay for desktop dropdowns */}
-      {activeFilter && (
+          {/* ── 2. PRICE FILTER ───────────────────────── */}
+          <div className="relative shrink-0">
+            <button
+              type="button"
+              onClick={() => toggleDropdown("price")}
+              aria-expanded={activeDropdown === "price"}
+              aria-label="Filter by price"
+              className={`h-9 px-3 inline-flex items-center gap-1.5 text-[13px] font-medium rounded-md border transition-colors whitespace-nowrap ${
+                isPriceActive
+                  ? "bg-foreground text-background border-foreground font-semibold"
+                  : "bg-background text-foreground/85 border-border/80 hover:border-foreground/40 hover:text-foreground"
+              }`}
+            >
+              <span>{priceLabel}</span>
+              <ChevronDown className={`h-3 w-3 opacity-60 transition-transform ${activeDropdown === "price" ? "rotate-180" : ""}`} />
+            </button>
+
+            {activeDropdown === "price" && (
+              <div
+                style={{ maxHeight: `${maxDropdownHeight}px` }}
+                className={`absolute ${
+                  dropDirection === "up" ? "bottom-full mb-1.5" : "top-full mt-1.5"
+                } left-0 bg-card border border-border rounded-lg shadow-xl p-3.5 z-50 w-[300px] sm:w-[320px] max-w-[calc(100vw-2rem)] overflow-y-auto animate-in fade-in zoom-in-95 duration-100`}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">
+                    Custom Range (₹ Lakh)
+                  </p>
+                  {isPriceActive && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onFilterChange({
+                          ...filters,
+                          priceMin: "",
+                          priceMax: "",
+                          priceOnRequestOnly: false,
+                        })
+                        setInputMinLakh("")
+                        setInputMaxLakh("")
+                        closeDropdown()
+                      }}
+                      className="text-xs text-primary hover:underline font-medium"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+
+                {/* Min / Max inputs — Compact Inline Row with Apply Button */}
+                <form onSubmit={handleApplyCustomPrice} className="space-y-1.5 mb-3">
+                  <div className="flex items-center gap-1.5">
+                    <div className="relative flex-1">
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="Min ₹L"
+                        value={inputMinLakh}
+                        onChange={(e) => {
+                          setInputMinLakh(e.target.value)
+                          setPriceError("")
+                        }}
+                        className="w-full px-2.5 py-1.5 text-xs rounded border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-foreground"
+                      />
+                    </div>
+                    <span className="text-muted-foreground text-xs font-medium shrink-0">–</span>
+                    <div className="relative flex-1">
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="Max ₹L"
+                        value={inputMaxLakh}
+                        onChange={(e) => {
+                          setInputMaxLakh(e.target.value)
+                          setPriceError("")
+                        }}
+                        className="w-full px-2.5 py-1.5 text-xs rounded border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-foreground"
+                      />
+                    </div>
+                    <button
+                      type="submit"
+                      className="px-3 py-1.5 text-xs font-semibold bg-foreground text-background rounded hover:bg-foreground/90 transition-colors shrink-0 shadow-xs"
+                    >
+                      Apply
+                    </button>
+                  </div>
+
+                  {priceError && (
+                    <p className="text-[11px] text-destructive font-medium">{priceError}</p>
+                  )}
+                </form>
+
+                {/* Quick Budget Tiers — Compact 2-Column Grid (No Overflow) */}
+                <div className="pt-2.5 border-t border-border/80">
+                  <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider mb-2">
+                    Quick Budget Tiers
+                  </p>
+                  <div className="grid grid-cols-2 gap-1.5">
+                    {pricePresets.map((preset) => {
+                      const isSelected =
+                        preset.onRequest
+                          ? filters.priceOnRequestOnly
+                          : !filters.priceOnRequestOnly &&
+                            filters.priceMin === preset.min &&
+                            filters.priceMax === preset.max
+
+                      return (
+                        <button
+                          key={preset.label}
+                          type="button"
+                          onClick={() => {
+                            onFilterChange({
+                              ...filters,
+                              priceMin: preset.min,
+                              priceMax: preset.max,
+                              priceOnRequestOnly: preset.onRequest,
+                            })
+                            closeDropdown()
+                          }}
+                          className={`px-2 py-1.5 text-xs rounded-md border text-center transition-colors font-medium truncate ${
+                            (preset as { span2?: boolean }).span2 ? "col-span-2" : ""
+                          } ${
+                            isSelected
+                              ? "bg-foreground text-background border-foreground font-semibold shadow-xs"
+                              : "border-border/80 text-foreground/85 hover:bg-muted/70 hover:border-foreground/30"
+                          }`}
+                        >
+                          {preset.label}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* ── 3. BEDS & BATHS FILTER ────────────────── */}
+          <div className="relative shrink-0">
+            <button
+              type="button"
+              onClick={() => toggleDropdown("beds")}
+              aria-expanded={activeDropdown === "beds"}
+              aria-label="Filter by bedrooms and bathrooms"
+              className={`h-9 px-3 inline-flex items-center gap-1.5 text-[13px] font-medium rounded-md border transition-colors whitespace-nowrap ${
+                isBedsBathsActive
+                  ? "bg-foreground text-background border-foreground font-semibold"
+                  : "bg-background text-foreground/85 border-border/80 hover:border-foreground/40 hover:text-foreground"
+              }`}
+            >
+              <span>{bedsBathsLabel}</span>
+              <ChevronDown className={`h-3 w-3 opacity-60 transition-transform ${activeDropdown === "beds" ? "rotate-180" : ""}`} />
+            </button>
+
+            {activeDropdown === "beds" && (
+              <div
+                style={{ maxHeight: `${maxDropdownHeight}px` }}
+                className={`absolute ${
+                  dropDirection === "up" ? "bottom-full mb-1.5" : "top-full mt-1.5"
+                } left-0 bg-card border border-border rounded-md shadow-xl p-3 z-50 w-[310px] sm:w-[320px] max-w-[calc(100vw-2rem)] overflow-y-auto animate-in fade-in zoom-in-95 duration-100`}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">
+                    Bedrooms
+                  </p>
+                  {filters.bedsMin && (
+                    <button
+                      type="button"
+                      onClick={() => updateFilter("bedsMin", "")}
+                      className="text-xs text-primary hover:underline"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+                <div className="grid grid-cols-5 gap-1.5 mb-3.5">
+                  {[
+                    { label: "Any", val: "" },
+                    { label: "1 BHK", val: "1" },
+                    { label: "2 BHK", val: "2" },
+                    { label: "3 BHK", val: "3" },
+                    { label: "4+ BHK", val: "4" },
+                  ].map((opt) => {
+                    const isSelected = filters.bedsMin === opt.val
+                    return (
+                      <button
+                        key={`bed-${opt.label}`}
+                        type="button"
+                        onClick={() => updateFilter("bedsMin", opt.val)}
+                        className={`h-8 rounded text-[11px] sm:text-xs font-medium border transition-colors whitespace-nowrap flex items-center justify-center px-1 ${
+                          isSelected
+                            ? "bg-foreground text-background border-foreground font-semibold shadow-xs"
+                            : "border-border text-foreground hover:bg-muted"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    )
+                  })}
+                </div>
+
+                <div className="flex items-center justify-between mb-2 pt-2.5 border-t border-border/80">
+                  <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">
+                    Bathrooms
+                  </p>
+                  {filters.bathsMin && (
+                    <button
+                      type="button"
+                      onClick={() => updateFilter("bathsMin", "")}
+                      className="text-xs text-primary hover:underline"
+                    >
+                      Clear
+                    </button>
+                  )}
+                </div>
+                <div className="grid grid-cols-4 gap-1.5">
+                  {[
+                    { label: "Any", val: "" },
+                    { label: "1 Bath", val: "1" },
+                    { label: "2 Baths", val: "2" },
+                    { label: "3+ Baths", val: "3" },
+                  ].map((opt) => {
+                    const isSelected = filters.bathsMin === opt.val
+                    return (
+                      <button
+                        key={`bath-${opt.label}`}
+                        type="button"
+                        onClick={() => updateFilter("bathsMin", opt.val)}
+                        className={`h-8 rounded text-[11px] sm:text-xs font-medium border transition-colors whitespace-nowrap flex items-center justify-center px-1 ${
+                          isSelected
+                            ? "bg-foreground text-background border-foreground font-semibold shadow-xs"
+                            : "border-border text-foreground hover:bg-muted"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    )
+                  })}
+                </div>
+
+                <div className="mt-3.5 pt-2.5 border-t border-border flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onFilterChange({ ...filters, bedsMin: "", bathsMin: "" })
+                    }}
+                    className="text-xs text-muted-foreground hover:text-foreground font-medium transition-colors"
+                  >
+                    Reset Both
+                  </button>
+                  <button
+                    type="button"
+                    onClick={closeDropdown}
+                    className="px-3.5 py-1.5 bg-foreground text-background text-xs font-semibold rounded hover:bg-foreground/90 transition-colors shadow-xs"
+                  >
+                    Done
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* ── 4. PROPERTY TYPE FILTER ───────────────── */}
+          <div className="relative shrink-0">
+            <button
+              type="button"
+              onClick={() => toggleDropdown("propertyType")}
+              aria-expanded={activeDropdown === "propertyType"}
+              aria-label="Filter by property type"
+              className={`h-9 px-3 inline-flex items-center gap-1.5 text-[13px] font-medium rounded-md border transition-colors whitespace-nowrap ${
+                isTypeActive
+                  ? "bg-foreground text-background border-foreground font-semibold"
+                  : "bg-background text-foreground/85 border-border/80 hover:border-foreground/40 hover:text-foreground"
+              }`}
+            >
+              <span>{typeLabel}</span>
+              <ChevronDown className={`h-3 w-3 opacity-60 transition-transform ${activeDropdown === "propertyType" ? "rotate-180" : ""}`} />
+            </button>
+
+            {activeDropdown === "propertyType" && (
+              <div
+                style={{ maxHeight: `${Math.min(maxDropdownHeight, 360)}px` }}
+                className={`absolute ${
+                  dropDirection === "up" ? "bottom-full mb-1.5" : "top-full mt-1.5"
+                } left-0 bg-card border border-border rounded-md shadow-xl p-3 z-50 w-[270px] max-w-[calc(100vw-2rem)] overflow-y-auto animate-in fade-in zoom-in-95 duration-100`}
+              >
+                <div className="flex items-center justify-between mb-1.5 px-1 text-[11px] font-medium text-muted-foreground uppercase tracking-wider sticky top-0 bg-card z-10 border-b border-border/50 pb-1">
+                  <span>Property Types</span>
+                  {isTypeActive && (
+                    <button
+                      type="button"
+                      onClick={() => updateFilter("homeType", [])}
+                      className="text-primary hover:underline lowercase font-normal"
+                    >
+                      clear
+                    </button>
+                  )}
+                </div>
+                <div className="flex flex-col gap-1 mt-1">
+                  {propertyTypes.map((type) => {
+                    const isChecked = filters.homeType.includes(type.value)
+                    return (
+                      <label
+                        key={type.value}
+                        className="flex items-center justify-between px-2 py-1.5 rounded hover:bg-muted/70 cursor-pointer text-[13px] text-foreground transition-colors"
+                      >
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => toggleArrayFilter("homeType", type.value)}
+                            className="h-3.5 w-3.5 rounded border-border text-primary focus:ring-0 accent-foreground cursor-pointer"
+                          />
+                          <span>{type.label}</span>
+                        </div>
+                        {type.count ? (
+                          <span className="text-xs text-muted-foreground font-normal">
+                            {type.count}
+                          </span>
+                        ) : null}
+                      </label>
+                    )
+                  })}
+                </div>
+                <div className="mt-2.5 pt-2 border-t border-border flex items-center justify-between">
+                  <button
+                    type="button"
+                    onClick={() => updateFilter("homeType", [])}
+                    className="text-xs text-muted-foreground hover:text-foreground px-1"
+                  >
+                    Clear All
+                  </button>
+                  <button
+                    type="button"
+                    onClick={closeDropdown}
+                    className="px-3.5 py-1.5 bg-foreground text-background text-xs font-semibold rounded hover:bg-foreground/90 transition-colors shadow-xs"
+                  >
+                    Apply
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* ── 5. MORE FILTERS ───────────────────────── */}
+          <div className="relative shrink-0">
+            <button
+              type="button"
+              onClick={() => toggleDropdown("moreFilters")}
+              aria-expanded={activeDropdown === "moreFilters"}
+              aria-label="More filters"
+              className={`h-9 px-3 inline-flex items-center gap-1.5 text-[13px] font-medium rounded-md border transition-colors whitespace-nowrap ${
+                moreFiltersCount > 0
+                  ? "bg-foreground text-background border-foreground font-semibold"
+                  : "bg-background text-foreground/85 border-border/80 hover:border-foreground/40 hover:text-foreground"
+              }`}
+            >
+              <SlidersHorizontal className="h-3.5 w-3.5 opacity-70" />
+              <span>More Filters</span>
+              {moreFiltersCount > 0 && (
+                <span className="w-4 h-4 rounded-full bg-primary text-primary-foreground text-[10px] font-bold flex items-center justify-center">
+                  {moreFiltersCount}
+                </span>
+              )}
+              <ChevronDown className={`h-3 w-3 opacity-60 transition-transform ${activeDropdown === "moreFilters" ? "rotate-180" : ""}`} />
+            </button>
+
+            {activeDropdown === "moreFilters" && (
+              <div
+                style={{ maxHeight: `${maxDropdownHeight}px` }}
+                className={`absolute ${
+                  dropDirection === "up" ? "bottom-full mb-1.5" : "top-full mt-1.5"
+                } right-0 bg-card border border-border rounded-xl shadow-xl z-50 w-[360px] sm:w-[380px] max-w-[calc(100vw-2rem)] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-100`}
+              >
+                {/* Sticky Header */}
+                <div className="flex items-center justify-between px-4 py-2.5 border-b border-border/80 shrink-0 bg-card">
+                  <p className="text-xs font-semibold text-foreground uppercase tracking-wide">
+                    Additional Filters
+                  </p>
+                  <button
+                    type="button"
+                    onClick={closeDropdown}
+                    className="p-1 text-muted-foreground hover:text-foreground rounded transition-colors"
+                    aria-label="Close more filters"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
+
+                {/* Scrollable Categories — Sleek Modern Scrollbar */}
+                <div className="p-4 space-y-4 overflow-y-auto flex-1 min-h-0">
+                  {/* Possession Status */}
+                  <div>
+                    <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider mb-2">
+                      Possession Status
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {possessionOptions.map((opt) => {
+                        const isSelected = filters.possession.includes(opt.value)
+                        return (
+                          <button
+                            key={opt.value}
+                            type="button"
+                            onClick={() => toggleArrayFilter("possession", opt.value)}
+                            className={`px-3 py-1.5 text-xs font-medium rounded-md border transition-colors whitespace-nowrap ${
+                              isSelected
+                                ? "bg-foreground text-background border-foreground font-semibold shadow-xs"
+                                : "border-border text-foreground hover:bg-muted"
+                            }`}
+                          >
+                            <span>{opt.label}</span>
+                            {opt.count ? (
+                              <span className={`text-[10px] ml-1 ${isSelected ? "text-background/80" : "text-muted-foreground"}`}>
+                                ({opt.count})
+                              </span>
+                            ) : null}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Furnishing */}
+                  <div>
+                    <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider mb-2">
+                      Furnishing
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {furnishingOptions.map((opt) => {
+                        const isSelected = filters.furnishing.includes(opt.value)
+                        return (
+                          <button
+                            key={opt.value}
+                            type="button"
+                            onClick={() => toggleArrayFilter("furnishing", opt.value)}
+                            className={`px-3 py-1.5 text-xs font-medium rounded-md border transition-colors whitespace-nowrap ${
+                              isSelected
+                                ? "bg-foreground text-background border-foreground font-semibold shadow-xs"
+                                : "border-border text-foreground hover:bg-muted"
+                            }`}
+                          >
+                            {opt.label}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Carpet Area */}
+                  <div>
+                    <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider mb-2">
+                      Carpet Area
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {areaOptions.map((opt) => {
+                        const isSelected = filters.sqftRange === opt.value
+                        return (
+                          <button
+                            key={opt.label}
+                            type="button"
+                            onClick={() => updateFilter("sqftRange", opt.value)}
+                            className={`px-3 py-1.5 text-xs font-medium rounded-md border transition-colors whitespace-nowrap ${
+                              isSelected
+                                ? "bg-foreground text-background border-foreground font-semibold shadow-xs"
+                                : "border-border text-foreground hover:bg-muted"
+                            }`}
+                          >
+                            {opt.label}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Amenities & Features */}
+                  <div>
+                    <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider mb-2">
+                      Amenities & Features
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {amenityOptions.map((opt) => {
+                        const isSelected = filters.amenities.includes(opt.value)
+                        return (
+                          <button
+                            key={opt.value}
+                            type="button"
+                            onClick={() => toggleArrayFilter("amenities", opt.value)}
+                            className={`px-3 py-1.5 text-xs font-medium rounded-md border transition-colors whitespace-nowrap flex items-center gap-1.5 ${
+                              isSelected
+                                ? "bg-foreground text-background border-foreground font-semibold shadow-xs"
+                                : "border-border text-foreground hover:bg-muted"
+                            }`}
+                          >
+                            <span>{opt.label}</span>
+                            {isSelected && <Check className="h-3 w-3 shrink-0" />}
+                          </button>
+                        )
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sticky Footer Actions — Always within viewport */}
+                <div className="px-4 py-2.5 border-t border-border/80 bg-card shrink-0 flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      onFilterChange({
+                        ...filters,
+                        possession: [],
+                        furnishing: [],
+                        amenities: [],
+                        sqftRange: "",
+                      })
+                    }}
+                    className="flex-1 py-1.5 text-xs text-muted-foreground hover:text-foreground font-medium border border-border rounded-md hover:bg-muted transition-colors"
+                  >
+                    Clear Extra
+                  </button>
+                  <button
+                    type="button"
+                    onClick={closeDropdown}
+                    className="flex-1 py-1.5 text-xs font-semibold text-background bg-foreground rounded-md hover:bg-foreground/90 transition-colors shadow-xs"
+                  >
+                    Apply Filters
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Quick Clear All Reset */}
+          {(isLocationActive || isPriceActive || isBedsBathsActive || isTypeActive || moreFiltersCount > 0) && (
+            <button
+              type="button"
+              onClick={onReset}
+              className="h-9 px-2.5 shrink-0 inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <X className="h-3.5 w-3.5" />
+              <span>Clear All</span>
+            </button>
+          )}
+
+          {/* Right Spacer to naturally position Sort on the far right */}
+          <div className="flex-1 min-w-[8px]" />
+
+          {/* ── 6. SORT FILTER (Far Right Positioned) ── */}
+          <div className="relative shrink-0">
+            <button
+              type="button"
+              onClick={() => toggleDropdown("sort")}
+              aria-expanded={activeDropdown === "sort"}
+              aria-label="Sort properties"
+              className="h-9 px-3 inline-flex items-center gap-1.5 text-[13px] font-medium rounded-md border border-border/80 bg-background text-foreground/85 hover:border-foreground/40 hover:text-foreground transition-colors whitespace-nowrap"
+            >
+              <ArrowUpDown className="h-3.5 w-3.5 opacity-60" />
+              <span>Sort: {filters.sortBy}</span>
+              <ChevronDown className={`h-3 w-3 opacity-60 transition-transform ${activeDropdown === "sort" ? "rotate-180" : ""}`} />
+            </button>
+
+            {activeDropdown === "sort" && (
+              <div
+                style={{ maxHeight: `${Math.min(maxDropdownHeight, 300)}px` }}
+                className={`absolute ${
+                  dropDirection === "up" ? "bottom-full mb-1.5" : "top-full mt-1.5"
+                } right-0 bg-card border border-border rounded-md shadow-xl p-1 z-50 min-w-[190px] overflow-y-auto animate-in fade-in zoom-in-95 duration-100`}
+              >
+                <p className="text-[11px] font-medium text-muted-foreground px-2.5 py-1 uppercase tracking-wider">
+                  Sort Properties
+                </p>
+                <div className="flex flex-col gap-0.5">
+                  {sortOptions.map((opt) => {
+                    const isSelected = filters.sortBy === opt.value
+                    return (
+                      <button
+                        key={opt.value}
+                        type="button"
+                        onClick={() => {
+                          updateFilter("sortBy", opt.value)
+                          closeDropdown()
+                        }}
+                        className={`w-full flex items-center justify-between px-2.5 py-1.5 text-[13px] rounded transition-colors text-left ${
+                          isSelected
+                            ? "bg-foreground text-background font-medium"
+                            : "text-foreground hover:bg-muted/70"
+                        }`}
+                      >
+                        <span>{opt.label}</span>
+                        {isSelected && <Check className="h-3.5 w-3.5" />}
+                      </button>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+        </div>
+      </div>
+
+      {/* Click-away backdrop overlay */}
+      {activeDropdown && (
         <div
-          className="hidden md:block fixed inset-0 z-40"
-          onClick={() => setActiveFilter(null)}
+          className="fixed inset-0 z-30 bg-transparent"
+          onClick={closeDropdown}
         />
       )}
-    </>
+    </nav>
   )
 }

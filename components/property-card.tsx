@@ -3,8 +3,7 @@
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Heart, ChevronLeft, ChevronRight, MessageCircle } from "lucide-react"
-import { motion } from "motion/react"
+import { Heart, ChevronLeft, ChevronRight, MessageCircle, MapPin, ArrowRight, Bed, Bath, Maximize2, Camera, Building2, CheckCircle2 } from "lucide-react"
 import type { PropertyData } from "@/lib/data"
 
 export function PropertyCard({ property }: { property: PropertyData }) {
@@ -47,129 +46,185 @@ export function PropertyCard({ property }: { property: PropertyData }) {
     window.open(`https://wa.me/917767805544?text=${msg}`, "_blank")
   }
 
+  // Single status badge logic: never display duplicate "FOR SALE For Sale"
+  const statusBadge = (() => {
+    if (property.tag && !["for sale", "for rent"].includes(property.tag.toLowerCase())) {
+      return property.tag
+    }
+    return property.isRental ? "For Rent" : "For Sale"
+  })()
+
+  // Format property type label
+  const typeLabel = property.type || (property.isRental ? "Rental" : "Apartment")
+
   return (
     <article
-      className="group relative flex flex-col"
+      className="group relative flex flex-col rounded-xl overflow-hidden border border-border/80 bg-card shadow-xs hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 h-full"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <Link href={detailHref} className="block w-full">
-        {/* Photo Container */}
-        <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden bg-neutral-100 dark:bg-neutral-900 mb-3 select-none">
+      {/* Photo Container */}
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted select-none">
+        <Link href={detailHref} className="block w-full h-full">
           <Image
             src={images[activeImgIndex]}
             alt={`${property.address}, ${property.city}`}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
+        </Link>
 
-          {/* Genuine Status Badge */}
-          {property.tag && (
-            <div className="absolute top-3 left-3 z-10">
-              <span className="px-2.5 py-1 text-xs font-semibold rounded-md bg-white/95 text-neutral-900 dark:bg-neutral-900/90 dark:text-neutral-100 shadow-sm backdrop-blur-xs">
-                {property.tag}
-              </span>
-            </div>
-          )}
-
-          {/* Heart Button */}
-          <button
-            type="button"
-            onClick={handleSave}
-            aria-label={saved ? "Remove from wishlist" : "Add to wishlist"}
-            className="absolute top-3 right-3 z-10 p-2 rounded-full transition-transform active:scale-90"
-          >
-            <Heart
-              className={`h-5 w-5 drop-shadow-md transition-colors ${
-                saved
-                  ? "fill-rose-500 text-rose-500"
-                  : "fill-black/30 text-white stroke-[2]"
-              }`}
-            />
-          </button>
-
-          {/* In-Card Carousel Arrows (Airbnb style on hover) */}
-          {images.length > 1 && isHovered && (
-            <div className="hidden sm:flex items-center justify-between absolute inset-x-2 top-1/2 -translate-y-1/2 z-10 pointer-events-none">
-              <button
-                type="button"
-                onClick={handlePrevImg}
-                aria-label="Previous image"
-                className="pointer-events-auto p-1.5 rounded-full bg-white/90 text-neutral-800 hover:bg-white hover:scale-105 shadow-md transition-all"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                onClick={handleNextImg}
-                aria-label="Next image"
-                className="pointer-events-auto p-1.5 rounded-full bg-white/90 text-neutral-800 hover:bg-white hover:scale-105 shadow-md transition-all"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
-          )}
-
-          {/* Carousel Pagination Dots */}
-          {images.length > 1 && (
-            <div className="absolute bottom-2.5 inset-x-0 flex items-center justify-center gap-1 z-10 pointer-events-none">
-              {images.slice(0, 5).map((_, i) => (
-                <span
-                  key={i}
-                  className={`h-1.5 rounded-full transition-all ${
-                    activeImgIndex === i
-                      ? "w-3 bg-white"
-                      : "w-1.5 bg-white/60"
-                  }`}
-                />
-              ))}
-            </div>
-          )}
+        {/* Single Status Badge */}
+        <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none">
+          <span className="px-2.5 py-1 text-[11px] font-semibold tracking-wide rounded-md bg-neutral-900/80 text-white backdrop-blur-md shadow-xs">
+            {statusBadge}
+          </span>
         </div>
 
-        {/* Listing Information (Clean, Authentic, Human) */}
-        <div className="space-y-1">
-          {/* Location & Star */}
-          <div className="flex items-center justify-between text-[15px] font-semibold text-neutral-900 dark:text-neutral-100">
-            <span className="truncate">{property.city}, Maharashtra</span>
-            <span className="flex items-center gap-1 text-xs font-medium text-neutral-700 dark:text-neutral-300">
-              ★ 5.0
+        {/* Wishlist Heart Button */}
+        <button
+          type="button"
+          onClick={handleSave}
+          aria-label={saved ? "Remove from wishlist" : "Add to wishlist"}
+          className="absolute top-2.5 right-2.5 z-10 p-2 rounded-full bg-black/40 hover:bg-black/60 text-white transition-all active:scale-90 shadow-xs"
+        >
+          <Heart
+            className={`h-4 w-4 transition-colors ${
+              saved
+                ? "fill-rose-500 text-rose-500"
+                : "text-white stroke-[2]"
+            }`}
+          />
+        </button>
+
+        {/* Photo Count Tag */}
+        {images.length > 1 && (
+          <div className="absolute bottom-2.5 left-2.5 z-10 pointer-events-none">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-black/60 text-white text-[10px] font-medium backdrop-blur-xs">
+              <Camera className="h-3 w-3" />
+              {activeImgIndex + 1}/{images.length}
             </span>
           </div>
+        )}
 
-          {/* Project Title */}
-          <p className="text-sm text-neutral-600 dark:text-neutral-400 truncate">
-            {property.address}
-          </p>
-
-          {/* Specs / Configuration */}
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 truncate">
-            {property.beds > 0
-              ? `${property.beds} BHK · ${property.baths} Bath · ${property.sqft !== "On Request" ? `${property.sqft} sqft` : "Spacious Layout"}`
-              : property.type
-                ? `${property.type} · Prime Location`
-                : "Commercial / Residential"}
-          </p>
-
-          {/* Price & Action Row */}
-          <div className="pt-1 flex items-center justify-between">
-            <p className="text-[15px] font-semibold text-neutral-900 dark:text-neutral-100">
-              {property.price}
-            </p>
-
-            {/* Quick WhatsApp Link */}
+        {/* In-Card Carousel Arrows */}
+        {images.length > 1 && isHovered && (
+          <div className="hidden sm:flex items-center justify-between absolute inset-x-2 top-1/2 -translate-y-1/2 z-10 pointer-events-none">
             <button
               type="button"
-              onClick={handleWhatsApp}
-              className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 transition-colors"
+              onClick={handlePrevImg}
+              aria-label="Previous image"
+              className="pointer-events-auto p-1.5 rounded-full bg-white/95 text-neutral-800 hover:bg-white hover:scale-105 shadow-md transition-all"
             >
-              <MessageCircle className="h-3.5 w-3.5" />
-              <span>WhatsApp</span>
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={handleNextImg}
+              aria-label="Next image"
+              className="pointer-events-auto p-1.5 rounded-full bg-white/95 text-neutral-800 hover:bg-white hover:scale-105 shadow-md transition-all"
+            >
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
+        )}
+      </div>
+
+      {/* Listing Content Body */}
+      <div className="flex flex-col flex-1 p-4">
+        {/* Marketplace Price Line */}
+        <div className="flex items-baseline justify-between gap-2 mb-1.5">
+          <span className="text-xl font-bold text-foreground tracking-tight">
+            {property.price}
+          </span>
+          <span className="text-[11px] font-medium text-muted-foreground bg-muted/70 px-2 py-0.5 rounded">
+            {typeLabel}
+          </span>
         </div>
-      </Link>
+
+        {/* Property Title / Address */}
+        <Link href={detailHref} className="block group-hover:text-primary transition-colors">
+          <h3 className="text-base font-semibold text-foreground leading-snug line-clamp-1 group-hover:text-primary transition-colors">
+            {property.address}
+          </h3>
+        </Link>
+
+        {/* Locality with Map Pin */}
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1 mb-3">
+          <MapPin className="h-3.5 w-3.5 text-muted-foreground/80 shrink-0" />
+          <span className="truncate">{property.city}, Maharashtra</span>
+        </div>
+
+        {/* Real Estate Specifications Strip - Non-fabricated & relevant */}
+        <div className="grid grid-cols-3 gap-2 py-2 px-3 rounded-lg bg-muted/40 border border-border/60 text-xs mb-3.5 mt-auto">
+          {property.beds > 0 ? (
+            <>
+              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
+                <Bed className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
+                <span className="font-semibold text-foreground text-[11px]">
+                  {property.beds} BHK
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
+                <Bath className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
+                <span className="font-semibold text-foreground text-[11px]">
+                  {property.baths > 0 ? `${property.baths} Bath` : "Bath on req."}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
+                <Maximize2 className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
+                <span className="font-semibold text-foreground text-[11px] truncate">
+                  {property.sqft && property.sqft !== "On Request" ? `${property.sqft} sqft` : "Area on req."}
+                </span>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
+                <Building2 className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
+                <span className="font-semibold text-foreground text-[11px] truncate">
+                  {property.category === "commercial" || property.type?.toLowerCase().includes("office") || property.type?.toLowerCase().includes("shop")
+                    ? (property.type || "Commercial")
+                    : (property.features?.[0] || "Residential")}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
+                <Maximize2 className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
+                <span className="font-semibold text-foreground text-[11px] truncate">
+                  {property.sqft && property.sqft !== "On Request" ? `${property.sqft} sqft` : "Area on req."}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5 text-muted-foreground truncate">
+                <CheckCircle2 className="h-3.5 w-3.5 text-foreground/70 shrink-0" />
+                <span className="font-semibold text-foreground text-[11px] truncate">
+                  {property.features?.[2] || property.features?.[1] || "Ready to Move"}
+                </span>
+              </div>
+            </>
+          )}
+        </div>
+
+        {/* Footer Actions */}
+        <div className="flex items-center gap-2 pt-2.5 border-t border-border/60">
+          <Link
+            href={detailHref}
+            className="flex-1 inline-flex items-center justify-center gap-1.5 h-9 px-3 bg-primary text-primary-foreground rounded-lg text-xs font-semibold hover:bg-primary/90 transition-all shadow-xs"
+          >
+            <span>View Details</span>
+            <ArrowRight className="h-3 w-3" />
+          </Link>
+          <button
+            type="button"
+            onClick={handleWhatsApp}
+            title="Chat on WhatsApp"
+            className="inline-flex items-center justify-center gap-1.5 h-9 px-3.5 border border-emerald-600/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded-lg text-xs font-semibold transition-all"
+          >
+            <MessageCircle className="h-3.5 w-3.5" />
+            <span className="hidden sm:inline">WhatsApp</span>
+          </button>
+        </div>
+      </div>
     </article>
   )
 }

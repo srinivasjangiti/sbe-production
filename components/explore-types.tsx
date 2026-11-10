@@ -45,7 +45,7 @@ export function ExploreTypes() {
               <Link
                 key={type.label}
                 href={type.href}
-                className="flex flex-col items-center gap-2 md:gap-3 p-4 md:p-6 bg-card rounded-2xl border border-border hover:border-primary hover:shadow-md hover:-translate-y-1 active:scale-[0.98] transition-all group"
+                className="flex flex-col items-center gap-2 md:gap-3 p-4 md:p-6 bg-card rounded-2xl border border-border/80 shadow-[0_2px_8px_rgba(0,0,0,0.03)] hover:border-primary/40 hover:shadow-[0_12px_24px_rgba(0,0,0,0.07)] hover:-translate-y-1 active:scale-[0.98] transition-all duration-300 group"
               >
                 <type.icon className="h-7 w-7 md:h-8 md:w-8 text-primary group-hover:scale-110 transition-transform" />
                 <div className="text-center">

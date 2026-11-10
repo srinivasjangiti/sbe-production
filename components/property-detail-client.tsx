@@ -388,9 +388,6 @@ export function PropertyDetailClient({
                   <p className="text-xs text-muted-foreground uppercase font-medium">Price</p>
                   <p className="text-2xl font-bold text-foreground">{property.price}</p>
                 </div>
-                <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2.5 py-1 rounded-md">
-                  No Brokerage on New Projects
-                </span>
               </div>
 
               {/* Inquiry Inputs */}

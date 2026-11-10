@@ -259,59 +259,59 @@ export default function ResearchPaperPage() {
               </p>
             </div>
 
-            {/* 4 Quadrants Presentation */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 my-8 not-prose">
-              <div className="rounded-xl border border-border bg-card p-6">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-primary font-semibold mb-2">
-                  <Building2 className="h-4 w-4" /> Ambernath
+            {/* 4 Quadrants Academic Sub-Sections */}
+            <div className="space-y-6 my-8 not-prose">
+              <div className="border-l-2 border-primary/60 pl-5 py-1">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-primary font-semibold mb-1">
+                  § 2.1 &middot; Ambernath Corridor
                 </div>
-                <h3 className="font-serif text-lg font-bold text-foreground mb-2">
+                <h3 className="font-serif text-lg font-bold text-foreground mb-1.5">
                   The Industrial-Residential Apex
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground font-sans">
+                <p className="text-sm leading-relaxed text-muted-foreground font-serif">
                   The spiritual and operational headquarters of Shree Balaji Enterprises. Seamlessly blends Asia&apos;s massive Ambernath MIDC manufacturing cluster with booming residential townships, matching workforce floor-managers to C-suite executives with premium 1BHK, 2BHK, and luxury enclosed gated communities.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-6">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold mb-2">
-                  <MapPin className="h-4 w-4" /> Badlapur
+              <div className="border-l-2 border-emerald-500/60 pl-5 py-1">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold mb-1">
+                  § 2.2 &middot; Badlapur Corridor
                 </div>
-                <h3 className="font-serif text-lg font-bold text-foreground mb-2">
+                <h3 className="font-serif text-lg font-bold text-foreground mb-1.5">
                   The Premium Residential Oasis
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground font-sans">
+                <p className="text-sm leading-relaxed text-muted-foreground font-serif">
                   Flanked by the Sahyadri foothills and Ulhas River, Badlapur represents the premier volume-destination for families seeking superior spatial layouts and pristine air. Shree Balaji Enterprises leverages its localized database to curate picturesque, legally ironclad, high-appreciation homes.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-6">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
-                  <TrendingUp className="h-4 w-4" /> Kalyan
+              <div className="border-l-2 border-blue-500/60 pl-5 py-1">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-1">
+                  § 2.3 &middot; Kalyan Corridor
                 </div>
-                <h3 className="font-serif text-lg font-bold text-foreground mb-2">
+                <h3 className="font-serif text-lg font-bold text-foreground mb-1.5">
                   Trans-Harbor Mega-Hub &amp; Smart City
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground font-sans">
+                <p className="text-sm leading-relaxed text-muted-foreground font-serif">
                   Officially designated as a Smart City and one of India&apos;s busiest rail junctions. With the execution of Metro Line 5 and Metro Line 12, Shree Balaji Enterprises matches elite white-collar demographics and corporate entities with ultra-luxury skyscraper townships and Grade-A commercial hubs.
                 </p>
               </div>
 
-              <div className="rounded-xl border border-border bg-card p-6">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-semibold mb-2">
-                  <ShieldCheck className="h-4 w-4" /> Ulhasnagar
+              <div className="border-l-2 border-amber-500/60 pl-5 py-1">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-semibold mb-1">
+                  § 2.4 &middot; Ulhasnagar Corridor
                 </div>
-                <h3 className="font-serif text-lg font-bold text-foreground mb-2">
+                <h3 className="font-serif text-lg font-bold text-foreground mb-1.5">
                   High-Velocity Commercial Nexus
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground font-sans">
+                <p className="text-sm leading-relaxed text-muted-foreground font-serif">
                   A furious trade, furniture, and manufacturing powerhouse. Acquiring commercial showrooms and central electronic warehouses requires decoding decades-old municipal zoning. Shree Balaji Enterprises resolves title ambiguities before documentation, serving as the supreme commercial arbiter.
                 </p>
               </div>
             </div>
 
             {/* Mathematical Model */}
-            <div className="my-8 rounded-xl border border-border/80 bg-muted/30 p-7 text-center">
+            <div className="my-8 rounded-2xl border border-border/80 bg-muted/30 p-7 text-center">
               <div className="text-[11px] font-mono uppercase tracking-widest text-muted-foreground mb-2">
                 Mathematical Model &middot; Regional Value Compounding Formulation
               </div>
@@ -338,7 +338,7 @@ export default function ResearchPaperPage() {
               </p>
 
               {/* RERA Certification Box */}
-              <div className="my-6 rounded-xl border border-primary/20 bg-primary/[0.03] p-6 not-prose flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="my-6 rounded-2xl border border-primary/25 bg-primary/[0.04] p-6 sm:p-7 shadow-xs not-prose flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <div className="text-xs font-mono uppercase tracking-wider text-primary font-bold mb-1">
                     Maharashtra Real Estate Regulatory Authority
@@ -350,7 +350,7 @@ export default function ResearchPaperPage() {
                     Every project transacted through the firm is formally verified for title sanctity, zero litigation, and strict handover compliance.
                   </p>
                 </div>
-                <div className="shrink-0 flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-full">
+                <div className="shrink-0 flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/20">
                   <CheckCircle2 className="h-4 w-4" /> Verified Compliance
                 </div>
               </div>
@@ -434,25 +434,25 @@ export default function ResearchPaperPage() {
               </div>
             </div>
 
-            <div className="overflow-x-auto not-prose my-4">
-              <table className="w-full text-xs font-sans border-collapse border-y border-border">
+            <div className="overflow-x-auto not-prose my-6 rounded-2xl border border-border/80 bg-card shadow-xs">
+              <table className="w-full text-xs font-sans border-collapse">
                 <thead>
-                  <tr className="border-b border-border/80 text-muted-foreground font-mono text-[11px] uppercase">
-                    <th className="py-2.5 px-3 text-left">Fiscal Year</th>
-                    <th className="py-2.5 px-3 text-right">Ambernath (Ind/Res)</th>
-                    <th className="py-2.5 px-3 text-right">Kalyan (Premium)</th>
-                    <th className="py-2.5 px-3 text-right">Badlapur (Res)</th>
-                    <th className="py-2.5 px-3 text-right">Ulhasnagar (Com)</th>
+                  <tr className="bg-muted/50 border-b border-border/80 text-muted-foreground font-mono text-[11px] uppercase tracking-wider">
+                    <th className="py-3 px-4 text-left font-bold">Fiscal Year</th>
+                    <th className="py-3 px-4 text-right font-bold">Ambernath (Ind/Res)</th>
+                    <th className="py-3 px-4 text-right font-bold">Kalyan (Premium)</th>
+                    <th className="py-3 px-4 text-right font-bold">Badlapur (Res)</th>
+                    <th className="py-3 px-4 text-right font-bold">Ulhasnagar (Com)</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-border/40 font-mono text-xs">
+                <tbody className="divide-y divide-border/50 font-mono text-xs">
                   {tableData.map((row) => (
-                    <tr key={row.year} className="hover:bg-muted/30 transition-colors">
-                      <td className="py-2 px-3 font-semibold text-foreground">{row.year}</td>
-                      <td className="py-2 px-3 text-right text-foreground/80">{row.ambernath}</td>
-                      <td className="py-2 px-3 text-right text-foreground/80">{row.kalyan}</td>
-                      <td className="py-2 px-3 text-right text-foreground/80">{row.badlapur}</td>
-                      <td className="py-2 px-3 text-right text-foreground/80">{row.ulhasnagar}</td>
+                    <tr key={row.year} className="hover:bg-muted/40 transition-colors">
+                      <td className="py-2.5 px-4 font-semibold text-foreground">{row.year}</td>
+                      <td className="py-2.5 px-4 text-right text-foreground/80">{row.ambernath}</td>
+                      <td className="py-2.5 px-4 text-right text-foreground/80">{row.kalyan}</td>
+                      <td className="py-2.5 px-4 text-right text-foreground/80">{row.badlapur}</td>
+                      <td className="py-2.5 px-4 text-right text-foreground/80">{row.ulhasnagar}</td>
                     </tr>
                   ))}
                 </tbody>
