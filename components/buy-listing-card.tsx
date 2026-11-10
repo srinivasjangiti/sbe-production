@@ -7,11 +7,11 @@ import {
   Heart,
   ChevronLeft,
   ChevronRight,
-  MessageCircle,
   Camera,
   MapPin,
   ArrowRight,
 } from "lucide-react"
+import { WhatsAppIcon } from "@/components/whatsapp-icon"
 import type { PropertyData } from "@/lib/data"
 
 interface BuyListingCardProps {
@@ -257,9 +257,9 @@ export function BuyListingCard({
             type="button"
             onClick={openWhatsApp}
             title="Chat on WhatsApp"
-            className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors py-1 px-2 rounded-md hover:bg-emerald-500/10"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 transition-colors py-1 px-2.5 rounded-md"
           >
-            <MessageCircle className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+            <WhatsAppIcon className="h-3.5 w-3.5 fill-[#25D366] shrink-0" />
             <span>WhatsApp</span>
           </button>
         </div>

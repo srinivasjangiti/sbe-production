@@ -2,7 +2,8 @@
 
 import { useState, useMemo, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
-import { Search, X, Building2, MessageCircle } from "lucide-react"
+import { Search, X, Building2 } from "lucide-react"
+import { WhatsAppIcon } from "@/components/whatsapp-icon"
 import { BuyListingCard } from "@/components/buy-listing-card"
 import { SearchFilters, DEFAULT_FILTERS, type FilterState } from "@/components/search-filters"
 import { useBuyProperties } from "@/hooks/use-properties"
@@ -394,9 +395,9 @@ function BuyPageContent() {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold rounded bg-emerald-600 text-white hover:bg-emerald-700 transition-colors shadow-xs"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-semibold rounded bg-[#25D366] text-white hover:bg-[#20bd5a] transition-colors shadow-xs"
               >
-                <MessageCircle className="h-3.5 w-3.5" />
+                <WhatsAppIcon className="h-3.5 w-3.5 fill-current shrink-0" />
                 <span>Inquire on WhatsApp</span>
               </a>
               <button

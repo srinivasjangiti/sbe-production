@@ -7,8 +7,9 @@ import {
   Heart, Share2, ChevronLeft, ChevronRight, MapPin,
   BedDouble, Bath, Maximize, Calendar, Home, Check,
   Grid, X, Phone, Mail, Shield, Building2, CheckCircle2,
-  Clock, ArrowRight, MessageCircle
+  Clock, ArrowRight
 } from "lucide-react"
+import { WhatsAppIcon } from "@/components/whatsapp-icon"
 import { PropertyCard } from "@/components/property-card"
 import { Button } from "@/components/ui/button"
 import { formatAddress } from "@/lib/data"
@@ -446,9 +447,9 @@ export function PropertyDetailClient({
                 <button
                   type="button"
                   onClick={handleWhatsAppInquiry}
-                  className="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-xs transition-colors"
+                  className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-xs transition-colors"
                 >
-                  <MessageCircle className="h-4 w-4" />
+                  <WhatsAppIcon className="h-4 w-4 fill-current shrink-0" />
                   <span>Enquire via WhatsApp</span>
                 </button>
 

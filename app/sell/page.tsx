@@ -9,11 +9,11 @@ import {
   CheckCircle2,
   ChevronDown,
   Phone,
-  MessageCircle,
   MapPin,
   ChevronRight,
   Check,
 } from "lucide-react"
+import { WhatsAppIcon } from "@/components/whatsapp-icon"
 import { saveInquiry, nextInquiryId } from "@/lib/admin-store"
 
 const WHATSAPP_NUMBER = "917767805544"
@@ -272,10 +272,10 @@ export default function SellPage() {
                 <button
                   type="button"
                   onClick={handleDirectWhatsApp}
-                  className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg border border-border/80 bg-background hover:bg-muted text-foreground text-xs sm:text-sm font-semibold transition-all"
+                  className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-sm font-semibold transition-all shadow-xs"
                 >
-                  <MessageCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>Talk to Our Team</span>
+                  <WhatsAppIcon className="h-4 w-4 fill-current shrink-0" />
+                  <span>Chat on WhatsApp</span>
                 </button>
               </div>
 
@@ -303,9 +303,16 @@ export default function SellPage() {
                     <p className="font-semibold text-foreground">
                       Local Property Advisory Desk
                     </p>
-                    <p className="text-[11px] text-muted-foreground mt-0.5">
-                      Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West) 421505
-                    </p>
+                    <a
+                      href="https://share.google/wXb6cKV7lpMgo9P4c"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] text-muted-foreground hover:text-primary transition-colors block mt-0.5 group"
+                      title="Open in Google Maps"
+                    >
+                      <span className="group-hover:underline">Shop No. 6, Vallabh Building, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West) 421505</span>
+                      <span className="text-primary font-medium ml-1">&rarr;</span>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -401,9 +408,9 @@ export default function SellPage() {
                       <button
                         type="button"
                         onClick={handleDirectWhatsApp}
-                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-10 px-5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold transition-all shadow-xs"
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 h-10 px-5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs font-semibold transition-all shadow-xs"
                       >
-                        <MessageCircle className="h-3.5 w-3.5" />
+                        <WhatsAppIcon className="h-3.5 w-3.5 fill-current shrink-0" />
                         <span>Continue on WhatsApp</span>
                       </button>
                       <button
@@ -849,19 +856,29 @@ export default function SellPage() {
               <button
                 type="button"
                 onClick={handleDirectWhatsApp}
-                className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg border border-border/80 bg-background hover:bg-muted text-foreground text-xs sm:text-sm font-semibold transition-all"
+                className="inline-flex items-center justify-center gap-2.5 h-11 px-5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-sm font-semibold transition-all shadow-xs"
               >
-                <MessageCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                <WhatsAppIcon className="h-4 w-4 fill-current shrink-0" />
                 <span>WhatsApp Advisory Desk</span>
               </button>
             </div>
 
             {/* Direct Office & Telephone Details */}
             <div className="pt-8 mt-6 border-t border-border/70 flex flex-col items-center justify-center gap-3 text-xs text-muted-foreground text-center">
-              <div className="inline-flex items-center justify-center gap-1.5 max-w-full">
-                <MapPin className="h-3.5 w-3.5 text-primary shrink-0" />
-                <span>Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West) 421505</span>
-              </div>
+              <a
+                href="https://share.google/wXb6cKV7lpMgo9P4c"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex flex-wrap items-center justify-center gap-2 max-w-full hover:text-primary transition-colors group"
+                title="View Shree Balaji Enterprises on Google Maps"
+              >
+                <MapPin className="h-3.5 w-3.5 text-primary shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="underline-offset-4 group-hover:underline">Shop No. 6, Vallabh Building, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West) 421505</span>
+                <span className="text-[11px] font-semibold bg-primary/10 text-primary px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+                  <span>Get Directions</span>
+                  <span>&rarr;</span>
+                </span>
+              </a>
               <div className="flex items-center justify-center gap-2 font-medium">
                 <span className="text-muted-foreground/80 font-normal">Direct Helpline:</span>
                 <a

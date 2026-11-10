@@ -276,7 +276,17 @@ export default function TermsPage() {
               <div className="mt-6 p-6 border border-border/80 rounded-lg bg-muted/20 space-y-2 text-xs leading-relaxed">
                 <p className="font-semibold text-sm text-foreground">Principal Office &bull; Shree Balaji Enterprises</p>
                 <p className="text-muted-foreground">MahaRERA Registration Certificate: <strong>A51700023633</strong></p>
-                <p className="text-muted-foreground">Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West), Maharashtra 421505</p>
+                <p className="text-muted-foreground">
+                  Chambers:{" "}
+                  <a
+                    href="https://share.google/wXb6cKV7lpMgo9P4c"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:underline text-foreground"
+                  >
+                    Shop No. 6, Vallabh Building, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West), Maharashtra 421505
+                  </a>
+                </p>
                 <div className="pt-2 flex flex-wrap gap-x-6 gap-y-1 text-foreground">
                   <span>Telephone: <a href="tel:7767805544" className="hover:underline font-mono">+91 7767805544</a></span>
                   <span>Email: <a href="mailto:shreebalajienterprisesamb@gmail.com" className="hover:underline font-mono">shreebalajienterprisesamb@gmail.com</a></span>

@@ -16,6 +16,7 @@ import {
   MessageCircle,
 } from "lucide-react"
 import { BrandLogo } from "@/components/brand-logo"
+import { WhatsAppIcon } from "@/components/whatsapp-icon"
 
 export const metadata: Metadata = {
   title: "About Us | Shree Balaji Enterprises — Real Estate Practice, Ambernath & MMR",
@@ -31,7 +32,8 @@ export const metadata: Metadata = {
 
 const WHATSAPP_NUMBER = "917767805544"
 const PHONE_DISPLAY = "+91 77678 05544"
-const OFFICE_ADDRESS = "Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West) 421505"
+const OFFICE_ADDRESS = "Shop No. 6, Vallabh Building, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West) 421505"
+const OFFICE_MAPS_URL = "https://share.google/wXb6cKV7lpMgo9P4c"
 
 const servicesList = [
   {
@@ -130,8 +132,8 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              {/* Single Primary Action + Restrained Secondary Link */}
-              <div className="pt-3 flex flex-wrap items-center gap-5">
+              {/* Single Primary Action + Recognizable WhatsApp Button */}
+              <div className="pt-3 flex flex-wrap items-center gap-3 sm:gap-4">
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:bg-primary/90 transition-all shadow-xs"
@@ -144,9 +146,9 @@ export default function AboutPage() {
                   href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Anju ji, I would like to consult regarding property in Ambernath / MMR.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-semibold text-foreground hover:text-primary transition-colors inline-flex items-center gap-1.5"
+                  className="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-sm font-semibold transition-all shadow-xs active:scale-[0.98]"
                 >
-                  <MessageCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                  <WhatsAppIcon className="h-4 w-4 fill-current shrink-0" />
                   <span>Chat on WhatsApp: {PHONE_DISPLAY}</span>
                 </a>
               </div>
@@ -251,13 +253,35 @@ export default function AboutPage() {
               </div>
 
               <div className="p-5 rounded-xl border border-border/60 bg-muted/40 text-xs text-muted-foreground space-y-2">
-                <p className="font-semibold text-foreground">Registered Chambers</p>
+                <div className="flex items-center justify-between">
+                  <p className="font-semibold text-foreground">Registered Chambers</p>
+                  <a
+                    href={OFFICE_MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-primary hover:underline"
+                  >
+                    <span>View on Google Maps</span>
+                    <ArrowRight className="h-3 w-3" />
+                  </a>
+                </div>
                 <p className="leading-relaxed">
-                  Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West) 421505
+                  {OFFICE_ADDRESS}
                 </p>
-                <p className="text-primary font-mono font-medium pt-1">
-                  Helpline: {PHONE_DISPLAY}
-                </p>
+                <div className="flex items-center justify-between pt-1">
+                  <p className="text-primary font-mono font-medium">
+                    Helpline: {PHONE_DISPLAY}
+                  </p>
+                  <a
+                    href={OFFICE_MAPS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
+                  >
+                    <MapPin className="h-3 w-3 text-primary shrink-0" />
+                    <span>Get Directions</span>
+                  </a>
+                </div>
               </div>
 
             </div>
@@ -313,9 +337,9 @@ export default function AboutPage() {
                     href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Anju ji, I would like to consult with you regarding property in Ambernath / MMR.")}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                    className="inline-flex items-center gap-2 h-9 px-4 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white transition-all shadow-xs"
                   >
-                    <MessageCircle className="h-4 w-4 text-emerald-600" />
+                    <WhatsAppIcon className="h-4 w-4 fill-current shrink-0" />
                     <span>Direct WhatsApp with Anju Jangiti</span>
                   </a>
                   <span className="text-border">&bull;</span>
@@ -645,9 +669,9 @@ export default function AboutPage() {
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Shree Balaji Enterprises, I would like to consult with your advisory desk.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg border border-border/80 bg-background hover:bg-muted text-foreground text-sm font-semibold transition-all"
+                className="inline-flex items-center justify-center gap-2 h-11 px-6 rounded-lg bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-semibold transition-all shadow-xs active:scale-[0.98]"
               >
-                <MessageCircle className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+                <WhatsAppIcon className="h-4 w-4 fill-current shrink-0" />
                 <span>Chat on WhatsApp: {PHONE_DISPLAY}</span>
               </a>
 
@@ -661,10 +685,20 @@ export default function AboutPage() {
 
             {/* Direct Coordinates */}
             <div className="pt-8 mt-6 border-t border-border/70 flex flex-col items-center justify-center gap-3 text-xs sm:text-sm text-muted-foreground text-center">
-              <div className="inline-flex items-center justify-center gap-1.5 max-w-full">
-                <MapPin className="h-4 w-4 text-primary shrink-0" />
-                <span>{OFFICE_ADDRESS}</span>
-              </div>
+              <a
+                href={OFFICE_MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex flex-wrap items-center justify-center gap-2 max-w-full hover:text-primary transition-colors group"
+                title="View Shree Balaji Enterprises on Google Maps"
+              >
+                <MapPin className="h-4 w-4 text-primary shrink-0 group-hover:scale-110 transition-transform" />
+                <span className="underline-offset-4 group-hover:underline">{OFFICE_ADDRESS}</span>
+                <span className="text-[11px] font-semibold bg-primary/10 text-primary px-2 py-0.5 rounded-full inline-flex items-center gap-1">
+                  <span>Get Directions</span>
+                  <span>&rarr;</span>
+                </span>
+              </a>
               <div className="flex items-center justify-center gap-2 font-medium">
                 <span className="text-muted-foreground/80 font-normal">Direct Helpline:</span>
                 <a

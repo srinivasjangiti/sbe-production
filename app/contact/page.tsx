@@ -3,7 +3,8 @@
 import React, { useState, useEffect, Suspense } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
-import { Phone, Mail, MapPin, MessageSquare, Check, Copy, ExternalLink, Send } from "lucide-react"
+import { Phone, Mail, MapPin, Check, Copy, ExternalLink, Send } from "lucide-react"
+import { WhatsAppIcon } from "@/components/whatsapp-icon"
 import { saveInquiry, nextInquiryId } from "@/lib/admin-store"
 
 const enquiryCategories = [
@@ -45,7 +46,7 @@ function ContactForm() {
 
   const handleCopyAddress = () => {
     navigator.clipboard.writeText(
-      "Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West), Maharashtra 421505"
+      "Shop No. 6, Vallabh Building, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West), Maharashtra 421505"
     )
     setCopiedAddress(true)
     setTimeout(() => setCopiedAddress(false), 2500)
@@ -148,7 +149,7 @@ function ContactForm() {
                 </div>
                 <div>
                   <p className="text-foreground leading-relaxed">
-                    Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West), Maharashtra &ndash; 421505
+                    Shop No. 6, Vallabh Building, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West), Maharashtra &ndash; 421505
                   </p>
                   
                   {/* Copy Address & Directions Actions */}
@@ -171,7 +172,7 @@ function ContactForm() {
                       )}
                     </button>
                     <a
-                      href="https://maps.app.goo.gl/xESVmiEK2GtM3XBDA"
+                      href="https://share.google/wXb6cKV7lpMgo9P4c"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="h-8 px-3 rounded-lg border border-border bg-background hover:bg-muted font-medium text-foreground inline-flex items-center gap-1.5 transition-colors"
@@ -189,14 +190,14 @@ function ContactForm() {
               href="https://wa.me/917767805544?text=Hi%20Shree%20Balaji%20Enterprises%2C%20I%20would%20like%20to%20enquire%20about%20properties."
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full h-10 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm inline-flex items-center justify-center gap-2 transition-colors shadow-xs"
+              className="w-full h-10 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold text-sm inline-flex items-center justify-center gap-2 transition-colors shadow-xs"
             >
-              <MessageSquare className="h-4 w-4" />
+              <WhatsAppIcon className="h-4 w-4 fill-current shrink-0" />
               <span>Chat on WhatsApp</span>
             </a>
 
             {/* Compact Map Preview */}
-            <div className="rounded-xl border border-border overflow-hidden h-36 bg-muted relative">
+            <div className="rounded-xl border border-border overflow-hidden h-36 bg-muted relative group">
               <iframe
                 src="https://maps.google.com/maps?q=19.1895593,73.2230161&z=17&output=embed"
                 width="100%"
@@ -206,6 +207,15 @@ function ContactForm() {
                 loading="lazy"
                 title="Office Location Map"
               />
+              <a
+                href="https://share.google/wXb6cKV7lpMgo9P4c"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-2 right-2 px-2.5 py-1 rounded-md bg-background/90 backdrop-blur-sm border border-border/80 text-[11px] font-semibold text-foreground hover:text-primary shadow-xs transition-colors inline-flex items-center gap-1"
+              >
+                <span>Open in Google Maps</span>
+                <ExternalLink className="h-3 w-3" />
+              </a>
             </div>
 
             {/* Discreet MahaRERA notice */}
@@ -354,9 +364,9 @@ function ContactForm() {
                   <button
                     type="button"
                     onClick={(e) => handleSubmit(e, true)}
-                    className="h-10 px-4 border border-border rounded-lg text-sm font-medium text-foreground hover:bg-muted transition-colors inline-flex items-center justify-center gap-2 cursor-pointer"
+                    className="h-10 px-4 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-lg text-sm font-semibold transition-colors inline-flex items-center justify-center gap-2 cursor-pointer shadow-xs"
                   >
-                    <MessageSquare className="h-4 w-4 text-emerald-600" />
+                    <WhatsAppIcon className="h-4 w-4 fill-current shrink-0" />
                     <span>Send via WhatsApp</span>
                   </button>
                 </div>

@@ -192,7 +192,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
   siteName: "Shree Balaji Enterprises",
   phone: "7767805544",
   email: "anjujangiti@gmail.com",
-  address: "Shop No. 6, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West) 421505",
+  address: "Shop No. 6, Vallabh Building, Avdhoot Residency, Near Sarvodaya Nagar, Chikhloli, Ambernath (West) 421505",
   whatsapp: "917767805544",
   reraNo: "A51700023633",
   tagline: "Your Trusted Real Estate Partner",
